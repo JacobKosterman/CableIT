@@ -26,5 +26,5 @@ public interface CompanyDao {
     void updateCommentName(Company company);
 
     @Query("delete from company")
-    void removeAllCommentNames();
+    void removeAllCompanies();
 }

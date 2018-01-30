@@ -8,6 +8,9 @@ import android.widget.Button;
 
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+
+import java.util.List;
+
 import okhttp3.OkHttpClient;
 
 import skycom.cableit.Classes.Address;
@@ -36,16 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
         database = AppDatabase.getDatabase(getApplicationContext());
 
-        Address addressOne = new Address("Address 1", "Address 2", "Unit 1", "N2N 2N2", "ON", "CA");
-        Company companyOne = new Company("Test Company");
-        Company_Address company_addressOne = new Company_Address(addressOne.id, companyOne.id);
+        database.addressDao().addAddress(new Address("Address 1", "Address 2", "Unit 1", "N2N 2N2", "ON", "CA"));
+        database.companyDao().addCompany(new Company("Test Company"));
 
-        //Add some dummy information to database for testing purposes
-        database.addressDao().addAddress(addressOne);
-        database.companyDao().addCompany(companyOne);
+        List<Address> addressOne = database.addressDao().getAddress(1);
+        List<Company> companyOne = database.companyDao().getCompany(1);
 
-        database.companyAddressDao().addAddressCompany(company_addressOne);
-
+        database.companyAddressDao().addAddressCompany(new Company_Address(addressOne.get(0).id, companyOne.get(0).id));
 
         // Navigates to Add Company page
         Button btnAddCompany = findViewById(R.id.btnAddCompany);
