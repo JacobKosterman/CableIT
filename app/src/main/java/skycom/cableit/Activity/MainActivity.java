@@ -48,12 +48,23 @@ public class MainActivity extends AppCompatActivity {
         database.companyAddressDao().addAddressCompany(new CompanyAddress(addressOne.get(0).id, companyOne.get(0).id));
 
         // Navigates to Add Company page
-        Button btnAddCompany = findViewById(R.id.btnAddCompany);
+        Button btnAddCompany = findViewById(R.id.btnCompanies);
         btnAddCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(), CompanyActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        Button btnAddressList = findViewById(R.id.btnAddressList);
+        btnAddressList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), AddressListActivity.class);
                 startActivity(intent);
 
             }
