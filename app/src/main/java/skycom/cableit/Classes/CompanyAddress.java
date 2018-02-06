@@ -5,7 +5,7 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "Company_Address",
+@Entity(tableName = "CompanyAddress",
         //primaryKeys = {"addressId", "companyId"},
     foreignKeys = {
         @ForeignKey(
@@ -25,14 +25,14 @@ import android.arch.persistence.room.PrimaryKey;
 
 
 
-public class Company_Address {
+public class CompanyAddress {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
     public final long addressId;
     public final long companyId;
 
-    public Company_Address(long addressId, long companyId) {
+    public CompanyAddress(long addressId, long companyId) {
         this.addressId = addressId;
         this.companyId = companyId;
 

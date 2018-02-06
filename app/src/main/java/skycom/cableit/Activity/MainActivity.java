@@ -15,7 +15,7 @@ import okhttp3.OkHttpClient;
 
 import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.Company;
-import skycom.cableit.Classes.Company_Address;
+import skycom.cableit.Classes.CompanyAddress;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         List<Address> addressOne = database.addressDao().getAddress(1);
         List<Company> companyOne = database.companyDao().getCompany(1);
 
-        database.companyAddressDao().addAddressCompany(new Company_Address(addressOne.get(0).id, companyOne.get(0).id));
+        database.companyAddressDao().addAddressCompany(new CompanyAddress(addressOne.get(0).id, companyOne.get(0).id));
 
         // Navigates to Add Company page
         Button btnAddCompany = findViewById(R.id.btnAddCompany);

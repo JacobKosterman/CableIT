@@ -9,16 +9,16 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import skycom.cableit.Classes.Address;
-import skycom.cableit.Classes.Company_Address;
+import skycom.cableit.Classes.CompanyAddress;
 
 @Dao
-public interface Company_AddressDao {
+public interface CompanyAddressDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void addAddressCompany(Company_Address company_address);
+    void addAddressCompany(CompanyAddress companyAddress);
 
-    @Query("select * from company_address where addressId = :AddressId AND companyId = :CompanyId")
-    public List<Company_Address> getAddressCompanyInfos(long AddressId, long CompanyId);
+    @Query("select * from companyAddress where addressId = :AddressId AND companyId = :CompanyId")
+    public List<CompanyAddress> getAddressCompanyInfos(long AddressId, long CompanyId);
 
     //@Query("select * from address")
     //public List<Address> getAllAddressCompanyInfos();
