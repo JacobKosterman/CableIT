@@ -29,11 +29,6 @@
             android:text="Add Address"
             />
 
-
-
     </LinearLayout>
-
-
-
 
 </android.support.constraint.ConstraintLayout>

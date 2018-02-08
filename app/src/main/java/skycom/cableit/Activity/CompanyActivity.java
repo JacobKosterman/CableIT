@@ -13,5 +13,9 @@ public class CompanyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company);
 
 
+
+
+
+
     }
 }
