@@ -8,22 +8,26 @@ public class Address {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
+    public int companyID;
     public String StreetAddress1;
     public String StreetAddress2;
     public String UnitNumber;
     public String PostalCode;
     public String Province;
     public String Country;
+    public boolean isActive;
 
 
-    public Address(String StreetAddress1, String StreetAddress2, String UnitNumber, String PostalCode,
-                   String Province, String Country) {
+    public Address(int companyID, String StreetAddress1, String StreetAddress2, String UnitNumber, String PostalCode,
+                   String Province, String Country, boolean isActive) {
+        this.companyID = companyID;
         this.StreetAddress1 = StreetAddress1;
         this.StreetAddress2 = StreetAddress2;
         this.UnitNumber = UnitNumber;
         this.PostalCode = PostalCode;
         this.Province = Province;
         this.Country = Country;
+        this.isActive = isActive;
 
     }
 }
