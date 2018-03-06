@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         database = AppDatabase.getDatabase(getApplicationContext());
 
-        database.addressDao().addAddress(new Address("Address 1", "Address 2", "Unit 1", "N2N 2N2", "ON", "CA"));
+        database.addressDao().addAddress(new Address( 1,"Address 1", "Address 2", "Unit 1", "N2N 2N2", "ON", "CA", Boolean.FALSE ));
         database.companyDao().addCompany(new Company("Test Company"));
 
         List<Address> addressOne = database.addressDao().getAddress(1);
@@ -65,6 +65,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(), AddressListActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        Button btnProductList = findViewById(R.id.btnProductList);
+        btnProductList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
                 startActivity(intent);
 
             }
