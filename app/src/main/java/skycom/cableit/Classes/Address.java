@@ -1,5 +1,5 @@
 package skycom.cableit.Classes;
-//Testing Git
+
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 

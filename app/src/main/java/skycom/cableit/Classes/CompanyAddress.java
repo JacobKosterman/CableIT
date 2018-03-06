@@ -1,12 +1,10 @@
 package skycom.cableit.Classes;
-
+//dnu
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "CompanyAddress",
-        //primaryKeys = {"addressId", "companyId"},
     foreignKeys = {
         @ForeignKey(
             entity = Address.class,
@@ -19,10 +17,8 @@ import android.arch.persistence.room.PrimaryKey;
             childColumns = "companyId",
             onDelete = ForeignKey.CASCADE
 
-    )}/*,
-    indices = { @Index(value = "id")}*/
+    )}
 )
-
 
 
 public class CompanyAddress {
