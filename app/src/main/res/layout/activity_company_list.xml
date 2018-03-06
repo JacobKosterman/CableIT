@@ -24,10 +24,10 @@
 
 
         <Button
-            android:id="@+id/btnSaveCompany"
+            android:id="@+id/btnAddCompany"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save Company"
+            android:text="Add Company"
             />
 
     </LinearLayout>

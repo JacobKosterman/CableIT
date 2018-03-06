@@ -19,13 +19,15 @@ public class AddressListActivity extends AppCompatActivity {
 
 
 
-    Button btnAddAddress = findViewById(R.id.btnAddAddress);
+        Button btnAddAddress = findViewById(R.id.btnAddAddress);
         btnAddAddress.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
             Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
             startActivity(intent);
+
+
 
         }
     });

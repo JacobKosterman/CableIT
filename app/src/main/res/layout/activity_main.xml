@@ -25,7 +25,8 @@
             <ListView
                 android:id="@+id/lstView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
             </ListView>
 
             <Button
@@ -38,8 +39,7 @@
                 android:id="@+id/btnCompanies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add Company"
-                android:gravity="center|bottom"
+                android:text="Company List"
                 />
             <Button
                 android:id="@+id/btnAddressList"
