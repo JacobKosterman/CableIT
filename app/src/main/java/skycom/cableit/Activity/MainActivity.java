@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         btnAddCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CompanyActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CompanyListActivity.class);
                 startActivity(intent);
             }
         });
