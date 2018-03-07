@@ -59,8 +59,6 @@
             android:inputType="textPersonName"
             android:hint="Postal Code" />
 
-
-
         <EditText
             android:id="@+id/txtProvince"
             android:layout_width="match_parent"
@@ -69,8 +67,6 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Province" />
-
-
 
         <EditText
             android:id="@+id/txtCountry"
@@ -81,16 +77,20 @@
             android:inputType="textPersonName"
             android:hint="Country" />
 
-
+        <CheckBox
+            android:id="@+id/chkIsActive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CheckBox" />
 
         <Button
             android:id="@+id/btnSaveAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|bottom"
-            android:text="Save"
+            android:text="Is Active"
+            android:clickable="false"
             />
-
 
 
 

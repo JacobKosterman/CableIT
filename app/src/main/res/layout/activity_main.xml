@@ -42,12 +42,6 @@
                 android:text="Company List"
                 />
             <Button
-                android:id="@+id/btnAddressList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Address List"
-                />
-            <Button
                 android:id="@+id/btnNewQuote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

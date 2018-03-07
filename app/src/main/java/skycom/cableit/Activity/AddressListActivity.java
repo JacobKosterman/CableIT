@@ -15,10 +15,6 @@ public class AddressListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_list);
 
-
-
-
-
         Button btnAddAddress = findViewById(R.id.btnAddAddress);
         btnAddAddress.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -26,8 +22,6 @@ public class AddressListActivity extends AppCompatActivity {
 
             Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
             startActivity(intent);
-
-
 
         }
     });
