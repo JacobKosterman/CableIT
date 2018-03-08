@@ -53,7 +53,8 @@ public class CompanyListActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.lstView);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> arrayAdapter =
+                new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
                 tempStringList
         );
@@ -61,10 +62,12 @@ public class CompanyListActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
+            // Hey Mirko, Can you take a look at this? It can't find the intent when a company is
+            // clicked on in the listview.
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);
-                String message = "abc";
+                //String message = "abc";
                 //intent.putExtra(EXTRA_MESSAGE, message);
                 startActivity(intent);
             }
