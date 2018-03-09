@@ -62,11 +62,14 @@ public class CompanyListActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            // Hey Mirko, Can you take a look at this? It can't find the intent when a company is
-            // clicked on in the listview.
+
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
+
                 Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);
+                intent.putExtra("COMPANY_ID", id + "");
+
+                //Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);
                 //String message = "abc";
                 //intent.putExtra(EXTRA_MESSAGE, message);
                 startActivity(intent);

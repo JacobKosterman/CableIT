@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         database = AppDatabase.getDatabase(getApplicationContext());
 
         database.addressDao().addAddress(new Address( 1,"Address 1", "Address 2", "Unit 1", "N2N 2N2", "ON", "CA", Boolean.FALSE ));
-        database.companyDao().addCompany(new Company("Test Company"));
+        database.companyDao().addCompany(new Company("Test Company 1"));
+        database.companyDao().addCompany(new Company("Test Company 2"));
 
         List<Address> addressOne = database.addressDao().getAddress(1);
         List<Company> companyOne = database.companyDao().getCompany(1);
