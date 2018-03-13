@@ -3,6 +3,7 @@ package skycom.cableit.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -57,6 +58,18 @@ public class CompanyListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        //Needs to be completed to add company
+        Button btnProductList = findViewById(R.id.btnAddCompany);
+        btnProductList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(getApplicationContext(), CompanyEditDetailActivity.class);
+                //startActivity(intent);
+            }
+        });
+
     }
     @Override
     public void onBackPressed(){

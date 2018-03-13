@@ -6,39 +6,45 @@
     android:layout_height="match_parent"
     tools:context="skycom.cableit.Activity.CompanyListActivity">
 
+
     <LinearLayout
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center|bottom"
-        android:layout_height="0dp"
-        android:layout_weight="1"
         android:weightSum="1"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:gravity="center|bottom">
 
-
-
-        <ListView
-            android:id="@+id/lstView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </ListView>
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:id="@+id/image_frag"
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/btnAddCompany"
+            <ListView
+                android:id="@+id/lstView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Company"
-            />
+            android:orientation="vertical"
+            android:id="@+id/input_frag"
+            android:layout_weight="0"
+            android:gravity="center|bottom">
 
+            <Button
+                android:id="@+id/btnAddCompany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Company"
+                android:gravity="bottom|center"/>
+
+        </LinearLayout>
     </LinearLayout>
-
-
 
 </android.support.constraint.ConstraintLayout>

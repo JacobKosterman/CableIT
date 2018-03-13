@@ -27,7 +27,6 @@ public class ProductListActivity extends AppCompatActivity {
 
         database = AppDatabase.getDatabase(getApplicationContext());
 
-
         // Populates list view of companies.
         final List<Product> productList = database.productDao().getAllProducts();
         List<String> tempStringList = new ArrayList<String>();
@@ -37,6 +36,7 @@ public class ProductListActivity extends AppCompatActivity {
             tempString = productList.get(i).partNo;
             tempStringList.add(tempString);
         }
+
         ListView listView = (ListView) findViewById(R.id.lstProduct);
         ArrayAdapter<String> arrayAdapter =
                 new ArrayAdapter<String>(this,
@@ -44,9 +44,6 @@ public class ProductListActivity extends AppCompatActivity {
                         tempStringList
                 );
         listView.setAdapter(arrayAdapter);
-
-
-
 
         Button btnAddProduct = findViewById(R.id.btnAddProduct);
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
