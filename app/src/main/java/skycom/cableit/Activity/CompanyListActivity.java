@@ -1,6 +1,5 @@
 package skycom.cableit.Activity;
 
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -30,7 +29,6 @@ public class CompanyListActivity extends AppCompatActivity {
 
         database = AppDatabase.getDatabase(getApplicationContext());
 
-
         // Populates list view of companies.
         final List<Company> companyList = database.companyDao().getAllCompany();
         List<String> tempStringList = new ArrayList<String>();
@@ -46,6 +44,8 @@ public class CompanyListActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 tempStringList
         );
+
+
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -57,15 +57,10 @@ public class CompanyListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
-
-
-
-
-
     }
-
-
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

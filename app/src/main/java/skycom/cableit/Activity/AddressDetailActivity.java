@@ -69,14 +69,6 @@ public class AddressDetailActivity extends AppCompatActivity {
             }
         });
 
-        /*Button btnMakeActive = findViewById(R.id.btnMakeActive);
-        btnMakeActive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
-
     }
 
     @Override

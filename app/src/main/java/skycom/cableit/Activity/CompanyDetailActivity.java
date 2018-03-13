@@ -27,10 +27,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_detail);
 
         database = AppDatabase.getDatabase(getApplicationContext());
-
-
-
-
         TextView myAwesomeTextView = (TextView)findViewById(R.id.textView);
         int tempCompanyID;
 
@@ -57,7 +53,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
             else{
                 myAwesomeTextView.setText("No ID found");
             }
-
         }
 
 
@@ -74,13 +69,14 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
                 if (companyIDString != ""){
                     intent.putExtra("COMPANY_ID_TEST", companyIDString + "");
-
-
                     startActivity(intent);
                 }
-
             }
         });
-
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, CompanyListActivity.class);
+        startActivity(intent);
     }
 }

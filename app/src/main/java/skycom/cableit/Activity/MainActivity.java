@@ -7,10 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.List;
 import okhttp3.OkHttpClient;
 import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.Company;
+import skycom.cableit.Classes.Product;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -34,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         database = AppDatabase.getDatabase(getApplicationContext());
 
         addDummyData();
+        importFromCSV();
 
         //
         // Navigates to Add Company page
@@ -60,7 +68,58 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void addDummyData(){
+    private void importFromCSV() {
+
+        //Check to see if that products data has already been loaded.
+        List<Product> products = database.productDao().getAllProducts();
+        if (products.isEmpty()) {
+
+            InputStream is = getResources().openRawResource(R.raw.product_list);
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(is, Charset.forName("UTF-8"))
+            );
+
+            String line = "";
+
+            try {
+                while ((line = reader.readLine()) != null) {
+
+                    String[] tokens = line.split("\\|");
+
+                    String tempProNo = "";
+                    String tempProName = "";
+
+                    if (tokens[0].length() > 0) {
+                        tempProNo = tokens[0];
+                    } else {
+                        tempProNo = "";
+                    }
+
+                    if (tokens.length >= 2 && tokens[1].length() > 0) {
+                        tempProName = tokens[1];
+                    } else {
+                        tempProName = "";
+                    }
+
+                    database.productDao().addProduct(new Product(1,
+                            tempProNo,
+                            tempProName,
+                            "",
+                            0.0,
+                            0.0,
+                            0.0,
+                            true));
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+
+
+            }
+        }
+    }
+
+    private void addDummyData(){
         List<Company> companies = database.companyDao().getAllCompany();
         if (companies.isEmpty()) {
 
