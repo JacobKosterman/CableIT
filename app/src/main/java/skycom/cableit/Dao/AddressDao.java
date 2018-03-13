@@ -22,6 +22,11 @@ public interface AddressDao {
     @Query("select * from address where id = :AddressId")
     public List<Address> getAddress(long AddressId);
 
+    @Query("select * from address where companyID = :CompanyId")
+    public List<Address> getAddressFromCompany(long CompanyId);
+
+
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateAddress(Address address);
 

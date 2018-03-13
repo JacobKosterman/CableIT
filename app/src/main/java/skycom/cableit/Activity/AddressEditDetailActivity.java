@@ -15,29 +15,25 @@ import skycom.cableit.Classes.Address;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
-public class AddressDetailActivity extends AppCompatActivity {
+public class AddressEditDetailActivity extends AppCompatActivity {
 
     int companyID = 0;
 
     private AppDatabase database;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_address_detail);
+        setContentView(R.layout.activity_address_edit_detail);
 
         database = AppDatabase.getDatabase(getApplicationContext());
 
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         companyID = prefs.getInt("MY_COMPANY", 0);
 
-
-
-        //editText.setText(String.valueOf(companyID), TextView.BufferType.EDITABLE);
+        Address updatedAddress;
 
         List<Address> tempAddress = database.addressDao().getAddressFromCompany(companyID);
-
-
 
         EditText editAddressOne = (EditText)findViewById(R.id.txtStreetAddress1);
         EditText editAddressTwo = (EditText)findViewById(R.id.txtStreetAddress2);
@@ -45,6 +41,13 @@ public class AddressDetailActivity extends AppCompatActivity {
         EditText editPostal = (EditText)findViewById(R.id.txtPostalCode);
         EditText editProvince = (EditText)findViewById(R.id.txtProvince);
         EditText editCountry = (EditText)findViewById(R.id.txtCountry);
+
+        String tempAddOne = editAddressOne.getText().toString();
+        String tempAddTwo = editAddressTwo.getText().toString();
+        String tempCity = editCity.getText().toString();
+        String tempPostal = editPostal.getText().toString();
+        String tempProvince = editProvince.getText().toString();
+        String tempCountry = editCountry.getText().toString();
 
 
         if (!tempAddress.isEmpty()){
@@ -56,33 +59,34 @@ public class AddressDetailActivity extends AppCompatActivity {
             editCountry.setText(String.valueOf(tempAddress.get(0).Country), TextView.BufferType.EDITABLE);
         }
 
-        //editAddressOne.setText(String.valueOf(companyID), TextView.BufferType.EDITABLE);
+        tempAddOne = editAddressOne.getText().toString();
+        tempAddTwo = editAddressTwo.getText().toString();
+        tempCity = editCity.getText().toString();
+        tempPostal = editPostal.getText().toString();
+        tempProvince = editProvince.getText().toString();
+        tempCountry = editCountry.getText().toString();
 
 
-        Button btnAddAddress = findViewById(R.id.btnEdit);
-        btnAddAddress.setOnClickListener(new View.OnClickListener() {
+                database.addressDao().updateAddress(new Address(companyID, tempAddOne, tempAddTwo, tempCity,
+                        tempPostal, tempProvince, tempCountry, true));
+
+
+
+
+        Button btnSaveAddAddress = findViewById(R.id.btnSaveAddress);
+        btnSaveAddAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(), AddressEditDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
                 startActivity(intent);
+
             }
         });
-
-        /*Button btnMakeActive = findViewById(R.id.btnMakeActive);
-        btnMakeActive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
-
     }
-
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(this, CompanyDetailActivity.class);
+        Intent intent = new Intent(this, AddressDetailActivity.class);
         startActivity(intent);
     }
-
 }
