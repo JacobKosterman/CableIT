@@ -5,13 +5,16 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
 
 import skycom.cableit.Classes.Address;
+import skycom.cableit.Classes.AddressType;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -32,12 +35,7 @@ public class AddressDetailActivity extends AppCompatActivity {
         companyID = prefs.getInt("MY_COMPANY", 0);
 
 
-
-        //editText.setText(String.valueOf(companyID), TextView.BufferType.EDITABLE);
-
         List<Address> tempAddress = database.addressDao().getAddressFromCompany(companyID);
-
-
 
         EditText editAddressOne = (EditText)findViewById(R.id.txtStreetAddress1);
         EditText editAddressTwo = (EditText)findViewById(R.id.txtStreetAddress2);
@@ -56,8 +54,10 @@ public class AddressDetailActivity extends AppCompatActivity {
             editCountry.setText(String.valueOf(tempAddress.get(0).Country), TextView.BufferType.EDITABLE);
         }
 
-        //editAddressOne.setText(String.valueOf(companyID), TextView.BufferType.EDITABLE);
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinAddressType);
 
+        mySpinner.setAdapter(new ArrayAdapter<AddressType>(this,
+                android.R.layout.simple_spinner_item, AddressType.values()));
 
         Button btnAddAddress = findViewById(R.id.btnEdit);
         btnAddAddress.setOnClickListener(new View.OnClickListener() {

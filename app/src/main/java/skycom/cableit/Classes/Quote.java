@@ -1,9 +1,12 @@
 package skycom.cableit.Classes;
 
+import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
 
+
+@Entity
 public class Quote {
 
     @PrimaryKey(autoGenerate = true)

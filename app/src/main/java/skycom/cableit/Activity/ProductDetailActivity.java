@@ -38,10 +38,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         String tempProDescription = editProDescription.getText().toString();
         String tempProCost = editProCost.getText().toString();
 
-        Spinner mySpinner = (Spinner) findViewById(R.id.spinProductCategoryID);
-
-        mySpinner.setAdapter(new ArrayAdapter<AddressType>(this,
-                android.R.layout.simple_spinner_item, AddressType.values()));
 
 
 

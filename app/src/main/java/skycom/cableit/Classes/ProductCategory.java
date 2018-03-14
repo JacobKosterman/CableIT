@@ -3,6 +3,7 @@ package skycom.cableit.Classes;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+@Entity
 public class ProductCategory {
 
 
