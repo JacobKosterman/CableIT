@@ -13,11 +13,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 import okhttp3.OkHttpClient;
 import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.Company;
 import skycom.cableit.Classes.Product;
+import skycom.cableit.Classes.ProductCategory;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -86,8 +88,14 @@ public class MainActivity extends AppCompatActivity {
 
                     String[] tokens = line.split("\\|");
 
+                    ProductCategory tempProCat;
                     String tempProNo = "";
                     String tempProName = "";
+                    String tempDescription = "";
+                    int tempCatId = 0;
+                    double tempPrice;
+                    double tempMarkUpRate;
+                    double tempMarkUpAmount;
 
                     if (tokens[0].length() > 0) {
                         tempProNo = tokens[0];
@@ -95,19 +103,67 @@ public class MainActivity extends AppCompatActivity {
                         tempProNo = "";
                     }
 
-                    if (tokens.length >= 2 && tokens[1].length() > 0) {
-                        tempProName = tokens[1];
-                    } else {
-                        tempProName = "";
+                    //Add Product Category is it does NOT exist
+                    if (tokens[1].length() > 0 ) {
+                        List<ProductCategory> listProductCategories = database.productCategoryDao().checkIfExists(tokens[1].toString());
+                        tempProCat = new ProductCategory(tokens[1], 0.67);
+                        if (listProductCategories.isEmpty()) {
+                            database.productCategoryDao().addProductCategory(tempProCat);
+                            //Getting from database gets the active ID number.
+                            tempProCat = database.productCategoryDao().getProductCategoryByName(tempProCat.categoryName);
+                            tempCatId = tempProCat.id;
+                        }
+                        else{
+                            tempCatId = listProductCategories.get(0).id;
+                        }
                     }
 
-                    database.productDao().addProduct(new Product(1,
+                    if (tokens[2].length() > 0) {
+                        tempProName = tokens[2];
+                    } else {
+                        tempProNo = "";
+                    }
+
+                    if (tokens[3].length() > 0) {
+                        tempDescription = tokens[3];
+                    } else {
+                        tempDescription = "";
+                    }
+
+                    if (tokens[4].length() > 0) {
+                        tempPrice = Double.parseDouble(tokens[4].toString());
+                    } else {
+                        tempPrice = 0.0;
+                    }
+
+                    if (tokens[5].length() > 0) {
+                        tempMarkUpRate = Double.parseDouble(tokens[5].toString());
+                    } else {
+                        tempMarkUpRate = 0.0;
+                    }
+
+                    if (tokens[6].length() > 0) {
+                        tempMarkUpAmount = Double.parseDouble(tokens[6].toString());
+                    } else {
+                        tempMarkUpAmount = 0.0;
+                    }
+
+
+//                    if (tokens.length >= 7 && tokens[2].length() > 0) {
+//                        tempProName = tokens[1];
+//                    } else {
+//                        tempProName = "";
+//                    }
+
+
+
+                    database.productDao().addProduct(new Product(tempCatId,
                             tempProNo,
                             tempProName,
-                            "",
-                            0.0,
-                            0.0,
-                            0.0,
+                            tempDescription,
+                            tempPrice,
+                            tempMarkUpRate,
+                            tempMarkUpAmount,
                             true));
                 }
             } catch (IOException e) {
