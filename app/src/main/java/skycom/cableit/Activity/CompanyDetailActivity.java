@@ -48,13 +48,11 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 companyID = tempCompanyID;
                 List<Company> companyOne = database.companyDao().getCompany(tempCompanyID);
                 myAwesomeTextView.setText(companyOne.get(0).name);
-
             }
             else{
                 myAwesomeTextView.setText("No ID found");
             }
         }
-
 
         prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();

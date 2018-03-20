@@ -109,12 +109,9 @@ public class MainActivity extends AppCompatActivity {
                             0.0,
                             0.0,
                             true));
-
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-
-
             }
         }
     }
@@ -122,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
     private void addDummyData(){
         List<Company> companies = database.companyDao().getAllCompany();
         if (companies.isEmpty()) {
-
 
             database.addressDao().addAddress(new Address( 1,"Address 1", "Address 2", "Kitchener","N2N 2N2", "ON", "CA", Boolean.FALSE ));
             database.companyDao().addCompany(new Company("Test Company 1"));
@@ -132,13 +128,9 @@ public class MainActivity extends AppCompatActivity {
             database.companyDao().addCompany(new Company("Test Company 5"));
             database.companyDao().addCompany(new Company("Test Company 6"));
 
-
             List<Address> addressOne = database.addressDao().getAddress(1);
             List<Company> companyOne = database.companyDao().getCompany(1);
 
-            //database.companyAddressDao().addAddressCompany(new CompanyAddress(addressOne.get(0).id, companyOne.get(0).id));
-
         }
     }
-
 }

@@ -38,10 +38,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         String tempProDescription = editProDescription.getText().toString();
         String tempProCost = editProCost.getText().toString();
 
-
-
-
-
         Button btnProductList = findViewById(R.id.btnSaveProduct);
         btnProductList.setOnClickListener(new View.OnClickListener() {
             @Override

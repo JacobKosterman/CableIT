@@ -8,9 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import java.util.List;
-
 import skycom.cableit.Classes.Address;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
@@ -18,7 +16,6 @@ import skycom.cableit.R;
 public class AddressEditDetailActivity extends AppCompatActivity {
 
     int companyID = 0;
-
     private AppDatabase database;
 
     @Override
@@ -66,12 +63,8 @@ public class AddressEditDetailActivity extends AppCompatActivity {
         tempProvince = editProvince.getText().toString();
         tempCountry = editCountry.getText().toString();
 
-
                 database.addressDao().updateAddress(new Address(companyID, tempAddOne, tempAddTwo, tempCity,
                         tempPostal, tempProvince, tempCountry, true));
-
-
-
 
         Button btnSaveAddAddress = findViewById(R.id.btnSaveAddress);
         btnSaveAddAddress.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +73,6 @@ public class AddressEditDetailActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
                 startActivity(intent);
-
             }
         });
     }

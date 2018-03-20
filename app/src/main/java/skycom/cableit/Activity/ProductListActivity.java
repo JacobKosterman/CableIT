@@ -33,7 +33,7 @@ public class ProductListActivity extends AppCompatActivity {
         String tempString = "";
 
         for (int i=0; i<productList.size(); i++){
-            tempString = productList.get(i).partNo;
+            tempString = productList.get(i).productName;
             tempStringList.add(tempString);
         }
 
