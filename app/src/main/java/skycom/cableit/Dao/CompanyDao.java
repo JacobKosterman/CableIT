@@ -19,6 +19,9 @@ public interface CompanyDao {
     @Query("select * from company")
     public List<Company> getAllCompany();
 
+    @Query("select * from company where name LIKE :companyName")
+    public List<Company> getCompanyByName(String companyName);
+
     @Query("select * from company where id = :companyId")
     public List<Company> getCompany(long companyId);
 

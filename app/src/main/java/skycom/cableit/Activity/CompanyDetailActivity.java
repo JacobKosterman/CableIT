@@ -18,8 +18,9 @@ public class CompanyDetailActivity extends AppCompatActivity {
 
     private AppDatabase database;
     String companyIDString = "";
-    private SharedPreferences prefs;
+    private SharedPreferences existingCompanyPrefs;
     int companyID = 0;
+    int newCompanyID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +55,25 @@ public class CompanyDetailActivity extends AppCompatActivity {
             }
         }
 
-        prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        //This is used if creating a new company.
+        if (companyIDString == "" || companyIDString == null){
+
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null )
+                newCompanyID = bundle.getInt("NEW_COMPANY_ID");
+
+            List<Company> companyOne = database.companyDao().getCompany(newCompanyID);
+            myAwesomeTextView.setText(companyOne.get(0).name);
+        }
+
+
+        existingCompanyPrefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
+        SharedPreferences.Editor editor = existingCompanyPrefs.edit();
         editor.putInt("MY_COMPANY", companyID);
         editor.apply();
 
 
+        //Button to navigate to the Address detail Activity
         Button btnAddCompany = findViewById(R.id.btnAddresses);
         btnAddCompany.setOnClickListener(new View.OnClickListener() {
             @Override

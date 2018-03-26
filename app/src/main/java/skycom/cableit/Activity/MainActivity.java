@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         database = AppDatabase.getDatabase(getApplicationContext());
 
         addDummyData();
-        importFromCSV();
+        //importFromCSV();
 
         //
         // Navigates to Add Company page
@@ -68,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity.class);
+        //This removes the functionality of back button on main screen
     }
 
     private void importFromCSV() {

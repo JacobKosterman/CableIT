@@ -34,7 +34,6 @@ public class AddressDetailActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         companyID = prefs.getInt("MY_COMPANY", 0);
 
-
         List<Address> tempAddress = database.addressDao().getAddressFromCompany(companyID);
 
         EditText editAddressOne = (EditText)findViewById(R.id.txtStreetAddress1);
@@ -68,12 +67,12 @@ public class AddressDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(this, CompanyDetailActivity.class);
+        intent.putExtra("NEW_COMPANY_ID", companyID);
         startActivity(intent);
     }
 
