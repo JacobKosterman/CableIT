@@ -22,6 +22,7 @@ public class CompanyNewDetailActivity extends AppCompatActivity {
 
     private AppDatabase database;
     String tempCompanyName = "";
+    String tempCompanyDescription = "";
     Context context = this;
     private SharedPreferences prefs;
 
@@ -42,7 +43,10 @@ public class CompanyNewDetailActivity extends AppCompatActivity {
 
 
                 EditText txtCompanyName = (EditText)findViewById(R.id.txtCompanyName);
+                EditText txtCompanyDescription = (EditText)findViewById(R.id.txtDescription);
+
                 tempCompanyName = txtCompanyName.getText().toString();
+                tempCompanyDescription = txtCompanyDescription.getText().toString();
 
                 List<Company> CompanyCheckList = database.companyDao().getCompanyByName(tempCompanyName);
 
@@ -85,7 +89,7 @@ public class CompanyNewDetailActivity extends AppCompatActivity {
 
     public void addCompanyAndDivert(){
 
-        Company company = new Company(tempCompanyName);
+        Company company = new Company(tempCompanyName, tempCompanyDescription);
         database.companyDao().addCompany(company);
         List<Company> tempCompanyList = database.companyDao().getCompanyByName(tempCompanyName);
 

@@ -74,11 +74,11 @@ public class CompanyDetailActivity extends AppCompatActivity {
 
 
         //Button to navigate to the Address detail Activity
-        Button btnAddCompany = findViewById(R.id.btnAddresses);
+        Button btnAddCompany = findViewById(R.id.btnEditCompany);
         btnAddCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CompanyEditDetailActivity.class);
                 if (companyIDString != ""){
                     intent.putExtra("COMPANY_ID_TEST", companyIDString + "");
                     startActivity(intent);

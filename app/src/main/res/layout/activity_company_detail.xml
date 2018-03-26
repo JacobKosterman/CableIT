@@ -21,6 +21,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:id="@+id/image_frag"
+        android:layout_weight="1">
+
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
@@ -29,25 +37,33 @@
             android:text="TextView"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/btnAddresses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom|center"
-            android:text="Addresses"
-            />
-
-        <Button
-            android:id="@+id/btnAddContact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Contact"
-            android:gravity="bottom|center"/>
-
+        <TextView
+            android:id="@+id/address1"
+            android:gravity="left"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:maxLines="4"
+            android:lines="4"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></TextView>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/input_frag"
+        android:layout_weight="0"
+        android:gravity="center|bottom">
+
+    <Button
+        android:id="@+id/btnEditCompany"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Company"
+        android:gravity="bottom|center"/>
+    </LinearLayout>
 
 
-
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -182,12 +182,12 @@ public class MainActivity extends AppCompatActivity {
         if (companies.isEmpty()) {
 
             database.addressDao().addAddress(new Address( 1,"Address 1", "Address 2", "Kitchener","N2N 2N2", "ON", "CA", Boolean.FALSE ));
-            database.companyDao().addCompany(new Company("Test Company 1"));
-            database.companyDao().addCompany(new Company("Test Company 2"));
-            database.companyDao().addCompany(new Company("Test Company 3"));
-            database.companyDao().addCompany(new Company("Test Company 4"));
-            database.companyDao().addCompany(new Company("Test Company 5"));
-            database.companyDao().addCompany(new Company("Test Company 6"));
+            database.companyDao().addCompany(new Company("Test Company 1", "This is a description"));
+            database.companyDao().addCompany(new Company("Test Company 2", "This is a description"));
+            database.companyDao().addCompany(new Company("Test Company 3", "This is a description"));
+            database.companyDao().addCompany(new Company("Test Company 4", "This is a description"));
+            database.companyDao().addCompany(new Company("Test Company 5", "This is a description"));
+            database.companyDao().addCompany(new Company("Test Company 6", "This is a description"));
 
             List<Address> addressOne = database.addressDao().getAddress(1);
             List<Company> companyOne = database.companyDao().getCompany(1);

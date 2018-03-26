@@ -30,7 +30,27 @@
             android:gravity="top|left"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Address 1" />
+            android:hint="Company Name" />
+
+
+        <EditText
+            android:id="@+id/txtCompanyName2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Company Name" />
+
+        <EditText
+            android:id ="@+id/txtDescription"
+            android:layout_width ="0dip"
+            android:layout_height ="wrap_content"
+            android:layout_weight ="1"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLines ="4"
+            android:maxLength ="2000"
+            android:scrollHorizontally="false"/>
 
 
         <Button
