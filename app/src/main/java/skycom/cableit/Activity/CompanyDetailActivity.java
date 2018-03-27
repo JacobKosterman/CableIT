@@ -8,8 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+
+
+
+
 import java.util.List;
 
+import skycom.cableit.Classes.ViewPagerAdapter;
 import skycom.cableit.Classes.Company;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
@@ -21,6 +29,11 @@ public class CompanyDetailActivity extends AppCompatActivity {
     private SharedPreferences existingCompanyPrefs;
     int companyID = 0;
     int newCompanyID = 0;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +84,23 @@ public class CompanyDetailActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = existingCompanyPrefs.edit();
         editor.putInt("MY_COMPANY", companyID);
         editor.apply();
+
+        //
+        //
+        //
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+
 
 
         //Button to navigate to the Address detail Activity
