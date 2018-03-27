@@ -24,7 +24,9 @@
         <activity android:name=".Activity.AddressEditDetailActivity" />
         <activity android:name=".Activity.CompanyEditDetailActivity" />
         <activity android:name=".Activity.CompanyNewDetailActivity" />
-        <activity android:name=".Activity.ProductNewDetailActivity"></activity>
+        <activity android:name=".Activity.ProductNewDetailActivity" />
+        <activity android:name=".Activity.QuoteListActivity" />
+        <activity android:name=".Activity.QuoteDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -68,6 +68,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //
+        // Navigate to Quotes List Page
+        //
+        Button btnQuoteList = findViewById(R.id.btnQuoteList);
+        btnQuoteList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QuoteListActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
     @Override
     public void onBackPressed(){

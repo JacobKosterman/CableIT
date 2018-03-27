@@ -43,10 +43,10 @@
                 android:text="Company List"
                 />
             <Button
-                android:id="@+id/btnNewQuote"
+                android:id="@+id/btnQuoteList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="New Quote"
+                android:text="Quotes"
                 />
 
     </LinearLayout>
