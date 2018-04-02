@@ -35,29 +35,33 @@ public class CompanyListActivity extends AppCompatActivity {
         List<String> tempStringList = new ArrayList<String>();
         String tempString = "";
 
-        for (int i=0; i<companyList.size(); i++){
-            tempString = companyList.get(i).name;
-            tempStringList.add(tempString);
-        }
-        ListView listView = (ListView) findViewById(R.id.lstView);
-        ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                tempStringList
-        );
-
-
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);
-                intent.putExtra("COMPANY_ID", id + "");
-                startActivity(intent);
+        if (companyList.size() >= 1 ){
+            for (int i=0; i<companyList.size(); i++){
+                tempString = companyList.get(i).name;
+                tempStringList.add(tempString);
             }
-        });
+            ListView listView = (ListView) findViewById(R.id.lstView);
+            ArrayAdapter<String> arrayAdapter =
+                    new ArrayAdapter<String>(this,
+                            android.R.layout.simple_list_item_1,
+                            tempStringList
+                    );
+
+
+            listView.setAdapter(arrayAdapter);
+            listView.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);
+                    intent.putExtra("COMPANY_ID", id + "");
+                    startActivity(intent);
+                }
+            });
+
+        }
+
 
 
         //Needs to be completed to add company

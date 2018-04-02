@@ -7,18 +7,19 @@
     android:orientation="vertical"
     tools:context="skycom.cableit.Activity.CompanyDetailActivity">
     <RelativeLayout
-        android:layout_weight=".5"
+        android:layout_weight=".6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="10dp"
         >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--app:layout_scrollFlags="scroll|enterAlways"-->
+            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
 
 
 
@@ -27,12 +28,12 @@
              android:layout_height="wrap_content"
              android:orientation="vertical"
              android:id="@+id/image_frag"
-             android:paddingTop="?android:attr/actionBarSize"
+             android:paddingTop="10px"
              >
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"
@@ -40,13 +41,12 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/address1"
+            android:id="@+id/textDescription"
             android:gravity="left"
             android:layout_height="fill_parent"
             android:layout_width="wrap_content"
             android:maxLines="4"
-            android:lines="4"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></TextView>
+            android:lines="4"/>
 
         <Button
             android:id="@+id/btnEditCompany"
@@ -61,7 +61,7 @@
     <RelativeLayout
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:layout_weight=".5"
+             android:layout_weight=".4"
              android:paddingBottom="10dp"
              android:paddingLeft="10dp"
              android:paddingRight="10dp"
@@ -70,8 +70,8 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:layout_height="wrap_content">
+            <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">-->
 
 
 

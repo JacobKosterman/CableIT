@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -32,30 +33,49 @@ public class ProductListActivity extends AppCompatActivity {
         List<String> tempStringList = new ArrayList<String>();
         String tempString = "";
 
-        for (int i=0; i<productList.size(); i++){
-            tempString =  productList.get(i).productName + "\n " + productList.get(i).partNo;
-            tempStringList.add(tempString);
+        if (productList.size() >= 1){
+            for (int i=0; i<productList.size(); i++){
+                tempString = "Part Number: " + productList.get(i).productName + "\n Part Name: " + productList.get(i).partNo;
+                tempStringList.add(tempString);
+            }
+
+            ListView listView = (ListView) findViewById(R.id.lstProduct);
+            ArrayAdapter<String> arrayAdapter =
+                    new ArrayAdapter<String>(this,
+                            android.R.layout.simple_list_item_1,
+                            tempStringList
+                    );
+            listView.setAdapter(arrayAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
+                    intent.putExtra("PRODUCT_ID", id + "");
+                    startActivity(intent);
+                }
+            });
         }
 
-        ListView listView = (ListView) findViewById(R.id.lstProduct);
-        ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<String>(this,
-                        android.R.layout.simple_list_item_1,
-                        tempStringList
-                );
-        listView.setAdapter(arrayAdapter);
 
         Button btnAddProduct = findViewById(R.id.btnAddProduct);
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ProductNewDetailActivity.class);
                 startActivity(intent);
 
             }
         });
 
 
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

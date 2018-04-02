@@ -26,7 +26,7 @@ public interface CompanyDao {
     public List<Company> getCompany(long companyId);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateCommentName(Company company);
+    void updateCompany(Company company);
 
     @Query("delete from company")
     void removeAllCompanies();

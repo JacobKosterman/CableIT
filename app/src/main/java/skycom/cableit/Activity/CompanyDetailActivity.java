@@ -1,5 +1,6 @@
 package skycom.cableit.Activity;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -8,15 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
 
-
+import org.w3c.dom.Text;
 
 import java.util.List;
 
+import skycom.cableit.Classes.TabFragment;
 import skycom.cableit.Classes.ViewPagerAdapter;
 import skycom.cableit.Classes.Company;
 import skycom.cableit.Database.AppDatabase;
@@ -32,7 +35,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    TabFragment TabFragment;
 
 
     @Override
@@ -41,7 +44,8 @@ public class CompanyDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_detail);
 
         database = AppDatabase.getDatabase(getApplicationContext());
-        TextView myAwesomeTextView = (TextView)findViewById(R.id.textView);
+        TextView txtName = (TextView)findViewById(R.id.textName);
+        TextView txtDescription = (TextView)findViewById(R.id.textDescription);
         int tempCompanyID;
 
         if (savedInstanceState == null) {
@@ -61,10 +65,11 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 tempCompanyID= Integer.parseInt(companyIDString) + 1;
                 companyID = tempCompanyID;
                 List<Company> companyOne = database.companyDao().getCompany(tempCompanyID);
-                myAwesomeTextView.setText(companyOne.get(0).name);
+                txtName.setText(companyOne.get(0).name);
+                txtDescription.setText(companyOne.get(0).description);
             }
             else{
-                myAwesomeTextView.setText("No ID found");
+                txtName.setText("No ID found");
             }
         }
 
@@ -76,22 +81,25 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 newCompanyID = bundle.getInt("NEW_COMPANY_ID");
 
             List<Company> companyOne = database.companyDao().getCompany(newCompanyID);
-            myAwesomeTextView.setText(companyOne.get(0).name);
+            txtName.setText(companyOne.get(0).name);
+            txtDescription.setText(companyOne.get(0).description);
         }
 
 
+        //Adding the current company ID to sharedPrefs
         existingCompanyPrefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         SharedPreferences.Editor editor = existingCompanyPrefs.edit();
         editor.putInt("MY_COMPANY", companyID);
         editor.apply();
 
-        //
-        //
-        //
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //To be deleted - Just leave for testing
+        //toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -104,8 +112,8 @@ public class CompanyDetailActivity extends AppCompatActivity {
 
 
         //Button to navigate to the Address detail Activity
-        Button btnAddCompany = findViewById(R.id.btnEditCompany);
-        btnAddCompany.setOnClickListener(new View.OnClickListener() {
+        Button btnEditCompany = findViewById(R.id.btnEditCompany);
+        btnEditCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CompanyEditDetailActivity.class);
@@ -115,10 +123,27 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        Button btnAddAddress = findViewById(R.id.btnNewAddress);
+//        btnAddAddress.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), AddressEditDetailActivity.class);
+//                if (companyIDString != ""){
+//                    intent.putExtra("COMPANY_ID_TEST", companyIDString + "");
+//                    startActivity(intent);
+//                }
+//            }
+//        });
+
     }
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(this, CompanyListActivity.class);
         startActivity(intent);
     }
+
+//    public void myClickMethod(View v) {
+//        TabFragment.onClick(v);
+//    }
 }

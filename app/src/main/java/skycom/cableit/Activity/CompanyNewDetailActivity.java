@@ -24,7 +24,6 @@ public class CompanyNewDetailActivity extends AppCompatActivity {
     String tempCompanyName = "";
     String tempCompanyDescription = "";
     Context context = this;
-    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +31,6 @@ public class CompanyNewDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_new_detail);
 
         database = AppDatabase.getDatabase(getApplicationContext());
-
-
-
 
         Button btnSaveCompany = findViewById(R.id.btnSaveCompany);
         btnSaveCompany.setOnClickListener(new View.OnClickListener() {

@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         database = AppDatabase.getDatabase(getApplicationContext());
 
         addDummyData();
-        //importFromCSV();
+        importFromCSV();
 
         //
         // Navigates to Add Company page

@@ -3,23 +3,25 @@ package skycom.cableit.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.TextView;
 
-import skycom.cableit.Classes.AddressType;
+import java.util.List;
+
+
 import skycom.cableit.Classes.Product;
-import skycom.cableit.Classes.ProductCategory;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
     private AppDatabase database;
-    Boolean askSave;
-    Product product;
+    String productIDString = "";
+    int productID = 0;
+    String tempProName = "";
+    String tempProNo = "";
+    String tempProDescription = "";
+    String tempProCost = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,45 +29,58 @@ public class ProductDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_detail);
 
         database = AppDatabase.getDatabase(getApplicationContext());
+        int tempProductID;
 
-        EditText editProName = (EditText)findViewById(R.id.txtProName);
-        EditText editProNo = (EditText)findViewById(R.id.txtProNo);
-        EditText editProDescription = (EditText)findViewById(R.id.txtProDescription);
-        EditText editProCost = (EditText)findViewById(R.id.txtProCost);
-
-        String tempProName = editProName.getText().toString();
-        String tempProNo = editProNo.getText().toString();
-        String tempProDescription = editProDescription.getText().toString();
-        String tempProCost = editProCost.getText().toString();
-
-        Button btnProductList = findViewById(R.id.btnSaveProduct);
-        btnProductList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
-                startActivity(intent);
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                productIDString = null;
+            } else {
+                productIDString = extras.getString("PRODUCT_ID");
             }
-        });
+        } else {
+            productIDString = (String) savedInstanceState.getSerializable("PRODUCT_ID");
+        }
 
-        /*if (tempProName.length() >= 1 && tempProNo.length() >= 1
-                && tempProDescription.length() >= 1 && tempProCost.length() >= 1){
-
-                product.productName =tempProName;
-                product.partNo = tempProNo;
-                product.description = tempProDescription;
-                product.productCost = Double.parseDouble(tempProCost);
-
-
-                database.productDao().addProduct(product);
-
-
-        }*/
+        if (productIDString != null)
+        {
+            if (productIDString != "") {
+                tempProductID = Integer.parseInt(productIDString) + 1;
+                productID = tempProductID;
 
 
 
 
+            }
+        }
+        List<Product> productOne = database.productDao().getProduct(productID);
 
 
 
+        TextView editProName = (TextView) findViewById(R.id.txtProName);
+        TextView editProNo = (TextView) findViewById(R.id.txtProNo);
+        TextView editProDescription = (TextView)findViewById(R.id.txtProDescription);
+        TextView editProCost = (TextView) findViewById(R.id.txtProCost);
+
+
+        editProName.setText(productOne.get(0).productName.toString());
+        editProNo.setText(productOne.get(0).partNo.toString());
+        editProDescription.setText(productOne.get(0).description.toString());
+        editProCost.setText(productOne.get(0).productCost.toString());
+
+
+//        Button btnProductList = findViewById(R.id.btnSaveProduct);
+//        btnProductList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, ProductListActivity.class);
+        startActivity(intent);
     }
 }

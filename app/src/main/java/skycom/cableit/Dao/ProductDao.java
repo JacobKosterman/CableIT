@@ -16,20 +16,22 @@ public interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addProduct(Product product);
 
-    @Query("select * from product")
+    @Query("select * from product Order by productName ASC")
     public List<Product> getAllProducts();
-/*
+
+    @Query("select * from product where partNo LIKE :productName")
+    public List<Product> getProductByNumber(String productName);
+
     @Query("select * from product where id = :ProductID")
-    public List<Product> getProduct(long AddressId);
+    public List<Product> getProduct(long ProductID);
 
-    @Query("select * from product where companyID = :CompanyId")
-    public List<Product> getAddressFromCompany(long CompanyId);
-
-
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateAddress(Product product);
-
-    @Query("delete from product")
-    void removeAllProducts();*/
+//
+//    @Query("select * from product where companyID = :CompanyId")
+//    public List<Product> getAddressFromCompany(long CompanyId);
+//
+//    @Update(onConflict = OnConflictStrategy.REPLACE)
+//    void updateAddress(Product product);
+//
+//    @Query("delete from product")
+//    void removeAllProducts();
 }
