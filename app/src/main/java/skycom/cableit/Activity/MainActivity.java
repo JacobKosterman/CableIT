@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Date;
 import java.util.List;
 import okhttp3.OkHttpClient;
 import skycom.cableit.Classes.Address;
@@ -20,6 +21,8 @@ import skycom.cableit.Classes.Company;
 import skycom.cableit.Classes.Contact;
 import skycom.cableit.Classes.Product;
 import skycom.cableit.Classes.ProductCategory;
+import skycom.cableit.Classes.Quote;
+import skycom.cableit.Classes.QuoteLine;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -201,8 +204,14 @@ public class MainActivity extends AppCompatActivity {
             database.companyDAO().addCompany(new Company("Test Company 4", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 5", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 6", "This is a description"));
-            database.contactDAO().addContact(new Contact(1, 1, "Test Type", "Bob Suruncle", "bob@email.com", Boolean.TRUE));
-            database.contactDAO().addContact(new Contact(1, 1, "Test Type", "Brian BlueBalls", "bballs@email.com", Boolean.TRUE));
+            database.contactDAO().addContact(new Contact(1, "Test Type", "Bob Suruncle", "bob@email.com", Boolean.TRUE));
+            database.contactDAO().addContact(new Contact(1, "Test Type", "Brian BlueBalls", "bballs@email.com", Boolean.TRUE));
+
+            database.quoteDAO().addQuote(new Quote("2018040401", 1, 1, 1, new Date(), new Date()));
+
+
+            database.quoteLineDAO().addQuoteLine(new QuoteLine(1, 1, "This is a comment", 2.0, 3.0, 4.0 ));
+
 
             List<Address> addressOne = database.addressDAO().getAddress(1);
             List<Company> companyOne = database.companyDAO().getCompany(1);
