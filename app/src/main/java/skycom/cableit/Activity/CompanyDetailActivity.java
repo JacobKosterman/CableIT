@@ -1,6 +1,5 @@
 package skycom.cableit.Activity;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +13,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -64,7 +61,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
             if (companyIDString != ""){
                 tempCompanyID= Integer.parseInt(companyIDString) + 1;
                 companyID = tempCompanyID;
-                List<Company> companyOne = database.companyDao().getCompany(tempCompanyID);
+                List<Company> companyOne = database.companyDAO().getCompany(tempCompanyID);
                 txtName.setText(companyOne.get(0).name);
                 txtDescription.setText(companyOne.get(0).description);
             }
@@ -80,7 +77,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
             if (bundle != null )
                 newCompanyID = bundle.getInt("NEW_COMPANY_ID");
 
-            List<Company> companyOne = database.companyDao().getCompany(newCompanyID);
+            List<Company> companyOne = database.companyDAO().getCompany(newCompanyID);
             txtName.setText(companyOne.get(0).name);
             txtDescription.setText(companyOne.get(0).description);
         }
@@ -104,9 +101,28 @@ public class CompanyDetailActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+//        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                viewPager.setCurrentItem(tab.getPosition());
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+
+
 
 
 

@@ -11,7 +11,7 @@ import java.util.List;
 import skycom.cableit.Classes.Product;
 
 @Dao
-public interface ProductDao {
+public interface ProductDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addProduct(Product product);

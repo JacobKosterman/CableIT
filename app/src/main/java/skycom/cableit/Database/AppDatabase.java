@@ -16,12 +16,12 @@ import skycom.cableit.Classes.ProductCategory;
 import skycom.cableit.Classes.Quote;
 import skycom.cableit.Classes.QuoteLine;
 import skycom.cableit.Classes.TimestampConverter;
-import skycom.cableit.Dao.CompanyDao;
-import skycom.cableit.Dao.AddressDao;
-import skycom.cableit.Dao.ProductDao;
+import skycom.cableit.Dao.AddressDAO;
+import skycom.cableit.Dao.CompanyDAO;
+import skycom.cableit.Dao.ProductDAO;
 import skycom.cableit.Dao.QuoteDAO;
 import skycom.cableit.Dao.QuoteLineDAO;
-import skycom.cableit.Dao.ProductCategoryDao;
+import skycom.cableit.Dao.ProductCategoryDAO;
 
 
 @Database(entities = {Company.class, Address.class, Product.class, ProductCategory.class, Contact.class, Quote.class, QuoteLine.class }, version = 17, exportSchema = false)
@@ -29,10 +29,10 @@ import skycom.cableit.Dao.ProductCategoryDao;
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
-    public abstract CompanyDao companyDao();
-    public abstract AddressDao addressDao();
-    public abstract ProductDao productDao();
-    public abstract ProductCategoryDao productCategoryDao();
+    public abstract CompanyDAO companyDAO();
+    public abstract AddressDAO addressDAO();
+    public abstract ProductDAO productDAO();
+    public abstract ProductCategoryDAO productCategoryDAO();
     public abstract QuoteDAO quoteDAO();
     public abstract QuoteLineDAO quoteLineDAO();
 

@@ -30,7 +30,7 @@ public class AddressEditDetailActivity extends AppCompatActivity {
 
         Address updatedAddress;
 
-        List<Address> tempAddress = database.addressDao().getAddressFromCompany(companyID);
+        List<Address> tempAddress = database.addressDAO().getAddressFromCompany(companyID);
 
         EditText editAddressOne = (EditText)findViewById(R.id.txtStreetAddress1);
         EditText editAddressTwo = (EditText)findViewById(R.id.txtStreetAddress2);
@@ -63,7 +63,7 @@ public class AddressEditDetailActivity extends AppCompatActivity {
         tempProvince = editProvince.getText().toString();
         tempCountry = editCountry.getText().toString();
 
-                database.addressDao().updateAddress(new Address(companyID, tempAddOne, tempAddTwo, tempCity,
+                database.addressDAO().updateAddress(new Address(companyID, tempAddOne, tempAddTwo, tempCity,
                         tempPostal, tempProvince, tempCountry, true));
 
         Button btnSaveAddAddress = findViewById(R.id.btnSaveAddress);

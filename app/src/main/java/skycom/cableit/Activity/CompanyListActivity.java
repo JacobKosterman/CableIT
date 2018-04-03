@@ -31,7 +31,7 @@ public class CompanyListActivity extends AppCompatActivity {
         database = AppDatabase.getDatabase(getApplicationContext());
 
         // Populates list view of companies.
-        final List<Company> companyList = database.companyDao().getAllCompany();
+        final List<Company> companyList = database.companyDAO().getAllCompany();
         List<String> tempStringList = new ArrayList<String>();
         String tempString = "";
 

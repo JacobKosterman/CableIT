@@ -11,7 +11,7 @@ import java.util.List;
 import skycom.cableit.Classes.Address;
 
 @Dao
-public interface AddressDao {
+public interface AddressDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addAddress(Address address);

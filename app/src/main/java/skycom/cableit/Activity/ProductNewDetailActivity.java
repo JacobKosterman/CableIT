@@ -58,7 +58,7 @@ public class ProductNewDetailActivity extends AppCompatActivity {
 
 
 
-                    List<Product> ProductCheckList = database.productDao().getProductByNumber(tempProNo);
+                    List<Product> ProductCheckList = database.productDAO().getProductByNumber(tempProNo);
 
                     if (ProductCheckList.isEmpty()){
 
@@ -101,8 +101,8 @@ public class ProductNewDetailActivity extends AppCompatActivity {
 
         Product product = new Product(1, tempProName, tempProNo, tempProDescription,
                 tempProCost, 0.0, 0.0, true);
-        database.productDao().addProduct(product);
-        List<Product> ProductCheckList = database.productDao().getProductByNumber(tempProNo);
+        database.productDAO().addProduct(product);
+        List<Product> ProductCheckList = database.productDAO().getProductByNumber(tempProNo);
 
         if (ProductCheckList.size() == 1){
 

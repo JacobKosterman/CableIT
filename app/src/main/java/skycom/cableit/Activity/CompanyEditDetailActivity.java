@@ -24,8 +24,6 @@ public class CompanyEditDetailActivity extends AppCompatActivity {
     String tempDesc = "";
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +38,7 @@ public class CompanyEditDetailActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         companyID = prefs.getInt("MY_COMPANY", 0);
 
-        List<Company> tempCompList = database.companyDao().getCompany(companyID);
+        List<Company> tempCompList = database.companyDAO().getCompany(companyID);
 
         if(tempCompList.size() == 1){
 
@@ -64,7 +62,7 @@ public class CompanyEditDetailActivity extends AppCompatActivity {
                 company.name = tempName;
                 company.description = tempDesc;
 
-                database.companyDao().updateCompany(company);
+                database.companyDAO().updateCompany(company);
 
 
                 Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);

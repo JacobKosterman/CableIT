@@ -53,7 +53,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             }
         }
-        List<Product> productOne = database.productDao().getProduct(productID);
+        List<Product> productOne = database.productDAO().getProduct(productID);
 
 
 

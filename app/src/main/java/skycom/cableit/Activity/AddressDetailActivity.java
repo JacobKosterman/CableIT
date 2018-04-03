@@ -34,7 +34,7 @@ public class AddressDetailActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         companyID = prefs.getInt("MY_COMPANY", 0);
 
-        List<Address> tempAddress = database.addressDao().getAddressFromCompany(companyID);
+        List<Address> tempAddress = database.addressDAO().getAddressFromCompany(companyID);
 
         EditText editAddressOne = (EditText)findViewById(R.id.txtStreetAddress1);
         EditText editAddressTwo = (EditText)findViewById(R.id.txtStreetAddress2);

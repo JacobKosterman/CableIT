@@ -11,7 +11,7 @@ import java.util.List;
 import skycom.cableit.Classes.Company;
 
 @Dao
-public interface CompanyDao {
+public interface CompanyDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addCompany(Company company);

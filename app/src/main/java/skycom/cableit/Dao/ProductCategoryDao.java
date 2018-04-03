@@ -12,7 +12,7 @@ import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.ProductCategory;
 
 @Dao
-public interface ProductCategoryDao {
+public interface ProductCategoryDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addProductCategory(ProductCategory productCategory);

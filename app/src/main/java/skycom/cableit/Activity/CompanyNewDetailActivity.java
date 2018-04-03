@@ -3,14 +3,12 @@ package skycom.cableit.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -44,7 +42,7 @@ public class CompanyNewDetailActivity extends AppCompatActivity {
                 tempCompanyName = txtCompanyName.getText().toString();
                 tempCompanyDescription = txtCompanyDescription.getText().toString();
 
-                List<Company> CompanyCheckList = database.companyDao().getCompanyByName(tempCompanyName);
+                List<Company> CompanyCheckList = database.companyDAO().getCompanyByName(tempCompanyName);
 
                 if (CompanyCheckList.isEmpty()){
 
@@ -86,8 +84,8 @@ public class CompanyNewDetailActivity extends AppCompatActivity {
     public void addCompanyAndDivert(){
 
         Company company = new Company(tempCompanyName, tempCompanyDescription);
-        database.companyDao().addCompany(company);
-        List<Company> tempCompanyList = database.companyDao().getCompanyByName(tempCompanyName);
+        database.companyDAO().addCompany(company);
+        List<Company> tempCompanyList = database.companyDAO().getCompanyByName(tempCompanyName);
 
         if (tempCompanyList.size() == 1){
 

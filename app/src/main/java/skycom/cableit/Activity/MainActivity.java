@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 import okhttp3.OkHttpClient;
 import skycom.cableit.Classes.Address;
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     private void importFromCSV() {
 
         //Check to see if that products data has already been loaded.
-        List<Product> products = database.productDao().getAllProducts();
+        List<Product> products = database.productDAO().getAllProducts();
         if (products.isEmpty()) {
 
             InputStream is = getResources().openRawResource(R.raw.product_list);
@@ -123,12 +122,12 @@ public class MainActivity extends AppCompatActivity {
 
                     //Add Product Category is it does NOT exist
                     if (tokens[1].length() > 0 ) {
-                        List<ProductCategory> listProductCategories = database.productCategoryDao().checkIfExists(tokens[1].toString());
+                        List<ProductCategory> listProductCategories = database.productCategoryDAO().checkIfExists(tokens[1].toString());
                         tempProCat = new ProductCategory(tokens[1], 0.67);
                         if (listProductCategories.isEmpty()) {
-                            database.productCategoryDao().addProductCategory(tempProCat);
+                            database.productCategoryDAO().addProductCategory(tempProCat);
                             //Getting from database gets the active ID number.
-                            tempProCat = database.productCategoryDao().getProductCategoryByName(tempProCat.categoryName);
+                            tempProCat = database.productCategoryDAO().getProductCategoryByName(tempProCat.categoryName);
                             tempCatId = tempProCat.id;
                         }
                         else{
@@ -175,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    database.productDao().addProduct(new Product(tempCatId,
+                    database.productDAO().addProduct(new Product(tempCatId,
                             tempProNo,
                             tempProName,
                             tempDescription,
@@ -191,19 +190,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDummyData(){
-        List<Company> companies = database.companyDao().getAllCompany();
+        List<Company> companies = database.companyDAO().getAllCompany();
         if (companies.isEmpty()) {
 
-            database.addressDao().addAddress(new Address( 1,"Address 1", "Address 2", "Kitchener","N2N 2N2", "ON", "CA", Boolean.FALSE ));
-            database.companyDao().addCompany(new Company("Test Company 1", "This is a description"));
-            database.companyDao().addCompany(new Company("Test Company 2", "This is a description"));
-            database.companyDao().addCompany(new Company("Test Company 3", "This is a description"));
-            database.companyDao().addCompany(new Company("Test Company 4", "This is a description"));
-            database.companyDao().addCompany(new Company("Test Company 5", "This is a description"));
-            database.companyDao().addCompany(new Company("Test Company 6", "This is a description"));
+            database.addressDAO().addAddress(new Address( 1,"Address 1", "Address 2", "Kitchener","N2N 2N2", "ON", "CA", Boolean.FALSE ));
+            database.companyDAO().addCompany(new Company("Test Company 1", "This is a description"));
+            database.companyDAO().addCompany(new Company("Test Company 2", "This is a description"));
+            database.companyDAO().addCompany(new Company("Test Company 3", "This is a description"));
+            database.companyDAO().addCompany(new Company("Test Company 4", "This is a description"));
+            database.companyDAO().addCompany(new Company("Test Company 5", "This is a description"));
+            database.companyDAO().addCompany(new Company("Test Company 6", "This is a description"));
 
-            List<Address> addressOne = database.addressDao().getAddress(1);
-            List<Company> companyOne = database.companyDao().getCompany(1);
+            List<Address> addressOne = database.addressDAO().getAddress(1);
+            List<Company> companyOne = database.companyDAO().getCompany(1);
 
         }
     }

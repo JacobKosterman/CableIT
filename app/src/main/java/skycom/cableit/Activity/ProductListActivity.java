@@ -12,7 +12,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import skycom.cableit.Classes.Company;
 import skycom.cableit.Classes.Product;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
@@ -29,7 +28,7 @@ public class ProductListActivity extends AppCompatActivity {
         database = AppDatabase.getDatabase(getApplicationContext());
 
         // Populates list view of companies.
-        final List<Product> productList = database.productDao().getAllProducts();
+        final List<Product> productList = database.productDAO().getAllProducts();
         List<String> tempStringList = new ArrayList<String>();
         String tempString = "";
 
