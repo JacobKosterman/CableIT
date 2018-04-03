@@ -10,9 +10,6 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 
@@ -20,9 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import skycom.cableit.Classes.Address;
+import skycom.cableit.Classes.Contact;
 import skycom.cableit.Classes.ExpandableListAdapter;
-import skycom.cableit.Classes.TabFragment;
-import skycom.cableit.Classes.ViewPagerAdapter;
 import skycom.cableit.Classes.Company;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
@@ -34,10 +31,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
     private SharedPreferences existingCompanyPrefs;
     int companyID = 0;
     int newCompanyID = 0;
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    TabFragment TabFragment;
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -98,15 +91,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
         editor.putInt("MY_COMPANY", companyID);
         editor.apply();
 
-
-
-//        viewPager = (ViewPager) findViewById(R.id.viewpager);
-//        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-//        viewPager.setAdapter(adapter);
-//
-//        tabLayout = (TabLayout) findViewById(R.id.tabs);
-//        tabLayout.setupWithViewPager(viewPager);
-//
 
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
 
@@ -174,7 +158,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
         });
 
 
-        //Button to navigate to the Address detail Activity
+        //Button to navigate to the Company detail Activity
         Button btnEditCompany = findViewById(R.id.btnEditCompany);
         btnEditCompany.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,17 +171,31 @@ public class CompanyDetailActivity extends AppCompatActivity {
             }
         });
 
-//        Button btnAddAddress = findViewById(R.id.btnNewAddress);
-//        btnAddAddress.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), AddressEditDetailActivity.class);
-//                if (companyIDString != ""){
-//                    intent.putExtra("COMPANY_ID_TEST", companyIDString + "");
-//                    startActivity(intent);
-//                }
-//            }
-//        });
+        //Buttong to navaigate to the Address Edit Detail Activity
+        Button btnAddAddress = findViewById(R.id.btnNewAddress);
+        btnAddAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddressNewDetailActivity.class);
+                if (companyIDString != ""){
+                    intent.putExtra("COMPANY_ID_TEST", companyIDString + "");
+                    startActivity(intent);
+                }
+            }
+        });
+
+        //Buttong to navaigate to the Address Edit Detail Activity
+        Button btnAddContact = findViewById(R.id.btnNewContact);
+        btnAddContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ContactEditDetailActivity.class);
+                if (companyIDString != ""){
+                    intent.putExtra("COMPANY_ID_TEST", companyIDString + "");
+                    startActivity(intent);
+                }
+            }
+        });
 
     }
     @Override
@@ -211,41 +209,39 @@ public class CompanyDetailActivity extends AppCompatActivity {
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
-        listDataHeader.add("Top 250");
-        listDataHeader.add("Now Showing");
-        listDataHeader.add("Coming Soon..");
+        listDataHeader.add("Contacts");
+        listDataHeader.add("Addresses");
+        listDataHeader.add("Quotes");
 
         // Adding child data
-        List<String> top250 = new ArrayList<String>();
-        top250.add("The Shawshank Redemption");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
-        top250.add("The Dark Knight");
-        top250.add("12 Angry Men");
+        List<String> contactsStringList = new ArrayList<String>();
+        List<Contact> contacts =  database.contactDAO().getContactsFromCompany(companyID);
+        for(int i = 0; i < contacts.size(); i++){
+            String thisString = contacts.get(i).contactName.toString();
+            if(!thisString.equals(null)){
+                contactsStringList.add(thisString);
+            }
+        }
 
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
-        nowShowing.add("The Wolverine");
+        List<String> addressesStringList = new ArrayList<String>();
+        List<Address> addresses =  database.addressDAO().getAddressFromCompany(companyID);
+        for(int i = 0; i < addresses.size(); i++){
+            String thisString = addresses.get(i).StreetAddress1.toString();
+            if(!thisString.equals(null)){
+                addressesStringList.add(thisString);
+            }
+        }
 
-        List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
-        comingSoon.add("The Spectacular Now");
-        comingSoon.add("The Canyons");
-        comingSoon.add("Europa Report");
+        List<String> quotesStringList = new ArrayList<String>();
+        quotesStringList.add("2 Guns");
+        quotesStringList.add("The Smurfs 2");
+        quotesStringList.add("The Spectacular Now");
+        quotesStringList.add("The Canyons");
+        quotesStringList.add("Europa Report");
 
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);
+        listDataChild.put(listDataHeader.get(0), contactsStringList); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), addressesStringList);
+        listDataChild.put(listDataHeader.get(2), quotesStringList);
     }
 
-//    public void myClickMethod(View v) {
-//        TabFragment.onClick(v);
-//    }
 }

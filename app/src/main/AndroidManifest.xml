@@ -26,7 +26,10 @@
         <activity android:name=".Activity.CompanyNewDetailActivity" />
         <activity android:name=".Activity.ProductNewDetailActivity" />
         <activity android:name=".Activity.QuoteListActivity" />
-        <activity android:name=".Activity.QuoteDetailActivity"></activity>
+        <activity android:name=".Activity.QuoteDetailActivity" />
+        <activity android:name=".Activity.ContactDetailActivity" />
+        <activity android:name=".Activity.ContactEditDetailActivity" />
+        <activity android:name=".Activity.AddressNewDetailActivity"></activity>
     </application>
 
 </manifest>

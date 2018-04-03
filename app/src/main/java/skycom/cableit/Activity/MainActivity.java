@@ -17,6 +17,7 @@ import java.util.List;
 import okhttp3.OkHttpClient;
 import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.Company;
+import skycom.cableit.Classes.Contact;
 import skycom.cableit.Classes.Product;
 import skycom.cableit.Classes.ProductCategory;
 import skycom.cableit.Database.AppDatabase;
@@ -193,13 +194,15 @@ public class MainActivity extends AppCompatActivity {
         List<Company> companies = database.companyDAO().getAllCompany();
         if (companies.isEmpty()) {
 
-            database.addressDAO().addAddress(new Address( 1,"Address 1", "Address 2", "Kitchener","N2N 2N2", "ON", "CA", Boolean.FALSE ));
+            database.addressDAO().addAddress(new Address( 1,"Address 1", "Address 2", "Kitchener","N2N 2N2", "ON", "CA", Boolean.TRUE ));
             database.companyDAO().addCompany(new Company("Test Company 1", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 2", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 3", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 4", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 5", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 6", "This is a description"));
+            database.contactDAO().addContact(new Contact(1, 1, "Test Type", "Bob Suruncle", "bob@email.com", Boolean.TRUE));
+            database.contactDAO().addContact(new Contact(1, 1, "Test Type", "Brian BlueBalls", "bballs@email.com", Boolean.TRUE));
 
             List<Address> addressOne = database.addressDAO().getAddress(1);
             List<Company> companyOne = database.companyDAO().getCompany(1);

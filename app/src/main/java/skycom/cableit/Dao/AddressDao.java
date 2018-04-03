@@ -25,8 +25,6 @@ public interface AddressDAO {
     @Query("select * from address where companyID = :CompanyId")
     public List<Address> getAddressFromCompany(long CompanyId);
 
-
-
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateAddress(Address address);
 

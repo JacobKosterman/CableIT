@@ -78,7 +78,8 @@ public class AddressEditDetailActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(this, AddressDetailActivity.class);
+        Intent intent = new Intent(this, CompanyDetailActivity.class);
+        intent.putExtra("COMPANY_ID_TEST", companyID + "");
         startActivity(intent);
     }
 }

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="skycom.cableit.Activity.CompanyDetailActivity">
     <RelativeLayout
-        android:layout_weight=".6"
+        android:layout_weight=".4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
@@ -55,13 +55,28 @@
             android:text="Edit Company"
             android:gravity="bottom|center"/>
 
-        </LinearLayout>
+         <Button
+             android:id="@+id/btnNewAddress"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Add Address"
+             android:gravity="bottom|center"/>
+
+             <Button
+                 android:id="@+id/btnNewContact"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="Add Contact"
+                 android:gravity="bottom|center"/>
+
+
+         </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:layout_weight=".4"
+             android:layout_weight=".6"
              android:paddingBottom="10dp"
              android:paddingLeft="10dp"
              android:paddingRight="10dp"
