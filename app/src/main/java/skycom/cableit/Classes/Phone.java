@@ -11,11 +11,13 @@ public class Phone {
     public int contactID;
     public String phoneNumber;
     public String ext;
+    public String description;
 
 
-    public Phone(int contactID, String phoneNumber, String ext) {
+    public Phone(int contactID, String phoneNumber, String ext, String description) {
         this.contactID = contactID;
         this.phoneNumber = phoneNumber;
         this.ext = ext;
+        this.description = description;
     }
 }

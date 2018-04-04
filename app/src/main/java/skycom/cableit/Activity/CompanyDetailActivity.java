@@ -19,6 +19,7 @@ import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.Contact;
 import skycom.cableit.Classes.ExpandableListAdapter;
 import skycom.cableit.Classes.Company;
+import skycom.cableit.Classes.Quote;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -187,7 +188,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
         btnAddContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ContactEditDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ContactNewDetailActivity.class);
                 if (companyIDString != ""){
                     intent.putExtra("COMPANY_ID_TEST", companyIDString + "");
                     startActivity(intent);
@@ -231,11 +232,13 @@ public class CompanyDetailActivity extends AppCompatActivity {
         }
 
         List<String> quotesStringList = new ArrayList<String>();
-        quotesStringList.add("2 Guns");
-        quotesStringList.add("The Smurfs 2");
-        quotesStringList.add("The Spectacular Now");
-        quotesStringList.add("The Canyons");
-        quotesStringList.add("Europa Report");
+        List<Quote> quotes =  database.quoteDAO().getQuotesForCompany(companyID);
+        for(int i = 0; i < quotes.size(); i++){
+            String thisString = quotes.get(i).quoteNumber.toString() + "\n" + quotes.get(i).dateUpdated.toString();
+            if(!thisString.equals(null)){
+                quotesStringList.add(thisString);
+            }
+        }
 
         listDataChild.put(listDataHeader.get(0), contactsStringList); // Header, Child data
         listDataChild.put(listDataHeader.get(1), addressesStringList);

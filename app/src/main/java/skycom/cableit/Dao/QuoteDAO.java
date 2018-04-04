@@ -9,9 +9,7 @@ import java.util.List;
 
 import skycom.cableit.Classes.Quote;
 
-/**
- * Created by Sydney on 3/26/2018.
- */
+
 @Dao
 public interface QuoteDAO {
 
@@ -20,4 +18,11 @@ public interface QuoteDAO {
 
     @Query("select * from quote")
     public List<Quote> getAllQuotes();
+
+    @Query("select * from quote where companyID = :companyID")
+    public List<Quote> getQuotesForCompany(long companyID);
+
+    @Query("select * from quote where siteAddressID = :addressID")
+    public List<Quote> getQuotesForAddress(long addressID);
+
 }

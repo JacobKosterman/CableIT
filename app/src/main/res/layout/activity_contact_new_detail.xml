@@ -4,26 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="skycom.cableit.Activity.ContactEditDetailActivity"
+    tools:context="skycom.cableit.Activity.ContactNewDetailActivity"
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/textContactName"
+        android:id="@+id/txtNewContactName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp" />
+        android:gravity="top|left"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Address 1" />
 
     <EditText
-        android:id="@+id/textContactEmail"
+        android:id="@+id/txtNewEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp" />
+        android:gravity="top|left"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Address 2" />
 
     <Button
-        android:id="@+id/btnEditContact"
+        android:id="@+id/btnSaveNewContact"
         android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="Save Contact"
-        android:gravity="bottom|center"/>
+        android:text="Save Address"/>
+
+
 
 </LinearLayout>

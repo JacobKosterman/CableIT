@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/txtStreetAddress1"
+        android:id="@+id/txtNewStreetAddress1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top|left"
@@ -18,7 +18,7 @@
         android:hint="Address 1" />
 
     <EditText
-        android:id="@+id/txtStreetAddress2"
+        android:id="@+id/txtNewStreetAddress2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top|left"
@@ -27,7 +27,7 @@
         android:hint="Address 2" />
 
     <EditText
-        android:id="@+id/txtCity"
+        android:id="@+id/txtNewCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top|left"
@@ -36,7 +36,7 @@
         android:hint="City" />
 
     <EditText
-        android:id="@+id/txtPostalCode"
+        android:id="@+id/txtNewPostalCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top|left"
@@ -45,7 +45,7 @@
         android:hint="Postal Code" />
 
     <EditText
-        android:id="@+id/txtProvince"
+        android:id="@+id/txtNewProvince"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top|left"
@@ -54,7 +54,7 @@
         android:hint="Province" />
 
     <EditText
-        android:id="@+id/txtCountry"
+        android:id="@+id/txtNewCountry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top|left"
@@ -62,29 +62,19 @@
         android:inputType="textPersonName"
         android:hint="Country" />
 
-    <CheckBox
-        android:id="@+id/chkIsActive"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Is Active" />
-
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="bottom|center"
-        >
+        android:layout_gravity="bottom|center">
+
         <Button
-            android:id="@+id/btnSaveAddress"
+            android:id="@+id/btnSaveNewAddress"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Save Changes"/>
+            android:text="Save Address"/>
 
     </LinearLayout>
-
-
-
 
 </LinearLayout>
