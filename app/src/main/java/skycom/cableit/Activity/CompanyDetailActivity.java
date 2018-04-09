@@ -2,11 +2,14 @@ package skycom.cableit.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import android.widget.Toast;
@@ -15,11 +18,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import skycom.cableit.Classes.Adapters.ContactAdapter;
 import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.Contact;
 import skycom.cableit.Classes.ExpandableListAdapter;
 import skycom.cableit.Classes.Company;
 import skycom.cableit.Classes.Quote;
+import skycom.cableit.Dao.CompanyDAO;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -32,6 +37,8 @@ public class CompanyDetailActivity extends AppCompatActivity {
     int newCompanyID = 0;
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
+    ListView tstListView;
+    private static ContactAdapter adapter;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
@@ -89,6 +96,27 @@ public class CompanyDetailActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = existingCompanyPrefs.edit();
         editor.putInt("MY_COMPANY", companyID);
         editor.apply();
+
+        //BEGINS SYDNEY TEST
+        tstListView=(ListView)findViewById(R.id.lstTest);
+        ArrayList<Contact> temp = new ArrayList<>();
+        temp.addAll(database.contactDAO().getContactsFromCompany(companyID));
+
+        adapter= new ContactAdapter(this,temp);
+
+        tstListView.setAdapter(adapter);
+        tstListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //this is clack manager
+                Contact c = (Contact) parent.getItemAtPosition(position);
+
+                Toast.makeText(getApplicationContext(),
+                        String.valueOf(id) + c.contactName + c.emailAddress,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+        //END SYDNEY TEST
 
 
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
