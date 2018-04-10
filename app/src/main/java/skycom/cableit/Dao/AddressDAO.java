@@ -19,11 +19,14 @@ public interface AddressDAO {
     @Query("select * from address")
     public List<Address> getAllAddresses();
 
-    @Query("select * from address where id = :AddressId")
-    public List<Address> getAddress(long AddressId);
+    @Query("select * from address where id = :addressID")
+    public List<Address> getAddress(long addressID);
 
-    @Query("select * from address where companyID = :CompanyId")
-    public List<Address> getAddressFromCompany(long CompanyId);
+    @Query("select * from address where companyID = :companyID")
+    public List<Address> getAddressFromCompany(long companyID);
+
+//    @Query("select a.* from address a JOIN contactAddress ca ON ca.addressID = a.id WHERE ca.contactID = :contactID")
+//    public List<Address> getAddressFromContact(long contactID);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateAddress(Address address);

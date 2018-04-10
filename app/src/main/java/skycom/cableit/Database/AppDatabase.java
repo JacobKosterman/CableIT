@@ -16,6 +16,7 @@ import skycom.cableit.Classes.ProductCategory;
 import skycom.cableit.Classes.Quote;
 import skycom.cableit.Classes.QuoteLine;
 import skycom.cableit.Classes.TimestampConverter;
+import skycom.cableit.Classes.Phone;
 import skycom.cableit.Dao.AddressDAO;
 import skycom.cableit.Dao.CompanyDAO;
 import skycom.cableit.Dao.ProductDAO;
@@ -23,9 +24,10 @@ import skycom.cableit.Dao.QuoteDAO;
 import skycom.cableit.Dao.QuoteLineDAO;
 import skycom.cableit.Dao.ProductCategoryDAO;
 import skycom.cableit.Dao.ContactDAO;
+import skycom.cableit.Dao.PhoneDAO;
 
 
-@Database(entities = {Company.class, Address.class, Product.class, ProductCategory.class, Contact.class, Quote.class, QuoteLine.class}, version = 18, exportSchema = false)
+@Database(entities = {Company.class, Address.class, Product.class, ProductCategory.class, Contact.class, Quote.class, QuoteLine.class, Phone.class}, version = 18, exportSchema = false)
 @TypeConverters({TimestampConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -37,6 +39,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract QuoteDAO quoteDAO();
     public abstract QuoteLineDAO quoteLineDAO();
     public abstract ContactDAO contactDAO();
+    public abstract PhoneDAO phoneDAO();
 
     public static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
