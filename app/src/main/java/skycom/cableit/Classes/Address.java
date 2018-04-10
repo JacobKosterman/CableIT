@@ -18,15 +18,15 @@ public class Address {
     public boolean isActive;
 
 
-    public Address(int companyID, String address1, String address2, String City, String PostalCode,
-                   String Province, String Country, boolean isActive) {
+    public Address(int companyID, String address1, String address2, String city, String postalCode,
+                   String province, String country, boolean isActive) {
         this.companyID = companyID;
         this.address1 = address1;
         this.address2 = address2;
-        this.city = City;
-        this.postalCode = PostalCode;
-        this.province = Province;
-        this.country = Country;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.province = province;
+        this.country = country;
         this.isActive = isActive;
 
     }

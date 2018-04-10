@@ -25,7 +25,7 @@ import skycom.cableit.Dao.ProductCategoryDAO;
 import skycom.cableit.Dao.ContactDAO;
 
 
-@Database(entities = {Company.class, Address.class, Product.class, ProductCategory.class, Contact.class, Quote.class, QuoteLine.class}, version = 17, exportSchema = false)
+@Database(entities = {Company.class, Address.class, Product.class, ProductCategory.class, Contact.class, Quote.class, QuoteLine.class}, version = 18, exportSchema = false)
 @TypeConverters({TimestampConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
