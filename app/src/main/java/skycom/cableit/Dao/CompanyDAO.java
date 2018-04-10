@@ -22,12 +22,10 @@ public interface CompanyDAO {
     @Query("select * from company where name LIKE :companyName")
     public List<Company> getCompanyByName(String companyName);
 
-    @Query("select * from company where id = :companyId")
-    public List<Company> getCompany(long companyId);
+    @Query("select * from company where id = :companyID")
+    public List<Company> getCompany(long companyID);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateCompany(Company company);
 
-    @Query("delete from company")
-    void removeAllCompanies();
 }

@@ -18,6 +18,9 @@ public interface QuoteLineDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addQuoteLine(QuoteLine quoteLine);
 
+    @Query("select * from quoteLine where quoteID = :quoteID")
+    public List<QuoteLine> getQuoteLinesForQuote(long quoteID);
+
     @Query("select * from quoteLine")
     public List<QuoteLine> getAllQuoteLines();
 }

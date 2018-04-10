@@ -19,11 +19,14 @@ public interface ContactDAO {
     @Query("select * from contact")
     public List<Contact> getAllContact();
 
-    @Query("select * from contact where id = :contactId")
-    public List<Contact> getContact(long contactId);
+    @Query("select * from contact where id = :contactID")
+    public List<Contact> getContact(long contactID);
 
-    @Query("select * from contact where companyID = :companyId")
-    public List<Contact> getContactsFromCompany(long companyId);
+    @Query("select * from contact where companyID = :companyID")
+    public List<Contact> getContactsFromCompany(long companyID);
+
+    @Query("select * from contact c join quotecontact qc on c.id = qc.contactID where qc.quoteID = :quoteID")
+    public List<Contact> getContactsFromQuote(long quoteID);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateCompany(Contact contact);

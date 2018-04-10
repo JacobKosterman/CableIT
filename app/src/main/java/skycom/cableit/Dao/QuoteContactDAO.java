@@ -8,20 +8,20 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import skycom.cableit.Classes.Phone;
+import skycom.cableit.Classes.QuoteContact;
 
 @Dao
-public interface PhoneDAO {
+public interface QuoteContactDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void addPhone(Phone phone);
+    void addQuoteContact(QuoteContact quoteContact);
 
-    @Query("select * from phone")
-    public List<Phone> getAllPhones();
-
-    @Query("select * from phone where id = :phoneID")
-    public List<Phone> getPhone(long phoneID);
+    @Query("select * from quoteContact")
+    public List<QuoteContact> getAllQuoteContacts();
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updatePhone(Phone phone);
+    void updateQuoteContact(QuoteContact quoteContact);
+
+    @Query("delete from quoteContact")
+    void removeAllQuoteContacts();
 }

@@ -19,19 +19,10 @@ public interface ProductDAO {
     @Query("select * from product Order by productName ASC")
     public List<Product> getAllProducts();
 
-    @Query("select * from product where partNo LIKE :productName")
-    public List<Product> getProductByNumber(String productName);
+    @Query("select * from product where partNo LIKE :productNo")
+    public List<Product> getProductByNumber(String productNo);
 
     @Query("select * from product where id = :ProductID")
     public List<Product> getProduct(long ProductID);
 
-//
-//    @Query("select * from product where companyID = :CompanyId")
-//    public List<Product> getAddressFromCompany(long CompanyId);
-//
-//    @Update(onConflict = OnConflictStrategy.REPLACE)
-//    void updateAddress(Product product);
-//
-//    @Query("delete from product")
-//    void removeAllProducts();
 }

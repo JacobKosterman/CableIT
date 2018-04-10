@@ -20,18 +20,18 @@ public interface ProductCategoryDAO {
     @Query("select * from productCategory")
     public List<ProductCategory> getAllProductCategories();
 
-    @Query("select * from ProductCategory where id = :productCategoryID")
+    @Query("select * from productCategory where id = :productCategoryID")
     public List<ProductCategory> getProductCategory(long productCategoryID);
 
-    @Query("select * from ProductCategory where categoryName LIKE :newField")
+    //TODO: KOSTERMAN FIX THIS GDI
+
+    @Query("select * from productCategory where categoryName LIKE :newField")
     public List<ProductCategory> checkIfExists(String newField);
 
-    @Query("select * from ProductCategory where categoryName LIKE :proCatName")
+    @Query("select * from productCategory where categoryName LIKE :proCatName")
     public ProductCategory getProductCategoryByName(String proCatName);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateAddress(Address address);
+    void updateProductCategory(ProductCategory productCategory);
 
-    @Query("delete from address")
-    void removeAllAddress();
 }

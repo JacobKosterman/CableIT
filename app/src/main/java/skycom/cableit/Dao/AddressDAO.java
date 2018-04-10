@@ -25,12 +25,9 @@ public interface AddressDAO {
     @Query("select * from address where companyID = :companyID")
     public List<Address> getAddressFromCompany(long companyID);
 
-//    @Query("select a.* from address a JOIN contactAddress ca ON ca.addressID = a.id WHERE ca.contactID = :contactID")
-//    public List<Address> getAddressFromContact(long contactID);
+    @Query("select a.* from address a JOIN contactAddress ca ON ca.addressID = a.id WHERE ca.contactID = :contactID")
+    public List<Address> getAddressFromContact(long contactID);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateAddress(Address address);
-
-    @Query("delete from address")
-    void removeAllAddress();
 }
