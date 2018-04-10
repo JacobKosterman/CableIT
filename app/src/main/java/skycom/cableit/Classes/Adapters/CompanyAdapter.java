@@ -48,7 +48,7 @@ public class CompanyAdapter extends BaseAdapter implements Filterable {
         if (view == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
             //TODO: Update with new layout
-            view = inflater.inflate(R.layout.row_contact, parent, false);
+            view = inflater.inflate(R.layout.row_company, parent, false);
             holder = new ViewHolder();
             holder.name = (TextView) view.findViewById(R.id.name);
             holder.description = (TextView) view.findViewById(R.id.email);

@@ -77,11 +77,14 @@
             android:inputType="textPersonName"
             android:hint="Country" />
 
-        <CheckBox
-            android:id="@+id/chkIsActive"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spinAddressType"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Is Active" />
+            android:layout_marginTop="20dip"
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip"
+            android:ems="10"/>
 
 
         <LinearLayout

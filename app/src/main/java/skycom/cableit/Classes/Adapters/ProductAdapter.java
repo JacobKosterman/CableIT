@@ -48,10 +48,11 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
         if (view == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
             //TODO: Update with new layout
-            view = inflater.inflate(R.layout.row_contact, parent, false);
+            view = inflater.inflate(R.layout.row_product, parent, false);
             holder = new ViewHolder();
             holder.productName = (TextView) view.findViewById(R.id.name);
             holder.partNumber = (TextView) view.findViewById(R.id.email);
+            holder.description = (TextView) view.findViewById(R.id.email);
 
             view.setTag(holder);
         } else {

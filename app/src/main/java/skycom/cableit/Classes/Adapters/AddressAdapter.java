@@ -48,10 +48,12 @@ public class AddressAdapter extends BaseAdapter implements Filterable {
         if (view == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
             //TODO: Update with new layout
-            view = inflater.inflate(R.layout.row_contact, parent, false);
+            view = inflater.inflate(R.layout.row_address, parent, false);
             holder = new ViewHolder();
             holder.address1 = (TextView) view.findViewById(R.id.name);
             holder.address2 = (TextView) view.findViewById(R.id.email);
+            holder.cityProvPostal = (TextView) view.findViewById(R.id.email);
+
 
             view.setTag(holder);
         } else {

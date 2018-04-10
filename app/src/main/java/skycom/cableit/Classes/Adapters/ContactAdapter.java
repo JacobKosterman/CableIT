@@ -46,6 +46,7 @@ public class ContactAdapter extends BaseAdapter implements Filterable {
         final ViewHolder holder;
         final Contact user = (Contact) getItem(position);
 
+
         if (view == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
             view = inflater.inflate(R.layout.row_contact, parent, false);

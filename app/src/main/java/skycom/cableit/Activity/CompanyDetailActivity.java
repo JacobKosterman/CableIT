@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -19,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import skycom.cableit.Classes.Adapters.AddressAdapter;
 import skycom.cableit.Classes.Adapters.ContactAdapter;
 import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.Contact;
@@ -34,14 +33,12 @@ public class CompanyDetailActivity extends AppCompatActivity {
     String companyIDString = "";
     private SharedPreferences existingCompanyPrefs;
     int companyID = 0;
-    int newCompanyID = 0;
-    ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
-    ListView tstListView;
-    private static ContactAdapter adapter;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
 
+
+    ListView lvContact;
+    private static ContactAdapter adapterContact;
+    ListView lvAddress;
+    private static AddressAdapter adapterAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +63,8 @@ public class CompanyDetailActivity extends AppCompatActivity {
 
         if (companyIDString != null)
         {
+
+
             if (companyIDString != ""){
                 tempCompanyID= Integer.parseInt(companyIDString) + 1;
                 companyID = tempCompanyID;
@@ -80,14 +79,16 @@ public class CompanyDetailActivity extends AppCompatActivity {
 
         //This is used if creating a new company.
         if (companyIDString == "" || companyIDString == null){
+            try{
+                Bundle bundle = getIntent().getExtras();
+                if (bundle != null )
+                    companyID = bundle.getInt("NEW_COMPANY_ID");
 
-            Bundle bundle = getIntent().getExtras();
-            if (bundle != null )
-                newCompanyID = bundle.getInt("NEW_COMPANY_ID");
-
-            List<Company> companyOne = database.companyDAO().getCompany(newCompanyID);
-            txtName.setText(companyOne.get(0).name);
-            txtDescription.setText(companyOne.get(0).description);
+                List<Company> companyOne = database.companyDAO().getCompany(companyID);
+                txtName.setText(companyOne.get(0).name);
+                txtDescription.setText(companyOne.get(0).description);
+            }catch(Exception e) {
+            }
         }
 
 
@@ -98,22 +99,25 @@ public class CompanyDetailActivity extends AppCompatActivity {
         editor.apply();
 
         //BEGINS SYDNEY TEST
-        tstListView=(ListView)findViewById(R.id.lstTest);
+        lvContact =(ListView)findViewById(R.id.lstContact);
         ArrayList<Contact> temp = new ArrayList<>();
         temp.addAll(database.contactDAO().getContactsFromCompany(companyID));
 
-        adapter= new ContactAdapter(this,temp);
+        adapterContact = new ContactAdapter(this,temp);
 
-        tstListView.setAdapter(adapter);
-        tstListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvContact.setAdapter(adapterContact);
+        lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Contact c = (Contact) parent.getItemAtPosition(position);
                 if (c != null)
                 {
-                    Toast.makeText(getApplicationContext(),
-                            String.valueOf(id) + c.contactName + c.emailAddress,
-                            Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), ContactDetailActivity.class);
+                    if (companyIDString != ""){
+                        //intent.putExtra("COMPANY_ID_TEST", companyID + "");
+                        //intent.putExtra("CONTACT_ID", c.id + "");
+                        startActivity(intent);
+                    }
                 }
                 else
                 {
@@ -125,72 +129,35 @@ public class CompanyDetailActivity extends AppCompatActivity {
         });
         //END SYDNEY TEST
 
+        lvAddress =(ListView)findViewById(R.id.lstAddress);
+        ArrayList<Address> tempAddress = new ArrayList<>();
+        tempAddress.addAll(database.addressDAO().getAddressFromCompany(companyID));
 
-//        expListView = (ExpandableListView) findViewById(R.id.lvExp);
-//
-//        // preparing list data
-//        prepareListData();
-//
-//        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-//
-//        // setting list adapter
-//        expListView.setAdapter(listAdapter);
-//
-//
-//        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-//
-//            @Override
-//            public boolean onGroupClick(ExpandableListView parent, View v,
-//                                        int groupPosition, long id) {
-//                // Toast.makeText(getApplicationContext(),
-//                // "Group Clicked " + listDataHeader.get(groupPosition),
-//                // Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        });
-//
-//
-//        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-//
-//            @Override
-//            public void onGroupExpand(int groupPosition) {
-//                Toast.makeText(getApplicationContext(),
-//                        listDataHeader.get(groupPosition) + " Expanded",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        // Listview Group collasped listener
-//        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-//
-//            @Override
-//            public void onGroupCollapse(int groupPosition) {
-//                Toast.makeText(getApplicationContext(),
-//                        listDataHeader.get(groupPosition) + " Collapsed",
-//                        Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//
-//        // Listview on child click listener
-//        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-//
-//            @Override
-//            public boolean onChildClick(ExpandableListView parent, View v,
-//                                        int groupPosition, int childPosition, long id) {
-//                // TODO Auto-generated method stub
-//                Toast.makeText(
-//                        getApplicationContext(),
-//                        listDataHeader.get(groupPosition)
-//                                + " : "
-//                                + listDataChild.get(
-//                                listDataHeader.get(groupPosition)).get(
-//                                childPosition), Toast.LENGTH_SHORT)
-//                        .show();
-//                return false;
-//            }
-//        });
 
+
+        adapterAddress = new AddressAdapter(this,tempAddress);
+
+        lvAddress.setAdapter(adapterAddress);
+        lvAddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Address a = (Address) parent.getItemAtPosition(position);
+                if (a != null)
+                {
+                    Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
+                    if (companyIDString != "") {
+                        intent.putExtra("COMPANY_ID_TEST", a.id + "");
+                        startActivity(intent);
+                    }
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),
+                            "error",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         //Button to navigate to the Company detail Activity
         Button btnEditCompany = findViewById(R.id.btnEditCompany);
@@ -230,54 +197,10 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(this, CompanyListActivity.class);
         startActivity(intent);
     }
-
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-
-        // Adding child data
-        listDataHeader.add("Contacts");
-        listDataHeader.add("Addresses");
-        listDataHeader.add("Quotes");
-
-        // Adding child data
-        List<String> contactsStringList = new ArrayList<String>();
-        List<Contact> contacts =  database.contactDAO().getContactsFromCompany(companyID);
-        for(int i = 0; i < contacts.size(); i++){
-            String thisString = contacts.get(i).contactName.toString();
-            if(!thisString.equals(null)){
-                contactsStringList.add(thisString);
-            }
-        }
-
-        List<String> addressesStringList = new ArrayList<String>();
-        List<Address> addresses =  database.addressDAO().getAddressFromCompany(companyID);
-        for(int i = 0; i < addresses.size(); i++){
-            String thisString = addresses.get(i).address1.toString();
-            if(!thisString.equals(null)){
-                addressesStringList.add(thisString);
-            }
-        }
-
-        List<String> quotesStringList = new ArrayList<String>();
-        List<Quote> quotes =  database.quoteDAO().getQuotesForCompany(companyID);
-        for(int i = 0; i < quotes.size(); i++){
-            String thisString = quotes.get(i).quoteNumber.toString() + "\n" + quotes.get(i).dateUpdated.toString();
-            if(!thisString.equals(null)){
-                quotesStringList.add(thisString);
-            }
-        }
-
-        listDataChild.put(listDataHeader.get(0), contactsStringList); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), addressesStringList);
-        listDataChild.put(listDataHeader.get(2), quotesStringList);
-    }
-
 }

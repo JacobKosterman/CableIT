@@ -5,11 +5,14 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import java.util.List;
 import skycom.cableit.Classes.Address;
+import skycom.cableit.Classes.AddressType;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -17,6 +20,15 @@ public class AddressEditDetailActivity extends AppCompatActivity {
 
     int companyID = 0;
     private AppDatabase database;
+
+    String tempAddOne = "";
+    String tempAddTwo = "";
+    String tempCity = "";
+    String tempPostal = "";
+    String tempProvince = "";
+    String tempCountry = "";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +40,6 @@ public class AddressEditDetailActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         companyID = prefs.getInt("MY_COMPANY", 0);
 
-        Address updatedAddress;
-
         List<Address> tempAddress = database.addressDAO().getAddressFromCompany(companyID);
 
         EditText editAddressOne = (EditText)findViewById(R.id.txtStreetAddress1);
@@ -39,12 +49,12 @@ public class AddressEditDetailActivity extends AppCompatActivity {
         EditText editProvince = (EditText)findViewById(R.id.txtProvince);
         EditText editCountry = (EditText)findViewById(R.id.txtCountry);
 
-        String tempAddOne = editAddressOne.getText().toString();
-        String tempAddTwo = editAddressTwo.getText().toString();
-        String tempCity = editCity.getText().toString();
-        String tempPostal = editPostal.getText().toString();
-        String tempProvince = editProvince.getText().toString();
-        String tempCountry = editCountry.getText().toString();
+        tempAddOne = editAddressOne.getText().toString();
+        tempAddTwo = editAddressTwo.getText().toString();
+        tempCity = editCity.getText().toString();
+        tempPostal = editPostal.getText().toString();
+        tempProvince = editProvince.getText().toString();
+        tempCountry = editCountry.getText().toString();
 
 
         if (!tempAddress.isEmpty()){
@@ -63,15 +73,25 @@ public class AddressEditDetailActivity extends AppCompatActivity {
         tempProvince = editProvince.getText().toString();
         tempCountry = editCountry.getText().toString();
 
-                database.addressDAO().updateAddress(new Address(companyID, tempAddOne, tempAddTwo, tempCity,
-                        tempPostal, tempProvince, tempCountry, true));
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinAddressType);
+
+        mySpinner.setAdapter(new ArrayAdapter<AddressType>(this,
+                android.R.layout.simple_spinner_item, AddressType.values()));
+
+
+
+
 
         Button btnSaveAddAddress = findViewById(R.id.btnSaveAddress);
         btnSaveAddAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                database.addressDAO().updateAddress(new Address(companyID, tempAddOne, tempAddTwo, tempCity,
+                        tempPostal, tempProvince, tempCountry, true));
+
                 Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
+                intent.putExtra("COMPANY_ID_TEST", companyID + "");
                 startActivity(intent);
             }
         });
