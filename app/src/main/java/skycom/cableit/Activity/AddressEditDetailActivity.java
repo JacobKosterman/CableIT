@@ -48,12 +48,12 @@ public class AddressEditDetailActivity extends AppCompatActivity {
 
 
         if (!tempAddress.isEmpty()){
-            editAddressOne.setText(String.valueOf(tempAddress.get(0).StreetAddress1), TextView.BufferType.EDITABLE);
-            editAddressTwo.setText(String.valueOf(tempAddress.get(0).StreetAddress2), TextView.BufferType.EDITABLE);
-            editCity.setText(String.valueOf(tempAddress.get(0).City), TextView.BufferType.EDITABLE);
-            editPostal.setText(String.valueOf(tempAddress.get(0).PostalCode), TextView.BufferType.EDITABLE);
-            editProvince.setText(String.valueOf(tempAddress.get(0).Province), TextView.BufferType.EDITABLE);
-            editCountry.setText(String.valueOf(tempAddress.get(0).Country), TextView.BufferType.EDITABLE);
+            editAddressOne.setText(String.valueOf(tempAddress.get(0).address1), TextView.BufferType.EDITABLE);
+            editAddressTwo.setText(String.valueOf(tempAddress.get(0).address2), TextView.BufferType.EDITABLE);
+            editCity.setText(String.valueOf(tempAddress.get(0).city), TextView.BufferType.EDITABLE);
+            editPostal.setText(String.valueOf(tempAddress.get(0).postalCode), TextView.BufferType.EDITABLE);
+            editProvince.setText(String.valueOf(tempAddress.get(0).province), TextView.BufferType.EDITABLE);
+            editCountry.setText(String.valueOf(tempAddress.get(0).country), TextView.BufferType.EDITABLE);
         }
 
         tempAddOne = editAddressOne.getText().toString();

@@ -9,24 +9,24 @@ public class Address {
     @PrimaryKey(autoGenerate = true)
     public int id;
     public int companyID;
-    public String StreetAddress1;
-    public String StreetAddress2;
-    public String City;
-    public String PostalCode;
-    public String Province;
-    public String Country;
+    public String address1;
+    public String address2;
+    public String city;
+    public String postalCode;
+    public String province;
+    public String country;
     public boolean isActive;
 
 
-    public Address(int companyID, String StreetAddress1, String StreetAddress2, String City, String PostalCode,
+    public Address(int companyID, String address1, String address2, String City, String PostalCode,
                    String Province, String Country, boolean isActive) {
         this.companyID = companyID;
-        this.StreetAddress1 = StreetAddress1;
-        this.StreetAddress2 = StreetAddress2;
-        this.City = City;
-        this.PostalCode = PostalCode;
-        this.Province = Province;
-        this.Country = Country;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.city = City;
+        this.postalCode = PostalCode;
+        this.province = Province;
+        this.country = Country;
         this.isActive = isActive;
 
     }

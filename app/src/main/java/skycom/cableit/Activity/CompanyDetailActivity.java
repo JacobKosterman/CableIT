@@ -2,7 +2,6 @@ package skycom.cableit.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +23,6 @@ import skycom.cableit.Classes.Contact;
 import skycom.cableit.Classes.ExpandableListAdapter;
 import skycom.cableit.Classes.Company;
 import skycom.cableit.Classes.Quote;
-import skycom.cableit.Dao.CompanyDAO;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -253,7 +251,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
         List<String> addressesStringList = new ArrayList<String>();
         List<Address> addresses =  database.addressDAO().getAddressFromCompany(companyID);
         for(int i = 0; i < addresses.size(); i++){
-            String thisString = addresses.get(i).StreetAddress1.toString();
+            String thisString = addresses.get(i).address1.toString();
             if(!thisString.equals(null)){
                 addressesStringList.add(thisString);
             }

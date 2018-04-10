@@ -1,5 +1,4 @@
 package skycom.cableit.Classes.Adapters;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,20 +7,20 @@ import android.widget.*;
 
 import java.util.ArrayList;
 
-import skycom.cableit.Classes.Contact;
+import skycom.cableit.Classes.Product;
 import skycom.cableit.R;
 
-public class ContactAdapter extends BaseAdapter implements Filterable {
+public class ProductAdapter extends BaseAdapter implements Filterable {
 
     private Context context;
-    private ContactFilter contactFilter;
-    private ArrayList<Contact> contactList;
-    private ArrayList<Contact> filteredList;
+    private ProductFilter productFilter;
+    private ArrayList<Product> productList;
+    private ArrayList<Product> filteredList;
 
-    public ContactAdapter(Context activity, ArrayList<Contact> contactList) {
+    public ProductAdapter(Context activity, ArrayList<Product> productList) {
         this.context = activity;
-        this.contactList = contactList;
-        this.filteredList = contactList;
+        this.productList = productList;
+        this.filteredList = productList;
 
         getFilter();
     }
@@ -44,14 +43,15 @@ public class ContactAdapter extends BaseAdapter implements Filterable {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         final ViewHolder holder;
-        final Contact user = (Contact) getItem(position);
+        final Product product = (Product) getItem(position);
 
         if (view == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
+            //TODO: Update with new layout
             view = inflater.inflate(R.layout.row_contact, parent, false);
             holder = new ViewHolder();
-            holder.name = (TextView) view.findViewById(R.id.name);
-            holder.email = (TextView) view.findViewById(R.id.email);
+            holder.productName = (TextView) view.findViewById(R.id.name);
+            holder.partNumber = (TextView) view.findViewById(R.id.email);
 
             view.setTag(holder);
         } else {
@@ -60,47 +60,50 @@ public class ContactAdapter extends BaseAdapter implements Filterable {
         }
 
         // bind text with view holder content view for efficient use
-        holder.name.setText(user.contactName);
-        holder.email.setText(user.emailAddress);
+        holder.productName.setText(product.productName);
+        holder.partNumber.setText(product.partNo);
+        holder.description.setText(product.description);
 
         return view;
     }
 
     @Override
     public Filter getFilter() {
-        if (contactFilter == null) {
-            contactFilter = new ContactFilter();
+        if (productFilter == null) {
+            productFilter = new ProductFilter();
         }
 
-        return contactFilter;
+        return productFilter;
     }
 
     static class ViewHolder {
-        TextView email;
-        TextView name;
+        TextView partNumber;
+        TextView description;
+        TextView productName;
     }
 
-    private class ContactFilter extends Filter {
+    private class ProductFilter extends Filter {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults filterResults = new FilterResults();
             if (constraint!=null && constraint.length()>0) {
-                ArrayList<Contact> tempList = new ArrayList<Contact>();
+                ArrayList<Product> tempList = new ArrayList<Product>();
 
                 // search content in friend list
-                for (Contact user : contactList) {
-                    if (user.contactName.toLowerCase().contains(constraint.toString().toLowerCase())
-                            || user.emailAddress.toLowerCase().contains(constraint.toString().toLowerCase())) {
-                        tempList.add(user);
+                for (Product product : productList) {
+                    if (product.partNo.toLowerCase().contains(constraint.toString().toLowerCase())
+                            || product.productName.toLowerCase().contains(constraint.toString().toLowerCase())
+                            || product.description.toLowerCase().contains(constraint.toString().toLowerCase())){
+                        tempList.add(product);
                     }
                 }
 
                 filterResults.count = tempList.size();
                 filterResults.values = tempList;
             } else {
-                filterResults.count = contactList.size();
-                filterResults.values = contactList;
+                filterResults.count = productList.size();
+                filterResults.values = productList;
             }
 
             return filterResults;
@@ -109,7 +112,7 @@ public class ContactAdapter extends BaseAdapter implements Filterable {
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            filteredList = (ArrayList<Contact>) results.values;
+            filteredList = (ArrayList<Product>) results.values;
             notifyDataSetChanged();
         }
     }
