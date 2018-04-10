@@ -7,12 +7,12 @@ public class ContactAddress {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
-    public int companyID;
+    public int contactID;
     public int addressID;
 
 
-    public ContactAddress(int companyID, int addressID) {
-        this.companyID = companyID;
+    public ContactAddress(int contactID, int addressID) {
+        this.contactID = contactID;
         this.addressID = addressID;
     }
 }
