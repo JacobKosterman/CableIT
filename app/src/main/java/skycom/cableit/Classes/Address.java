@@ -9,6 +9,7 @@ public class Address {
     @PrimaryKey(autoGenerate = true)
     public int id;
     public int companyID;
+    public int addressTypeID;
     public String address1;
     public String address2;
     public String city;
@@ -18,9 +19,10 @@ public class Address {
     public boolean isActive;
 
 
-    public Address(int companyID, String address1, String address2, String city, String postalCode,
+    public Address(int companyID, int addressTypeID, String address1, String address2, String city, String postalCode,
                    String province, String country, boolean isActive) {
         this.companyID = companyID;
+        this.addressTypeID = addressTypeID;
         this.address1 = address1;
         this.address2 = address2;
         this.city = city;

@@ -58,7 +58,7 @@ public class AddressNewDetailActivity extends AppCompatActivity {
 
                 if (tempAddOne.length() >= 1 && !tempAddOne.isEmpty()){
 
-                    database.addressDAO().addAddress(new Address(companyID, tempAddOne, tempAddTwo,
+                    database.addressDAO().addAddress(new Address(companyID,1, tempAddOne, tempAddTwo,
                             tempCity, tempPostal, tempProvince, tempCountry, Boolean.TRUE));
 
 

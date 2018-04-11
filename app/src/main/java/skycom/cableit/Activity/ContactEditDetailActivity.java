@@ -20,7 +20,11 @@ public class ContactEditDetailActivity extends AppCompatActivity {
     private AppDatabase database;
     int companyID;
     int contactID;
+    Contact contact;
 
+
+    String tempName;
+    String tempEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,31 +36,48 @@ public class ContactEditDetailActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         companyID = prefs.getInt("MY_COMPANY", 0);
+        //contactID = prefs.getInt("CONTACT_ID", 0);
 
-        List<Contact> tempContact = database.contactDAO().getContactsFromCompany(companyID);
+        //SharedPreferences contactPrefs = getSharedPreferences("CONTACT_ID", MODE_PRIVATE);
+        contactID = prefs.getInt("MY_CONTACT", 0);
 
-        EditText txtName = (EditText)findViewById(R.id.textContactName);
-        EditText txtEmail = (EditText)findViewById(R.id.textContactEmail);
+        List<Contact> tempContact = database.contactDAO().getContact(contactID);
 
-        String tempAddOne = txtName.getText().toString();
-        String tempAddTwo = txtEmail.getText().toString();
+        final EditText txtName = (EditText)findViewById(R.id.textContactName);
+        final EditText txtEmail = (EditText)findViewById(R.id.textContactEmail);
+
+        tempName = txtName.getText().toString();
+        tempEmail = txtEmail.getText().toString();
 
 
         if (!tempContact.isEmpty()) {
             txtName.setText(String.valueOf(tempContact.get(0).contactName), TextView.BufferType.EDITABLE);
             txtEmail.setText(String.valueOf(tempContact.get(0).emailAddress), TextView.BufferType.EDITABLE);
             contactID = tempContact.get(0).id;
+            contact = tempContact.get(0);
         }
         Button btnEditContact = findViewById(R.id.btnEditContactFromDetail);
         btnEditContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
+                tempName = txtName.getText().toString();
+                tempEmail = txtEmail.getText().toString();
+
+                contact.contactName = tempName;
+                contact.emailAddress = tempEmail;
+
+                database.contactDAO().updateContact(contact);
+
+
                 Intent intent = new Intent(getApplicationContext(), ContactEditDetailActivity.class);
                 intent.putExtra("NEW_COMPANY_ID", companyID);
                 startActivity(intent);
             }
         });
+
+
     }
 
     @Override

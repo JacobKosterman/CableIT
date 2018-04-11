@@ -106,6 +106,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
         adapterContact = new ContactAdapter(this,temp);
 
         lvContact.setAdapter(adapterContact);
+        lvContact.setVisibility(View.GONE);
         lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -114,8 +115,14 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 {
                     Intent intent = new Intent(getApplicationContext(), ContactDetailActivity.class);
                     if (companyIDString != ""){
-                        //intent.putExtra("COMPANY_ID_TEST", companyID + "");
-                        //intent.putExtra("CONTACT_ID", c.id + "");
+                        intent.putExtra("COMPANY_ID_TEST", companyID + "");
+
+                        //existingContactPrefs = getSharedPreferences("CONTACT_ID", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = existingCompanyPrefs.edit();
+                        editor.putInt("MY_CONTACT", c.id);
+                        editor.apply();
+
+
                         startActivity(intent);
                     }
                 }
@@ -127,17 +134,31 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button btnContactList = findViewById(R.id.btnContactList);
+        btnContactList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lvContact.getVisibility() == View.VISIBLE){
+                    lvContact.setVisibility(View.GONE);
+                }else{
+                    lvContact.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         //END SYDNEY TEST
+
+
+
 
         lvAddress =(ListView)findViewById(R.id.lstAddress);
         ArrayList<Address> tempAddress = new ArrayList<>();
         tempAddress.addAll(database.addressDAO().getAddressFromCompany(companyID));
 
-
-
         adapterAddress = new AddressAdapter(this,tempAddress);
 
         lvAddress.setAdapter(adapterAddress);
+        lvAddress.setVisibility(View.GONE);
         lvAddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -158,6 +179,27 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 }
             }
         });
+        Button btnAddressList = findViewById(R.id.btnAddressList);
+        btnAddressList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lvAddress.getVisibility() == View.VISIBLE){
+                    lvAddress.setVisibility(View.GONE);
+
+
+                }else{
+
+                    lvAddress.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+
+
+
+
+
 
         //Button to navigate to the Company detail Activity
         Button btnEditCompany = findViewById(R.id.btnEditCompany);

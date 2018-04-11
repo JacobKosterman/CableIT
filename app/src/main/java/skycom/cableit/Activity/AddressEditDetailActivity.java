@@ -87,7 +87,7 @@ public class AddressEditDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                database.addressDAO().updateAddress(new Address(companyID, tempAddOne, tempAddTwo, tempCity,
+                database.addressDAO().updateAddress(new Address(companyID,1, tempAddOne, tempAddTwo, tempCity,
                         tempPostal, tempProvince, tempCountry, true));
 
                 Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);

@@ -35,9 +35,11 @@ public class ContactDetailActivity extends AppCompatActivity {
         companyID = prefs.getInt("MY_COMPANY", 0);
         //contactID = prefs.getInt("CONTACT_ID", 0);
 
+        //SharedPreferences contactPrefs = getSharedPreferences("CONTACT_ID", MODE_PRIVATE);
+        contactID = prefs.getInt("MY_CONTACT", 0);
 
 
-        List<Contact> tempContact = database.contactDAO().getContactsFromCompany(companyID);
+        List<Contact> tempContact = database.contactDAO().getContact(contactID);
         if (tempContact.size() >= 1 ){
             txtName.setText(tempContact.get(0).contactName);
             txtEmail.setText(tempContact.get(0).emailAddress);
@@ -51,7 +53,6 @@ public class ContactDetailActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), ContactEditDetailActivity.class);
                 intent.putExtra("NEW_COMPANY_ID", companyID);
-                intent.putExtra("CONTACT_ID", companyID);
                 startActivity(intent);
             }
         });

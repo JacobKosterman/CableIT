@@ -29,7 +29,7 @@ public interface ContactDAO {
     public List<Contact> getContactsFromQuote(long quoteID);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateCompany(Contact contact);
+    void updateContact(Contact contact);
 
     @Query("delete from contact")
     void removeAllContacts();

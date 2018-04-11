@@ -53,10 +53,12 @@ public class AddressDetailActivity extends AppCompatActivity {
             editCountry.setText(String.valueOf(tempAddress.get(0).country), TextView.BufferType.EDITABLE);
         }
 
-//        Spinner mySpinner = (Spinner) findViewById(R.id.spinAddressType);
-//
-//        mySpinner.setAdapter(new ArrayAdapter<AddressType>(this,
-//                android.R.layout.simple_spinner_item, AddressType.values()));
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinAddressType);
+
+        mySpinner.setAdapter(new ArrayAdapter<AddressType>(this,
+                android.R.layout.simple_spinner_item, AddressType.values()));
+
+        //Message mSelected = (Message) parent.getItemAtPosition(pos);
 
         Button btnAddAddress = findViewById(R.id.btnEdit);
         btnAddAddress.setOnClickListener(new View.OnClickListener() {

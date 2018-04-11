@@ -92,13 +92,21 @@
             >
 
 
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnContactList"
+            android:text="Contacts"/>
         <ListView
             android:id="@+id/lstContact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnAddressList"
+                android:text="Addresses"/>
             <ListView
                 android:id="@+id/lstAddress"
                 android:layout_width="match_parent"
