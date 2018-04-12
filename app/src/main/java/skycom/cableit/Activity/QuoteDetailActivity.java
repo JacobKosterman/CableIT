@@ -4,13 +4,21 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import skycom.cableit.Classes.Adapters.ContactAdapter;
+import skycom.cableit.Classes.Adapters.QuoteLineAdapter;
+import skycom.cableit.Classes.Address;
+import skycom.cableit.Classes.Company;
+import skycom.cableit.Classes.Contact;
 import skycom.cableit.Classes.Quote;
 import skycom.cableit.Classes.QuoteLine;
 import skycom.cableit.Database.AppDatabase;
@@ -18,41 +26,148 @@ import skycom.cableit.R;
 
 public class QuoteDetailActivity extends AppCompatActivity {
 
-    private AppDatabase database;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quote_detail);
+        AppDatabase database = AppDatabase.getDatabase(getApplicationContext());
 
-        database = AppDatabase.getDatabase(getApplicationContext());
+        //Objects
+        Quote quote = null;
+        Address siteAddress;
+        Address billingAddress;
+        Company company;
 
-        // Populates list view of companies.
-        final List<QuoteLine> quoteList = database.quoteLineDAO().getAllQuoteLines();
-        List<String> tempStringList = new ArrayList<String>();
-        String tempString = "";
+        //TextViews
+        final TextView txtQuoteNumber = findViewById(R.id.txtQuoteNumber);
+        final TextView txtCompanyName = findViewById(R.id.txtCompanyName);
+        final TextView txtSiteAddress1 = findViewById(R.id.txtSiteAddress1);
+        final TextView txtSiteAddress2 = findViewById(R.id.txtSiteAddress2);
+        final TextView txtSiteCityProvPostal = findViewById(R.id.txtSiteCityProvPostal);
+        final TextView txtBillingAddress1 = findViewById(R.id.txtBillingAddress1);
+        final TextView txtBillingAddress2 = findViewById(R.id.txtBillingAddress2);
+        final TextView txtBillingCityProvPostal = findViewById(R.id.txtBillingCityProvPostal);
 
-        for (int i = 0; i < quoteList.size(); i++) {
-            tempString = String.valueOf(quoteList.get(i).productID);
-            tempStringList.add(tempString);
+        //ListViews
+        final ListView lstQuoteLine = findViewById(R.id.lstQuoteLine);
+        final ListView lstContact = findViewById(R.id.lstContact);
+
+        //Buttons
+        final Button btnBillingAddress = findViewById(R.id.btnBillingAddress);
+        final Button btnContactList = findViewById(R.id.btnContactList);
+        final Button btnQuoteLineList = findViewById(R.id.btnQuoteLineList);
+
+        //Lists
+        final ArrayList<QuoteLine> quoteLines;
+        final ArrayList<Contact> contacts;
+
+        //Adapters
+        ContactAdapter adapterContact;
+        QuoteLineAdapter adapterQuoteLine;
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                quote = database.quoteDAO().getQuote(extras.getInt("QUOTE_ID")).get(0);
+            }
+        } else {
+            quote = database.quoteDAO().getQuote((int)savedInstanceState.getSerializable("QUOTE_ID")).get(0);
         }
 
-        ListView listView = (ListView) findViewById(R.id.lstQuoteLine);
-        ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<String>(this,
-                        android.R.layout.simple_list_item_1,
-                        tempStringList
-                );
-        listView.setAdapter(arrayAdapter);
+        if (quote != null) {
+            //Gather objects
+            siteAddress = database.addressDAO().getAddress(quote.siteAddressID).get(0);
+            billingAddress = database.addressDAO().getAddress(quote.billingAddressID).get(0);
+            company = database.companyDAO().getCompany(quote.companyID).get(0);
 
-        Button btnAddProduct = findViewById(R.id.btnAddQuoteLine);
-        btnAddProduct.setOnClickListener(new View.OnClickListener() {
+            //Gather lists
+            contacts = new ArrayList<>(database.contactDAO().getContactsFromQuote(quote.id));
+            quoteLines = new ArrayList<>(database.quoteLineDAO().getQuoteLinesForQuote(quote.id));
+
+            //Create custom adapters
+            adapterContact = new ContactAdapter(this, contacts);
+            adapterQuoteLine = new QuoteLineAdapter(this, quoteLines);
+        } else {
+            //make toast and return to quote list
+            Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), QuoteListActivity.class);
+            startActivity(intent);
+            return;
+        }
+
+        //Set text fields
+        String tempString;
+        txtCompanyName.setText(company.name);
+        txtQuoteNumber.setText(quote.quoteNumber);
+        txtSiteAddress1.setText(siteAddress.address1);
+        txtSiteAddress2.setText(siteAddress.address2);
+        tempString = siteAddress.city + ", " + siteAddress.province + ", "+ siteAddress.postalCode;
+        txtSiteCityProvPostal.setText(tempString);
+        txtBillingAddress1.setText(billingAddress.address1);
+        txtBillingAddress2.setText(billingAddress.address2);
+        tempString = billingAddress.city + ", " + billingAddress.province + ", " + billingAddress.postalCode;
+        txtBillingCityProvPostal.setText(tempString);
+
+        //Prepare billing address button
+        btnBillingAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (txtBillingAddress1.getVisibility() == View.VISIBLE) {
+                    txtBillingAddress1.setVisibility(View.GONE);
+                    txtBillingAddress2.setVisibility(View.GONE);
+                    txtBillingCityProvPostal.setVisibility(View.GONE);
+                } else {
+                    txtBillingAddress1.setVisibility(View.VISIBLE);
+                    txtBillingAddress2.setVisibility(View.VISIBLE);
+                    txtBillingCityProvPostal.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+        //Prepare contact listView
+        lstContact.setAdapter(adapterContact);
+        lstContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Click listener for contacts
+            }
+        });
+        //Prepare contact list button
+        btnContactList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (contacts.size() == 0) {
+                    Toast.makeText(getApplicationContext(), "This quote has no contacts yet!", Toast.LENGTH_SHORT).show();
+                } else if (lstContact.getVisibility() == View.VISIBLE) {
+                    lstContact.setVisibility(View.GONE);
+                } else {
+                    lstContact.setVisibility(View.VISIBLE);
+                    lstQuoteLine.setVisibility(View.GONE);
+                }
+            }
+        });
 
+        //Prepare quote line listView
+        lstQuoteLine.setAdapter(adapterQuoteLine);
+        lstQuoteLine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Click listener for contacts
+            }
+        });
+
+        //Prepare quote line list button
+        btnQuoteLineList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quoteLines.size() == 0) {
+                    Toast.makeText(getApplicationContext(), "This quote has no lines yet!", Toast.LENGTH_SHORT).show();
+                } else if (lstQuoteLine.getVisibility() == View.VISIBLE) {
+                    lstQuoteLine.setVisibility(View.GONE);
+                } else {
+                    lstQuoteLine.setVisibility(View.VISIBLE);
+                    lstContact.setVisibility(View.GONE);
+                }
             }
         });
     }

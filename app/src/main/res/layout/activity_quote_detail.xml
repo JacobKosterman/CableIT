@@ -1,64 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="skycom.cableit.Activity.QuoteDetailActivity">
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1">
+    <RelativeLayout
+        android:layout_weight=".5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/detail_frag"
-            android:layout_weight="1">
+            android:id="@+id/image_frag"
+            android:paddingTop="10px"
+            >
+
 
             <TextView
                 android:id="@+id/txtQuoteNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|left"
-                android:text=""
                 android:textSize="18sp" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/txtCompanyName"
+                android:gravity="left"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:id="@+id/list_frag"
-            android:layout_weight="1">
-
-            <ListView
-                android:id="@+id/lstQuoteLine"
+            <TextView
+                android:id="@+id/txtSiteAddress1"
+                android:gravity="left"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"/>
+            <TextView
+                android:id="@+id/txtSiteAddress2"
+                android:gravity="left"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"/>
+            <TextView
+                android:id="@+id/txtSiteCityProvPostal"
+                android:gravity="left"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"/>
+            <Button
+                android:id="@+id/btnBillingAddress"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </ListView>
-
+                android:layout_height="wrap_content"
+                android:text="Billing Address"/>
+            <TextView
+                android:id="@+id/txtBillingAddress1"
+                android:gravity="left"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txtBillingAddress2"
+                android:gravity="left"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txtBillingCityProvPostal"
+                android:gravity="left"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:visibility="gone"/>
+            <Button
+                android:id="@+id/btnEditHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Header"
+                android:gravity="bottom|center"/>
         </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight=".5"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/input_frag"
-            >
+            android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnAddQuoteLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_line"
-                />
+                android:id="@+id/btnContactList"
+                android:text="Contacts"/>
+            <ListView
+                android:id="@+id/lstContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnQuoteLineList"
+                android:text="Quote Lines"/>
+            <ListView
+                android:id="@+id/lstQuoteLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
         </LinearLayout>
-    </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
+</LinearLayout>

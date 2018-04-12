@@ -19,6 +19,9 @@ public interface QuoteDAO {
     @Query("select * from quote")
     public List<Quote> getAllQuotes();
 
+    @Query("select * from quote where id = :quoteID")
+    public List<Quote> getQuote(long quoteID);
+
     @Query("select * from quote where companyID = :companyID")
     public List<Quote> getQuotesForCompany(long companyID);
 

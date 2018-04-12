@@ -25,7 +25,7 @@ public interface ContactDAO {
     @Query("select * from contact where companyID = :companyID")
     public List<Contact> getContactsFromCompany(long companyID);
 
-    @Query("select * from contact c join quotecontact qc on c.id = qc.contactID where qc.quoteID = :quoteID")
+    @Query("select c.* from contact c join quotecontact qc on c.id = qc.contactID where qc.quoteID = :quoteID")
     public List<Contact> getContactsFromQuote(long quoteID);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
