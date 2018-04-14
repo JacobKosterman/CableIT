@@ -30,7 +30,8 @@
         <activity android:name=".Activity.ContactDetailActivity" />
         <activity android:name=".Activity.ContactEditDetailActivity" />
         <activity android:name=".Activity.AddressNewDetailActivity" />
-        <activity android:name=".Activity.ContactNewDetailActivity"></activity>
+        <activity android:name=".Activity.ContactNewDetailActivity" />
+        <activity android:name=".Activity.NewQuoteActivity"></activity>
     </application>
 
 </manifest>

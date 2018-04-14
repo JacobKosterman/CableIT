@@ -28,4 +28,7 @@ public interface QuoteDAO {
     @Query("select * from quote where siteAddressID = :addressID")
     public List<Quote> getQuotesForAddress(long addressID);
 
+    @Query("select * from quote where quoteNumber like :prefix")
+    public List<Quote> getQuotesFromNumber(String prefix);
+
 }
