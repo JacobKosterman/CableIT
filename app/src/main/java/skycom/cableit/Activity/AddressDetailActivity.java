@@ -2,13 +2,12 @@ package skycom.cableit.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,8 +20,16 @@ import skycom.cableit.R;
 public class AddressDetailActivity extends AppCompatActivity {
 
     int companyID = 0;
+    int addressID = 0;
 
     private AppDatabase database;
+
+    String addOne = "";
+    String addTwo = "";
+    String city = "";
+    String postalCode = "";
+    String province = "";
+    String country = "";
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -33,8 +40,9 @@ public class AddressDetailActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         companyID = prefs.getInt("MY_COMPANY", 0);
+        addressID = prefs.getInt("MY_ADDRESS", 0);
 
-        List<Address> tempAddress = database.addressDAO().getAddressFromCompany(companyID);
+        List<Address> tempAddress = database.addressDAO().getAddress(addressID);
 
         EditText editAddressOne = (EditText)findViewById(R.id.txtStreetAddress1);
         EditText editAddressTwo = (EditText)findViewById(R.id.txtStreetAddress2);
@@ -45,20 +53,34 @@ public class AddressDetailActivity extends AppCompatActivity {
 
 
         if (!tempAddress.isEmpty()){
-            editAddressOne.setText(String.valueOf(tempAddress.get(0).address1), TextView.BufferType.EDITABLE);
-            editAddressTwo.setText(String.valueOf(tempAddress.get(0).address2), TextView.BufferType.EDITABLE);
-            editCity.setText(String.valueOf(tempAddress.get(0).city), TextView.BufferType.EDITABLE);
-            editPostal.setText(String.valueOf(tempAddress.get(0).postalCode), TextView.BufferType.EDITABLE);
-            editProvince.setText(String.valueOf(tempAddress.get(0).province), TextView.BufferType.EDITABLE);
-            editCountry.setText(String.valueOf(tempAddress.get(0).country), TextView.BufferType.EDITABLE);
+
+            addOne = tempAddress.get(0).address1;
+            addTwo = tempAddress.get(0).address2;
+            city = tempAddress.get(0).city;
+            postalCode = tempAddress.get(0).postalCode;
+            province = tempAddress.get(0).province;
+            country = tempAddress.get(0).country;
+
+            editAddressOne.setText(addOne, TextView.BufferType.EDITABLE);
+            editAddressTwo.setText(addTwo, TextView.BufferType.EDITABLE);
+            editCity.setText(city, TextView.BufferType.EDITABLE);
+            editPostal.setText(postalCode, TextView.BufferType.EDITABLE);
+            editProvince.setText(province, TextView.BufferType.EDITABLE);
+            editCountry.setText(country, TextView.BufferType.EDITABLE);
+
         }
 
-        Spinner mySpinner = (Spinner) findViewById(R.id.spinAddressType);
 
-        mySpinner.setAdapter(new ArrayAdapter<AddressType>(this,
-                android.R.layout.simple_spinner_item, AddressType.values()));
+        Button btnEditContact = findViewById(R.id.btnEdit);
+        btnEditContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        //Message mSelected = (Message) parent.getItemAtPosition(pos);
+                Intent intent = new Intent(getApplicationContext(), ContactEditDetailActivity.class);
+                intent.putExtra("NEW_COMPANY_ID", companyID);
+                startActivity(intent);
+            }
+        });
 
         Button btnAddAddress = findViewById(R.id.btnEdit);
         btnAddAddress.setOnClickListener(new View.OnClickListener() {
@@ -71,11 +93,24 @@ public class AddressDetailActivity extends AppCompatActivity {
         });
     }
 
+    public void openMaps(View view){
+        String appendedAddress = (addOne != "" ? addOne + " " : "") +
+                (addTwo != "" ? addTwo + " " : "") +
+                (city != "" ? city + " " : "") +
+                (postalCode != "" ? postalCode + " " : "") +
+                (province != "" ? province + " " : "") +
+                (country != "" ? country + " " : "");
+
+        Uri tempUri = Uri.parse("geo:0,0?q=" + appendedAddress);
+        Intent intent = new Intent(Intent.ACTION_VIEW, tempUri);
+        intent.setPackage("com.google.android.apps.maps");
+        startActivity(intent);
+    };
+
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(this, CompanyDetailActivity.class);
         intent.putExtra("NEW_COMPANY_ID", companyID);
         startActivity(intent);
     }
-
 }

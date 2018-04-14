@@ -72,16 +72,12 @@ public class AddressEditDetailActivity extends AppCompatActivity {
         tempPostal = editPostal.getText().toString();
         tempProvince = editProvince.getText().toString();
         tempCountry = editCountry.getText().toString();
-
-        Spinner mySpinner = (Spinner) findViewById(R.id.spinAddressType);
-
-        mySpinner.setAdapter(new ArrayAdapter<AddressType>(this,
-                android.R.layout.simple_spinner_item, AddressType.values()));
-
-
-
-
-
+//
+//        Spinner mySpinner = (Spinner) findViewById(R.id.spinAddressType);
+//
+//        mySpinner.setAdapter(new ArrayAdapter<AddressType>(this,
+//                android.R.layout.simple_spinner_item, AddressType.values()));
+//
         Button btnSaveAddAddress = findViewById(R.id.btnSaveAddress);
         btnSaveAddAddress.setOnClickListener(new View.OnClickListener() {
             @Override

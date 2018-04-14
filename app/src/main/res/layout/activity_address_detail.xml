@@ -114,6 +114,14 @@
                 android:layout_height="wrap_content"
                 android:text="Edit"
                 />
+            <Button
+                android:id="@+id/btnOpenMaps"
+                android:onClick="openMaps"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Maps"
+                />
         </LinearLayout>
 
 

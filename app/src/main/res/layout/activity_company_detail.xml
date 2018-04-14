@@ -6,73 +6,62 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="skycom.cableit.Activity.CompanyDetailActivity">
+
     <RelativeLayout
-        android:layout_weight=".5"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        >
+        android:layout_height="434dp"
+        android:layout_weight=".5"
+        android:padding="10dp">
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--app:layout_scrollFlags="scroll|enterAlways"-->
-            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
-
-
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="vertical"
-             android:id="@+id/image_frag"
-             android:paddingTop="10px"
-             >
-
-
-        <TextView
-            android:id="@+id/textName"
+        <LinearLayout
+            android:id="@+id/image_frag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="top|left"
-            android:text="TextView"
-            android:textSize="18sp" />
+            android:orientation="vertical"
+            android:paddingTop="10px">
 
-        <TextView
-            android:id="@+id/textDescription"
-            android:gravity="left"
-            android:layout_height="fill_parent"
-            android:layout_width="wrap_content"
-            android:maxLines="4"
-            android:lines="4"/>
+            <Button
+                android:id="@+id/btnEditCompany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Company" />
 
-        <Button
-            android:id="@+id/btnEditCompany"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit Company"
-            android:gravity="bottom|center"/>
+            <TextView
+                android:id="@+id/textName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:text="TextView"
+                android:textSize="18sp" />
 
-         <Button
-             android:id="@+id/btnNewAddress"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="Add Address"
-             android:gravity="bottom|center"/>
+            <TextView
+                android:id="@+id/textDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="left"
+                android:lines="4"
+                android:maxLines="4" />
 
-             <Button
-                 android:id="@+id/btnNewContact"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:text="Add Contact"
-                 android:gravity="bottom|center"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnNewAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Add Address" />
 
-
-
-
-         </LinearLayout>
+                <Button
+                    android:id="@+id/btnNewContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Add Contact" />
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -90,17 +79,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnContactList"
-            android:text="Contacts"/>
-        <ListView
-            android:id="@+id/lstContact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnContactList"
+                android:text="Contacts"/>
+            <ListView
+                android:id="@+id/lstContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -112,9 +99,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnQuoteList"
+                android:text="Quotes"/>
+            <ListView
+                android:id="@+id/lstQuotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
-
-
-
     </RelativeLayout>
 </LinearLayout>

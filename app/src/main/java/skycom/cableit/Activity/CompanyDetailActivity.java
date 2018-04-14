@@ -19,6 +19,7 @@ import java.util.List;
 
 import skycom.cableit.Classes.Adapters.AddressAdapter;
 import skycom.cableit.Classes.Adapters.ContactAdapter;
+import skycom.cableit.Classes.Adapters.QuoteAdapter;
 import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.Contact;
 import skycom.cableit.Classes.ExpandableListAdapter;
@@ -39,6 +40,8 @@ public class CompanyDetailActivity extends AppCompatActivity {
     private static ContactAdapter adapterContact;
     ListView lvAddress;
     private static AddressAdapter adapterAddress;
+    ListView lvQuote;
+    private static QuoteAdapter adapterQuote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +101,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
         editor.putInt("MY_COMPANY", companyID);
         editor.apply();
 
+
         //BEGINS SYDNEY TEST
         lvContact =(ListView)findViewById(R.id.lstContact);
         ArrayList<Contact> temp = new ArrayList<>();
@@ -121,8 +125,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = existingCompanyPrefs.edit();
                         editor.putInt("MY_CONTACT", c.id);
                         editor.apply();
-
-
                         startActivity(intent);
                     }
                 }
@@ -146,10 +148,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 }
             }
         });
-        //END SYDNEY TEST
-
-
-
 
         lvAddress =(ListView)findViewById(R.id.lstAddress);
         ArrayList<Address> tempAddress = new ArrayList<>();
@@ -167,8 +165,14 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 {
                     Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
                     if (companyIDString != "") {
-                        intent.putExtra("COMPANY_ID_TEST", a.id + "");
+
+                        SharedPreferences.Editor editor = existingCompanyPrefs.edit();
+                        editor.putInt("MY_ADDRESS", a.id);
+                        editor.apply();
                         startActivity(intent);
+
+                        //intent.putExtra("COMPANY_ID_TEST", a.id + "");
+                        //startActivity(intent);
                     }
                 }
                 else
@@ -193,6 +197,55 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+        lvQuote =(ListView)findViewById(R.id.lstQuotes);
+        ArrayList<Quote> tempQuote = new ArrayList<>();
+        tempQuote.addAll(database.quoteDAO().getQuotesForCompany(companyID));
+
+
+        adapterQuote = new QuoteAdapter(this,tempQuote);
+
+        lvQuote.setAdapter(adapterQuote);
+        lvQuote.setVisibility(View.GONE);
+        lvQuote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Quote q = (Quote) parent.getItemAtPosition(position);
+                if (q != null)
+                {
+                    Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
+                    if (companyIDString != "") {
+
+//                        SharedPreferences.Editor editor = existingCompanyPrefs.edit();
+//                        editor.putInt("MY_QUOTE", q.id);
+//                        editor.apply();
+//                        startActivity(intent);
+
+                    }
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),
+                            "error",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        Button btnQuoteList = findViewById(R.id.btnQuoteList);
+        btnQuoteList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lvQuote.getVisibility() == View.VISIBLE){
+                    lvQuote.setVisibility(View.GONE);
+
+
+                }else{
+
+                    lvQuote.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 
 
 

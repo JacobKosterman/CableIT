@@ -33,9 +33,6 @@ public class ContactDetailActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         companyID = prefs.getInt("MY_COMPANY", 0);
-        //contactID = prefs.getInt("CONTACT_ID", 0);
-
-        //SharedPreferences contactPrefs = getSharedPreferences("CONTACT_ID", MODE_PRIVATE);
         contactID = prefs.getInt("MY_CONTACT", 0);
 
 

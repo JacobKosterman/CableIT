@@ -22,7 +22,6 @@ public class ContactEditDetailActivity extends AppCompatActivity {
     int contactID;
     Contact contact;
 
-
     String tempName;
     String tempEmail;
     @Override
@@ -32,13 +31,8 @@ public class ContactEditDetailActivity extends AppCompatActivity {
 
         database = AppDatabase.getDatabase(getApplicationContext());
 
-
-
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         companyID = prefs.getInt("MY_COMPANY", 0);
-        //contactID = prefs.getInt("CONTACT_ID", 0);
-
-        //SharedPreferences contactPrefs = getSharedPreferences("CONTACT_ID", MODE_PRIVATE);
         contactID = prefs.getInt("MY_CONTACT", 0);
 
         List<Contact> tempContact = database.contactDAO().getContact(contactID);
@@ -56,11 +50,10 @@ public class ContactEditDetailActivity extends AppCompatActivity {
             contactID = tempContact.get(0).id;
             contact = tempContact.get(0);
         }
-        Button btnEditContact = findViewById(R.id.btnEditContactFromDetail);
-        btnEditContact.setOnClickListener(new View.OnClickListener() {
+        Button btnSaveContact = findViewById(R.id.btnSaveContactChanges);
+        btnSaveContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 tempName = txtName.getText().toString();
                 tempEmail = txtEmail.getText().toString();
@@ -70,14 +63,11 @@ public class ContactEditDetailActivity extends AppCompatActivity {
 
                 database.contactDAO().updateContact(contact);
 
-
-                Intent intent = new Intent(getApplicationContext(), ContactEditDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ContactDetailActivity.class);
                 intent.putExtra("NEW_COMPANY_ID", companyID);
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override
