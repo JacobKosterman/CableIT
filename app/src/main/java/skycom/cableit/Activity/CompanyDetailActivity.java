@@ -51,58 +51,18 @@ public class CompanyDetailActivity extends AppCompatActivity {
         database = AppDatabase.getDatabase(getApplicationContext());
         TextView txtName = (TextView)findViewById(R.id.textName);
         TextView txtDescription = (TextView)findViewById(R.id.textDescription);
-        int tempCompanyID;
 
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                companyIDString = null;
-            } else {
-                companyIDString = extras.getString("COMPANY_ID");
-            }
-        } else {
-            companyIDString = (String) savedInstanceState.getSerializable("COMPANY_ID");
-        }
+        SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = prefs.edit();
+        companyID = prefs.getInt("MY_COMPANY", 0);
+        companyIDString = String.valueOf(companyID);
 
-        if (companyIDString != null)
-        {
+        List <Company> companyOne = database.companyDAO().getCompany(companyID);
+
+        txtName.setText(companyOne.get(0).name);
+        txtDescription.setText(companyOne.get(0).description);
 
 
-            if (companyIDString != ""){
-                tempCompanyID= Integer.parseInt(companyIDString) + 1;
-                companyID = tempCompanyID;
-                List<Company> companyOne = database.companyDAO().getCompany(tempCompanyID);
-                txtName.setText(companyOne.get(0).name);
-                txtDescription.setText(companyOne.get(0).description);
-            }
-            else{
-                txtName.setText("No ID found");
-            }
-        }
-
-        //This is used if creating a new company.
-        if (companyIDString == "" || companyIDString == null){
-            try{
-                Bundle bundle = getIntent().getExtras();
-                if (bundle != null )
-                    companyID = bundle.getInt("NEW_COMPANY_ID");
-
-                List<Company> companyOne = database.companyDAO().getCompany(companyID);
-                txtName.setText(companyOne.get(0).name);
-                txtDescription.setText(companyOne.get(0).description);
-            }catch(Exception e) {
-            }
-        }
-
-
-        //Adding the current company ID to sharedPrefs
-        existingCompanyPrefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
-        SharedPreferences.Editor editor = existingCompanyPrefs.edit();
-        editor.putInt("MY_COMPANY", companyID);
-        editor.apply();
-
-
-        //BEGINS SYDNEY TEST
         lvContact =(ListView)findViewById(R.id.lstContact);
         ArrayList<Contact> temp = new ArrayList<>();
         temp.addAll(database.contactDAO().getContactsFromCompany(companyID));
@@ -119,10 +79,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 {
                     Intent intent = new Intent(getApplicationContext(), ContactDetailActivity.class);
                     if (companyIDString != ""){
-                        intent.putExtra("COMPANY_ID_TEST", companyID + "");
-
-                        //existingContactPrefs = getSharedPreferences("CONTACT_ID", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = existingCompanyPrefs.edit();
                         editor.putInt("MY_CONTACT", c.id);
                         editor.apply();
                         startActivity(intent);
@@ -165,14 +121,9 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 {
                     Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
                     if (companyIDString != "") {
-
-                        SharedPreferences.Editor editor = existingCompanyPrefs.edit();
                         editor.putInt("MY_ADDRESS", a.id);
                         editor.apply();
                         startActivity(intent);
-
-                        //intent.putExtra("COMPANY_ID_TEST", a.id + "");
-                        //startActivity(intent);
                     }
                 }
                 else
@@ -189,10 +140,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(lvAddress.getVisibility() == View.VISIBLE){
                     lvAddress.setVisibility(View.GONE);
-
-
                 }else{
-
                     lvAddress.setVisibility(View.VISIBLE);
                 }
             }
@@ -201,7 +149,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
         lvQuote =(ListView)findViewById(R.id.lstQuotes);
         ArrayList<Quote> tempQuote = new ArrayList<>();
         tempQuote.addAll(database.quoteDAO().getQuotesForCompany(companyID));
-
 
         adapterQuote = new QuoteAdapter(this,tempQuote);
 
@@ -215,12 +162,9 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 {
                     Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
                     if (companyIDString != "") {
-
-//                        SharedPreferences.Editor editor = existingCompanyPrefs.edit();
 //                        editor.putInt("MY_QUOTE", q.id);
 //                        editor.apply();
 //                        startActivity(intent);
-
                     }
                 }
                 else
@@ -231,16 +175,14 @@ public class CompanyDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
         Button btnQuoteList = findViewById(R.id.btnQuoteList);
         btnQuoteList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(lvQuote.getVisibility() == View.VISIBLE){
                     lvQuote.setVisibility(View.GONE);
-
-
                 }else{
-
                     lvQuote.setVisibility(View.VISIBLE);
                 }
             }
@@ -250,11 +192,9 @@ public class CompanyDetailActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-        //Button to navigate to the Company detail Activity
+        //
+        // The Section for the buttons
+        //
         Button btnEditCompany = findViewById(R.id.btnEditCompany);
         btnEditCompany.setOnClickListener(new View.OnClickListener() {
             @Override

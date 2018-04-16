@@ -92,7 +92,7 @@ public class CompanyNewDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);
             int id = tempCompanyList.get(0).id;
 
-            intent.putExtra("NEW_COMPANY_ID", id);
+            //intent.putExtra("NEW_COMPANY_ID", id);
             startActivity(intent);
 
         } else {

@@ -64,10 +64,19 @@ public class AddressAdapter extends BaseAdapter implements Filterable {
         // bind text with view holder content view for efficient use
         holder.address1.setText(address.address1);
         holder.address2.setText(address.address2);
-        holder.cityProvPostal.setText(new StringBuilder().append(address.city).append(", ")
-                .append(address.province).append(", ").append(address.postalCode).toString());
+
+        String tempString = (address.city != "" ? address.city + " " : "") +
+                (address.postalCode != "" ? address.postalCode + " " : "") +
+                (address.province != "" ? address.province + " " : "");
+
+
+        holder.cityProvPostal.setText(tempString);
+//          Old Code
+//        holder.cityProvPostal.setText(new StringBuilder().append(address.city).append(", ")
+//                .append(address.province).append(", ").append(address.postalCode).toString());
 
         return view;
+
     }
 
     @Override

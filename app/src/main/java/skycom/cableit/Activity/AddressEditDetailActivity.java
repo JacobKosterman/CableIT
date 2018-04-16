@@ -19,7 +19,9 @@ import skycom.cableit.R;
 public class AddressEditDetailActivity extends AppCompatActivity {
 
     int companyID = 0;
+    int addressID = 0;
     private AppDatabase database;
+    Address address;
 
     String tempAddOne = "";
     String tempAddTwo = "";
@@ -28,7 +30,13 @@ public class AddressEditDetailActivity extends AppCompatActivity {
     String tempProvince = "";
     String tempCountry = "";
 
-
+    EditText editAddressOne;
+    EditText editAddressTwo;
+    EditText editCity;
+    EditText editPostal;
+    EditText editProvince;
+    EditText editCountry;
+    Spinner mySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,63 +47,68 @@ public class AddressEditDetailActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         companyID = prefs.getInt("MY_COMPANY", 0);
+        addressID = prefs.getInt("MY_ADDRESS", 0);
 
-        List<Address> tempAddress = database.addressDAO().getAddressFromCompany(companyID);
+        final List<Address> tempAddress = database.addressDAO().getAddress(addressID);
 
-        EditText editAddressOne = (EditText)findViewById(R.id.txtStreetAddress1);
-        EditText editAddressTwo = (EditText)findViewById(R.id.txtStreetAddress2);
-        EditText editCity = (EditText)findViewById(R.id.txtCity);
-        EditText editPostal = (EditText)findViewById(R.id.txtPostalCode);
-        EditText editProvince = (EditText)findViewById(R.id.txtProvince);
-        EditText editCountry = (EditText)findViewById(R.id.txtCountry);
 
-        tempAddOne = editAddressOne.getText().toString();
-        tempAddTwo = editAddressTwo.getText().toString();
-        tempCity = editCity.getText().toString();
-        tempPostal = editPostal.getText().toString();
-        tempProvince = editProvince.getText().toString();
-        tempCountry = editCountry.getText().toString();
-
+        editAddressOne = (EditText)findViewById(R.id.txtStreetAddress1);
+        editAddressTwo = (EditText)findViewById(R.id.txtStreetAddress2);
+        editCity = (EditText)findViewById(R.id.txtCity);
+        editPostal = (EditText)findViewById(R.id.txtPostalCode);
+        editProvince = (EditText)findViewById(R.id.txtProvince);
+        editCountry = (EditText)findViewById(R.id.txtCountry);
+        mySpinner = (Spinner) findViewById(R.id.spnAddressType);
 
         if (!tempAddress.isEmpty()){
-            editAddressOne.setText(String.valueOf(tempAddress.get(0).address1), TextView.BufferType.EDITABLE);
-            editAddressTwo.setText(String.valueOf(tempAddress.get(0).address2), TextView.BufferType.EDITABLE);
-            editCity.setText(String.valueOf(tempAddress.get(0).city), TextView.BufferType.EDITABLE);
-            editPostal.setText(String.valueOf(tempAddress.get(0).postalCode), TextView.BufferType.EDITABLE);
-            editProvince.setText(String.valueOf(tempAddress.get(0).province), TextView.BufferType.EDITABLE);
-            editCountry.setText(String.valueOf(tempAddress.get(0).country), TextView.BufferType.EDITABLE);
+
+            address = tempAddress.get(0);
+            editAddressOne.setText(address.address1, TextView.BufferType.EDITABLE);
+            editAddressTwo.setText(address.address2, TextView.BufferType.EDITABLE);
+            editCity.setText(address.city, TextView.BufferType.EDITABLE);
+            editPostal.setText(address.postalCode, TextView.BufferType.EDITABLE);
+            editProvince.setText(address.province, TextView.BufferType.EDITABLE);
+            editCountry.setText(address.country, TextView.BufferType.EDITABLE);
+            mySpinner.setAdapter(new ArrayAdapter<AddressType>(this, android.R.layout.simple_spinner_item, AddressType.values()));
+
         }
 
-        tempAddOne = editAddressOne.getText().toString();
-        tempAddTwo = editAddressTwo.getText().toString();
-        tempCity = editCity.getText().toString();
-        tempPostal = editPostal.getText().toString();
-        tempProvince = editProvince.getText().toString();
-        tempCountry = editCountry.getText().toString();
-//
-//        Spinner mySpinner = (Spinner) findViewById(R.id.spinAddressType);
-//
-//        mySpinner.setAdapter(new ArrayAdapter<AddressType>(this,
-//                android.R.layout.simple_spinner_item, AddressType.values()));
-//
         Button btnSaveAddAddress = findViewById(R.id.btnSaveAddress);
         btnSaveAddAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                database.addressDAO().updateAddress(new Address(companyID,1, tempAddOne, tempAddTwo, tempCity,
-                        tempPostal, tempProvince, tempCountry, true));
+                tempAddOne = editAddressOne.getText().toString();
+                tempAddTwo = editAddressTwo.getText().toString();
+                tempCity = editCity.getText().toString();
+                tempPostal = editPostal.getText().toString();
+                tempProvince = editProvince.getText().toString();
+                tempCountry = editCountry.getText().toString();
+
+
+                AddressType tempValue = (AddressType) mySpinner.getSelectedItem();
+                int tempAddressType = tempValue.getValue();
+
+
+                address.address1 =tempAddOne;
+                address.address2 = tempAddTwo;
+                address.city = tempCity;
+                address.postalCode = tempPostal;
+                address.province = tempProvince;
+                address.country = tempCountry;
+                address.addressTypeID = tempAddressType;
+
+                database.addressDAO().updateAddress(address);
 
                 Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
-                intent.putExtra("COMPANY_ID_TEST", companyID + "");
                 startActivity(intent);
             }
         });
     }
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(this, CompanyDetailActivity.class);
-        intent.putExtra("COMPANY_ID_TEST", companyID + "");
+        Intent intent = new Intent(this, AddressDetailActivity.class);
+        //intent.putExtra("COMPANY_ID_TEST", companyID + "");
         startActivity(intent);
     }
 }

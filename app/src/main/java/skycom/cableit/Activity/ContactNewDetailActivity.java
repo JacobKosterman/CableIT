@@ -51,7 +51,7 @@ public class ContactNewDetailActivity extends AppCompatActivity {
 
 
                     Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);
-                    intent.putExtra("COMPANY_ID", companyID - 1 + "");
+                    //intent.putExtra("COMPANY_ID", companyID - 1 + "");
                     startActivity(intent);
 
                 }

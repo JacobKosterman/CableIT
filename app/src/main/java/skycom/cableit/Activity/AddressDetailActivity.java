@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,12 +25,20 @@ public class AddressDetailActivity extends AppCompatActivity {
 
     private AppDatabase database;
 
+    Address address;
+
     String addOne = "";
     String addTwo = "";
     String city = "";
     String postalCode = "";
     String province = "";
     String country = "";
+    String addressType = "";
+    Boolean checked;
+
+    AddressType addressTypeObj;
+
+    Button btnMakeActive;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -44,32 +53,55 @@ public class AddressDetailActivity extends AppCompatActivity {
 
         List<Address> tempAddress = database.addressDAO().getAddress(addressID);
 
-        EditText editAddressOne = (EditText)findViewById(R.id.txtStreetAddress1);
-        EditText editAddressTwo = (EditText)findViewById(R.id.txtStreetAddress2);
-        EditText editCity = (EditText)findViewById(R.id.txtCity);
-        EditText editPostal = (EditText)findViewById(R.id.txtPostalCode);
-        EditText editProvince = (EditText)findViewById(R.id.txtProvince);
-        EditText editCountry = (EditText)findViewById(R.id.txtCountry);
+
+        TextView editAddressOne = (TextView) findViewById(R.id.txtStreetAddress1);
+        TextView editAddressType = (TextView)findViewById(R.id.txtAddressType);
+        final CheckBox chkIsActive = (CheckBox)findViewById(R.id.chkIsActive);
+        btnMakeActive = (Button) findViewById(R.id.btnMakeActive);
+
 
 
         if (!tempAddress.isEmpty()){
+            address = tempAddress.get(0);
 
-            addOne = tempAddress.get(0).address1;
-            addTwo = tempAddress.get(0).address2;
-            city = tempAddress.get(0).city;
-            postalCode = tempAddress.get(0).postalCode;
-            province = tempAddress.get(0).province;
-            country = tempAddress.get(0).country;
+            btnMakeActive.setText(address.isActive == Boolean.TRUE ? "Deactivate" : "Activate");
 
-            editAddressOne.setText(addOne, TextView.BufferType.EDITABLE);
-            editAddressTwo.setText(addTwo, TextView.BufferType.EDITABLE);
-            editCity.setText(city, TextView.BufferType.EDITABLE);
-            editPostal.setText(postalCode, TextView.BufferType.EDITABLE);
-            editProvince.setText(province, TextView.BufferType.EDITABLE);
-            editCountry.setText(country, TextView.BufferType.EDITABLE);
+            addOne = address.address1;
+            addTwo = address.address2;
+            city = address.city;
+            postalCode = address.postalCode;
+            province = address.province;
+            country = address.country;
+            checked = address.isActive;
 
+
+
+            String appendedAddress = "";
+            if(addTwo.isEmpty() && addTwo != null){
+                appendedAddress = (addOne != "" ? addOne + " \n" : "") +
+                        (city != "" ? city + ", " : "") +
+                        (province != "" ? province + ", " : "") +
+                        (postalCode != "" ? postalCode + " \n" : "") +
+                        (country != "" ? country + " " : "");
+            }else{
+                appendedAddress = (addOne != "" ? addOne + " \n" : "") +
+                        (addTwo != "" ? addTwo + " \n" : null) +
+                        (city != "" ? city + ", " : "") +
+                        (province != "" ? province + ", " : "") +
+                        (postalCode != "" ? postalCode + " \n" : "") +
+                        (country != "" ? country + " " : "");
+            }
+
+            int tempAddTypeID = tempAddress.get(0).addressTypeID;
+            addressTypeObj = AddressType.valueOf(tempAddTypeID);
+
+            addressType = addressTypeObj.name();
+
+
+            editAddressOne.setText(appendedAddress, TextView.BufferType.EDITABLE);
+            editAddressType.setText("Type: " + addressType, TextView.BufferType.EDITABLE);
+            chkIsActive.setChecked(checked);
         }
-
 
         Button btnEditContact = findViewById(R.id.btnEdit);
         btnEditContact.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +109,6 @@ public class AddressDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(), ContactEditDetailActivity.class);
-                intent.putExtra("NEW_COMPANY_ID", companyID);
                 startActivity(intent);
             }
         });
@@ -91,6 +122,29 @@ public class AddressDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnMakeActive = findViewById(R.id.btnMakeActive);
+        btnMakeActive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (chkIsActive.isChecked()){
+                    chkIsActive.setChecked(Boolean.FALSE);
+                    address.isActive = Boolean.FALSE;
+                    btnMakeActive.setText("Active");
+                }else{
+                    chkIsActive.setChecked(Boolean.TRUE);
+                    address.isActive = Boolean.TRUE;
+                    btnMakeActive.setText("Deactivate");
+                }
+
+                database.addressDAO().updateAddress(address);
+
+                //Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
+                //startActivity(intent);
+            }
+        });
+
     }
 
     public void openMaps(View view){

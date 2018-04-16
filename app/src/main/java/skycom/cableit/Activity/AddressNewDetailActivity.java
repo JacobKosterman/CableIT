@@ -5,10 +5,14 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import skycom.cableit.Classes.Address;
+import skycom.cableit.Classes.AddressType;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -23,6 +27,7 @@ public class AddressNewDetailActivity extends AppCompatActivity {
     EditText editPostal;
     EditText editProvince;
     EditText editCountry;
+    Spinner mySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,11 @@ public class AddressNewDetailActivity extends AppCompatActivity {
         editCountry = (EditText)findViewById(R.id.txtNewCountry);
 
 
+        //This creates and populates the AddressType Spinner
+        mySpinner = (Spinner) findViewById(R.id.spnAddressType);
+        mySpinner.setAdapter(new ArrayAdapter<AddressType>(this, android.R.layout.simple_spinner_item, AddressType.values()));
+
+
         Button btnNewAddressList = findViewById(R.id.btnSaveNewAddress);
         btnNewAddressList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,19 +65,24 @@ public class AddressNewDetailActivity extends AppCompatActivity {
                 String tempProvince = editProvince.getText().toString();
                 String tempCountry = editCountry.getText().toString();
 
+                AddressType tempValue = (AddressType) mySpinner.getSelectedItem();
+                int tempAddressType = tempValue.getValue();
 
                 if (tempAddOne.length() >= 1 && !tempAddOne.isEmpty()){
 
-                    database.addressDAO().addAddress(new Address(companyID,1, tempAddOne, tempAddTwo,
+                    database.addressDAO().addAddress(new Address(companyID, tempAddressType, tempAddOne, tempAddTwo,
                             tempCity, tempPostal, tempProvince, tempCountry, Boolean.TRUE));
 
 
                     Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);
-                    intent.putExtra("COMPANY_ID", companyID - 1 + "");
                     startActivity(intent);
 
                 }
             }
         });
+
+
     }
+
+
 }
