@@ -52,8 +52,8 @@ public class PhoneDetailActivity extends AppCompatActivity {
         btnEditPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(getApplicationContext(), PhoneEditDetailActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), PhoneEditActivity.class);
+                startActivity(intent);
             }
         });
     }

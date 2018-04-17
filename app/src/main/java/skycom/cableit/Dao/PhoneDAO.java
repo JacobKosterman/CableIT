@@ -22,6 +22,9 @@ public interface PhoneDAO {
     @Query("select * from phone where id = :phoneID")
     public Phone getPhone(long phoneID);
 
+    @Query("select * from phone where contactID = :contactID")
+    public List<Phone> getCompanyPhoneNumbers(long contactID);
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updatePhone(Phone phone);
 }

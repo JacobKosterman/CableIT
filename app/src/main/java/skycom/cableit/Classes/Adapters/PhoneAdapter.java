@@ -66,7 +66,7 @@ public class PhoneAdapter extends BaseAdapter implements Filterable {
 
         // bind text with view holder content view for efficient use
 
-        String tempPhone = "Test String";//phoneNumber.phoneNumber + " " + phoneNumber.ext;
+        String tempPhone = phoneNumber.phoneNumber;
         holder.name.setText(tempPhone);
         holder.email.setText(phoneNumber.description);
 

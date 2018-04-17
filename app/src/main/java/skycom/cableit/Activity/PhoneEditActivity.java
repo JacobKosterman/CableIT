@@ -9,53 +9,69 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import skycom.cableit.Classes.Contact;
 import skycom.cableit.Classes.Phone;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
-public class PhoneNewActivity extends AppCompatActivity {
+public class PhoneEditActivity extends AppCompatActivity {
+
 
     private AppDatabase database;
-    //int phoneID;
+    int phoneID;
     int contactID;
 
-    EditText editNumber;
-    EditText editExt;
-    EditText editDesc;
+    EditText tvNumber;
+    EditText tvExt;
+    EditText tvDesc;
 
     String Number;
     String Ext;
     String Desc;
 
+
     Phone phone;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phone_new);
+        setContentView(R.layout.activity_phone_edit);
+
 
         database = AppDatabase.getDatabase(getApplicationContext());
 
         SharedPreferences prefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
         contactID = prefs.getInt("MY_CONTACT", 0);
+        phoneID = prefs.getInt("MY_PHONE", 0);
 
-        editNumber = (EditText) findViewById(R.id.txtNumber);
-        editExt = (EditText) findViewById(R.id.txtExt);
-        editDesc = (EditText)findViewById(R.id.txtDescription);
+        phone = database.phoneDAO().getPhone(phoneID);
+        Number = phone.phoneNumber;
+        Ext = phone.ext;
+        Desc = phone.description;
 
-        Button btnEditPhone = findViewById(R.id.btnEdit);
-        btnEditPhone.setOnClickListener(new View.OnClickListener() {
+        tvNumber = (EditText) findViewById(R.id.txtNumber);
+        tvExt = (EditText) findViewById(R.id.txtExt);
+        tvDesc = (EditText)findViewById(R.id.txtDescription);
+
+
+        Button btnSavePhone = findViewById(R.id.btnSave);
+        btnSavePhone.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
 
-                Number = editNumber.getText().toString();
-                Ext = editExt.getText().toString();
-                Desc = editDesc.getText().toString();
+                phone = database.phoneDAO().getPhone(phoneID);
 
-                phone = new Phone(contactID, Number, Ext, Desc);
+                Number = tvNumber.getText().toString();
+                Ext = tvExt.getText().toString();
+                Desc = tvDesc.getText().toString();
 
-                database.phoneDAO().addPhone(phone);
+                phone.phoneNumber = Number;
+                phone.ext = Ext;
+                phone.description = Desc;
+
+                database.phoneDAO().updatePhone(phone);
 
                 Intent intent = new Intent(getApplicationContext(), ContactDetailActivity.class);
                 startActivity(intent);

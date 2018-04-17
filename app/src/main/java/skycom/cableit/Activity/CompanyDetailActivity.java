@@ -167,11 +167,14 @@ public class CompanyDetailActivity extends AppCompatActivity {
 
                 if (q != null)
                 {
-                    Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
+
                     if (companyIDString != "") {
 //                        editor.putInt("MY_QUOTE", q.id);
 //                        editor.apply();
 //                        startActivity(intent);
+                        Intent intent = new Intent(getApplicationContext(), QuoteDetailActivity.class);
+                        intent.putExtra("QUOTE_ID", q   .id);
+                        startActivity(intent);
                     }
                 }
                 else

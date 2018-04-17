@@ -64,8 +64,9 @@ public class ContactDetailActivity extends AppCompatActivity {
             txtContactType.setText(addressType);
 
         }
+
         final ArrayList<Phone> temp = new ArrayList<>();
-        temp.addAll(database.phoneDAO().getAllPhones());
+        temp.addAll(database.phoneDAO().getCompanyPhoneNumbers(contactID));
 
         adapterPhone = new PhoneAdapter(this,temp);
 
@@ -84,7 +85,6 @@ public class ContactDetailActivity extends AppCompatActivity {
                         editor.putInt("MY_PHONE", ph.id);
                         editor.apply();
                         startActivity(intent);
-
                 }
                 else
                 {
@@ -102,6 +102,16 @@ public class ContactDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(), ContactEditDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button btnAddPhone = findViewById(R.id.btnAddPhone);
+        btnAddPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), PhoneNewActivity.class);
                 startActivity(intent);
             }
         });
