@@ -19,6 +19,7 @@ import okhttp3.OkHttpClient;
 import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.Company;
 import skycom.cableit.Classes.Contact;
+import skycom.cableit.Classes.Phone;
 import skycom.cableit.Classes.Product;
 import skycom.cableit.Classes.ProductCategory;
 import skycom.cableit.Classes.Quote;
@@ -204,8 +205,10 @@ public class MainActivity extends AppCompatActivity {
             database.companyDAO().addCompany(new Company("Test Company 4", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 5", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 6", "This is a description"));
-            database.contactDAO().addContact(new Contact(1, "Test Type", "Bob Suruncle", "bob@email.com", Boolean.TRUE));
-            database.contactDAO().addContact(new Contact(1, "Test Type", "Brian BlueBalls", "bballs@email.com", Boolean.TRUE));
+            database.contactDAO().addContact(new Contact(1, 1, "Bob Suruncle", "bob@email.com", Boolean.TRUE));
+            database.contactDAO().addContact(new Contact(1, 2, "Brian BlueBalls", "bballs@email.com", Boolean.TRUE));
+            database.phoneDAO().addPhone(new Phone(1, "888-888-8888","123", "Test Description"));
+
 
             database.quoteDAO().addQuote(new Quote("2018040401", 1, 1, 1, new Date(), new Date()));
 

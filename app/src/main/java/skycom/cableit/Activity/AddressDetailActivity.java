@@ -53,13 +53,10 @@ public class AddressDetailActivity extends AppCompatActivity {
 
         List<Address> tempAddress = database.addressDAO().getAddress(addressID);
 
-
         TextView editAddressOne = (TextView) findViewById(R.id.txtStreetAddress1);
         TextView editAddressType = (TextView)findViewById(R.id.txtAddressType);
         final CheckBox chkIsActive = (CheckBox)findViewById(R.id.chkIsActive);
         btnMakeActive = (Button) findViewById(R.id.btnMakeActive);
-
-
 
         if (!tempAddress.isEmpty()){
             address = tempAddress.get(0);
@@ -131,7 +128,7 @@ public class AddressDetailActivity extends AppCompatActivity {
                 if (chkIsActive.isChecked()){
                     chkIsActive.setChecked(Boolean.FALSE);
                     address.isActive = Boolean.FALSE;
-                    btnMakeActive.setText("Active");
+                    btnMakeActive.setText("Activate");
                 }else{
                     chkIsActive.setChecked(Boolean.TRUE);
                     address.isActive = Boolean.TRUE;
@@ -139,9 +136,6 @@ public class AddressDetailActivity extends AppCompatActivity {
                 }
 
                 database.addressDAO().updateAddress(address);
-
-                //Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
-                //startActivity(intent);
             }
         });
 

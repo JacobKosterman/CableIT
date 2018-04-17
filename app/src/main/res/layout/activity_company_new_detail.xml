@@ -14,26 +14,38 @@
             android:gravity="top|left"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Company Name" />
+            android:hint="Company Name"
+            >
+            <requestFocus />
+        </EditText>
 
         <EditText
             android:id ="@+id/txtDescription"
             android:layout_width ="match_parent"
-            android:layout_height ="wrap_content"
+            android:layout_height ="match_parent"
             android:layout_weight ="1"
             android:inputType="textCapSentences|textMultiLine"
-            android:maxLines ="4"
-            android:maxLength ="2000"
+            android:maxLines ="2"
+            android:maxLength ="255"
             android:scrollHorizontally="false"
-            android:hint="Description"/>
+            android:hint="Description"
+            />
 
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight=".5"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        >
         <Button
             android:id="@+id/btnSaveCompany"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Company"
             android:gravity="bottom|center"/>
-
+    </RelativeLayout>
 
     </LinearLayout>

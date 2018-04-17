@@ -4,38 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="skycom.cableit.Activity.ContactNewDetailActivity"
-    android:orientation="vertical">
+    tools:context=".Activity.PhoneDetailActivity"
+    android:orientation="vertical"
+    >
 
-    <EditText
-        android:id="@+id/txtNewContactName"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="top|left"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Name" />
+        android:id="@+id/txtNumber"
+        android:hint="Phone Number"/>
 
-    <EditText
-        android:id="@+id/txtNewEmail"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="top|left"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Email" />
+        android:id="@+id/txtExt"
+        android:hint="Extension"/>
 
-    <Spinner
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spnContactType"/>
+        android:id="@+id/txtDescription"
+        android:hint="Phone Details"/>
 
     <Button
-        android:id="@+id/btnSaveNewContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save Contact"/>
-
+        android:id="@+id/btnEdit"
+        android:text="Edit Phone"/>
 
 
 </LinearLayout>

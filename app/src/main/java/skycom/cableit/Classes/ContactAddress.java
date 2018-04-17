@@ -10,7 +10,6 @@ public class ContactAddress {
     public int contactID;
     public int addressID;
 
-
     public ContactAddress(int contactID, int addressID) {
         this.contactID = contactID;
         this.addressID = addressID;

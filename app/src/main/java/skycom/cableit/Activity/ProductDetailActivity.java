@@ -1,6 +1,7 @@
 package skycom.cableit.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     String tempProNo = "";
     String tempProDescription = "";
     String tempProCost = "";
+    SharedPreferences prefs;
 
 
     @Override
@@ -29,30 +31,11 @@ public class ProductDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_detail);
 
         database = AppDatabase.getDatabase(getApplicationContext());
-        int tempProductID;
 
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                productIDString = null;
-            } else {
-                productIDString = extras.getString("PRODUCT_ID");
-            }
-        } else {
-            productIDString = (String) savedInstanceState.getSerializable("PRODUCT_ID");
-        }
+        prefs = getSharedPreferences("PRODUCT_ID", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = prefs.edit();
+        productID = prefs.getInt("MY_PRODUCT", 0);
 
-        if (productIDString != null)
-        {
-            if (productIDString != "") {
-                tempProductID = Integer.parseInt(productIDString) + 1;
-                productID = tempProductID;
-
-
-
-
-            }
-        }
         List<Product> productOne = database.productDAO().getProduct(productID);
 
 

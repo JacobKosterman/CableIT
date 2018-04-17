@@ -20,7 +20,7 @@ public interface PhoneDAO {
     public List<Phone> getAllPhones();
 
     @Query("select * from phone where id = :phoneID")
-    public List<Phone> getPhone(long phoneID);
+    public Phone getPhone(long phoneID);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updatePhone(Phone phone);

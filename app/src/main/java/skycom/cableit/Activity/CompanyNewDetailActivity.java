@@ -3,6 +3,7 @@ package skycom.cableit.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,9 @@ public class CompanyNewDetailActivity extends AppCompatActivity {
     String tempCompanyName = "";
     String tempCompanyDescription = "";
     Context context = this;
+    Company company;
+
+    private SharedPreferences existingCompanyPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,16 +87,24 @@ public class CompanyNewDetailActivity extends AppCompatActivity {
 
     public void addCompanyAndDivert(){
 
-        Company company = new Company(tempCompanyName, tempCompanyDescription);
+        company = new Company(tempCompanyName, tempCompanyDescription);
         database.companyDAO().addCompany(company);
         List<Company> tempCompanyList = database.companyDAO().getCompanyByName(tempCompanyName);
 
         if (tempCompanyList.size() == 1){
 
-            Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);
-            int id = tempCompanyList.get(0).id;
 
-            //intent.putExtra("NEW_COMPANY_ID", id);
+            int tempObjId = tempCompanyList.get(0).id;
+
+            existingCompanyPrefs = getSharedPreferences("COMPANY_ID_TEST", MODE_PRIVATE);
+            SharedPreferences.Editor editor = existingCompanyPrefs.edit();
+            editor.putInt("MY_COMPANY", tempObjId);
+            editor.apply();
+
+
+
+
+            Intent intent = new Intent(getApplicationContext(), CompanyDetailActivity.class);
             startActivity(intent);
 
         } else {

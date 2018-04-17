@@ -5,13 +5,17 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
 
+import skycom.cableit.Classes.AddressType;
 import skycom.cableit.Classes.Contact;
+import skycom.cableit.Classes.ContactType;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
@@ -24,6 +28,7 @@ public class ContactEditDetailActivity extends AppCompatActivity {
 
     String tempName;
     String tempEmail;
+    Spinner mySpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +44,18 @@ public class ContactEditDetailActivity extends AppCompatActivity {
 
         final EditText txtName = (EditText)findViewById(R.id.textContactName);
         final EditText txtEmail = (EditText)findViewById(R.id.textContactEmail);
+        mySpinner = (Spinner) findViewById(R.id.spnContactType);
 
         tempName = txtName.getText().toString();
         tempEmail = txtEmail.getText().toString();
+        mySpinner.setAdapter(new ArrayAdapter<ContactType>(this, android.R.layout.simple_spinner_item, ContactType.values()));
+
 
 
         if (!tempContact.isEmpty()) {
             txtName.setText(String.valueOf(tempContact.get(0).contactName), TextView.BufferType.EDITABLE);
             txtEmail.setText(String.valueOf(tempContact.get(0).emailAddress), TextView.BufferType.EDITABLE);
+
             contactID = tempContact.get(0).id;
             contact = tempContact.get(0);
         }
@@ -58,13 +67,16 @@ public class ContactEditDetailActivity extends AppCompatActivity {
                 tempName = txtName.getText().toString();
                 tempEmail = txtEmail.getText().toString();
 
+                ContactType tempValue = (ContactType) mySpinner.getSelectedItem();
+                int tempContactType = tempValue.getValue();
+
                 contact.contactName = tempName;
                 contact.emailAddress = tempEmail;
+                contact.contactType = tempContactType;
 
                 database.contactDAO().updateContact(contact);
 
                 Intent intent = new Intent(getApplicationContext(), ContactDetailActivity.class);
-                intent.putExtra("NEW_COMPANY_ID", companyID);
                 startActivity(intent);
             }
         });
@@ -73,7 +85,6 @@ public class ContactEditDetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(this, CompanyDetailActivity.class);
-        intent.putExtra("NEW_COMPANY_ID", companyID);
         startActivity(intent);
     }
 

@@ -62,9 +62,8 @@ public class CompanyDetailActivity extends AppCompatActivity {
         txtName.setText(companyOne.get(0).name);
         txtDescription.setText(companyOne.get(0).description);
 
-
         lvContact =(ListView)findViewById(R.id.lstContact);
-        ArrayList<Contact> temp = new ArrayList<>();
+        final ArrayList<Contact> temp = new ArrayList<>();
         temp.addAll(database.contactDAO().getContactsFromCompany(companyID));
 
         adapterContact = new ContactAdapter(this,temp);
@@ -97,7 +96,9 @@ public class CompanyDetailActivity extends AppCompatActivity {
         btnContactList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(lvContact.getVisibility() == View.VISIBLE){
+                if(temp.size()==0){
+                    Toast.makeText(getApplicationContext(), "This Company has no addresses yet!", Toast.LENGTH_SHORT).show();
+                }else if(lvContact.getVisibility() == View.VISIBLE){
                     lvContact.setVisibility(View.GONE);
                 }else{
                     lvContact.setVisibility(View.VISIBLE);
@@ -106,7 +107,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
         });
 
         lvAddress =(ListView)findViewById(R.id.lstAddress);
-        ArrayList<Address> tempAddress = new ArrayList<>();
+        final ArrayList<Address> tempAddress = new ArrayList<>();
         tempAddress.addAll(database.addressDAO().getAddressFromCompany(companyID));
 
         adapterAddress = new AddressAdapter(this,tempAddress);
@@ -117,28 +118,33 @@ public class CompanyDetailActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Address a = (Address) parent.getItemAtPosition(position);
-                if (a != null)
-                {
-                    Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
-                    if (companyIDString != "") {
-                        editor.putInt("MY_ADDRESS", a.id);
-                        editor.apply();
-                        startActivity(intent);
+
+                    if (a != null)
+                    {
+                        Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
+                        if (companyIDString != "") {
+                            editor.putInt("MY_ADDRESS", a.id);
+                            editor.apply();
+                            startActivity(intent);
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),
+                                "error",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),
-                            "error",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
+            });
         Button btnAddressList = findViewById(R.id.btnAddressList);
         btnAddressList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(lvAddress.getVisibility() == View.VISIBLE){
+                if(tempAddress.size() == 0)
+                {
+                    Toast.makeText(getApplicationContext(), "This Company has no addresses yet!", Toast.LENGTH_SHORT).show();
+                }else if(lvAddress.getVisibility() == View.VISIBLE){
                     lvAddress.setVisibility(View.GONE);
                 }else{
                     lvAddress.setVisibility(View.VISIBLE);
@@ -158,6 +164,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Quote q = (Quote) parent.getItemAtPosition(position);
+
                 if (q != null)
                 {
                     Intent intent = new Intent(getApplicationContext(), AddressDetailActivity.class);
@@ -188,10 +195,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
         //
         // The Section for the buttons
         //
@@ -200,36 +203,25 @@ public class CompanyDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CompanyEditDetailActivity.class);
-                if (companyIDString != ""){
-                    intent.putExtra("COMPANY_ID_TEST", companyIDString + "");
-                    startActivity(intent);
-                }
+                startActivity(intent);
             }
         });
 
-        //Buttong to navaigate to the Address Edit Detail Activity
         Button btnAddAddress = findViewById(R.id.btnNewAddress);
         btnAddAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddressNewDetailActivity.class);
-                if (companyIDString != ""){
-                    intent.putExtra("COMPANY_ID_TEST", companyIDString + "");
-                    startActivity(intent);
-                }
+                startActivity(intent);
             }
         });
 
-        //Buttong to navaigate to the Address Edit Detail Activity
         Button btnAddContact = findViewById(R.id.btnNewContact);
         btnAddContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ContactNewDetailActivity.class);
-                if (companyIDString != ""){
-                    intent.putExtra("COMPANY_ID_TEST", companyIDString + "");
-                    startActivity(intent);
-                }
+                startActivity(intent);
             }
         });
     }

@@ -9,13 +9,13 @@ public class Contact {
     @PrimaryKey(autoGenerate = true)
     public int id;
     public int companyID;
-    public String contactType;
+    public int contactType;
     public String contactName;
     public String emailAddress;
     public boolean isActive;
 
 
-    public Contact(int companyID, String contactType, String contactName, String emailAddress, boolean isActive) {
+    public Contact(int companyID, int contactType, String contactName, String emailAddress, boolean isActive) {
         this.companyID = companyID;
         this.contactType = contactType;
         this.contactName = contactName;
