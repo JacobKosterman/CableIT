@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.NewQuoteActivity">
+    tools:context=".Activity.QuoteLineNewActivity">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -24,50 +24,66 @@
 
 
         <EditText
-            android:id="@+id/txtQuoteNumber"
+            android:id="@+id/txtProductID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
             android:inputType="number"
-            android:hint="Quote Number" />
+            android:hint="Product ID" />
 
         <EditText
-            android:id="@+id/txtCompanyID"
+            android:id="@+id/txtLineComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:inputType="number"
-            android:hint="Company ID" />
+            android:hint="Line Comment" />
 
         <EditText
-            android:id="@+id/txtSiteAddressID"
+            android:id="@+id/txtQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
             android:inputType="number"
-            android:hint="Site Address ID" />
+            android:hint="Quantity" />
 
         <EditText
-            android:id="@+id/txtBillingAddressID"
+            android:id="@+id/txtProductCost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
             android:inputType="number"
-            android:hint="Billing Address ID" />
+            android:hint="Product Cost" />
+
+        <EditText
+            android:id="@+id/txtMarkupRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Markup Rate" />
+
+        <EditText
+            android:id="@+id/txtMarkupAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Markup Amount" />
 
         <Button
-            android:id="@+id/btnSaveQuote"
+            android:id="@+id/btnSaveLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Quote"
+            android:text="Add Line"
             android:gravity="bottom|center"/>
 
 
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>

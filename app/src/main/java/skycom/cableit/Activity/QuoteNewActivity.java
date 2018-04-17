@@ -7,7 +7,6 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +16,7 @@ import skycom.cableit.Classes.Quote;
 import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
-public class NewQuoteActivity extends AppCompatActivity {
+public class QuoteNewActivity extends AppCompatActivity {
 
     private AppDatabase database;
     public String quoteNumber;
@@ -30,7 +29,7 @@ public class NewQuoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_quote);
+        setContentView(R.layout.activity_quote_new);
         database = AppDatabase.getDatabase(getApplicationContext());
         String quoteStart = new SimpleDateFormat("YYYYMMdd").format(new Date());
         List<Quote> existingQuotes = database.quoteDAO().getQuotesFromNumber(quoteStart + "%");

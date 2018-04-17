@@ -22,6 +22,6 @@ public interface QuoteContactDAO {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateQuoteContact(QuoteContact quoteContact);
 
-    @Query("delete from quoteContact")
-    void removeAllQuoteContacts();
+    @Query("delete from quoteContact where quoteID = :quoteID and  contactID = :contactID")
+    void removeQuoteContact(int quoteID, int contactID);
 }

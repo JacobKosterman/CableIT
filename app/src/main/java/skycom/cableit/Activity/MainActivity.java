@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
             database.quoteDAO().addQuote(new Quote("2018040401", 1, 1, 1, new Date(), new Date()));
 
 
-            database.quoteLineDAO().addQuoteLine(new QuoteLine(1, 1, "This is a comment", 2.0, 3.0, 4.0 ));
+            database.quoteLineDAO().addQuoteLine(new QuoteLine(1, 1, "This is a comment", 2.0, 3.0, 4.0,4.0 ));
 
 
             List<Address> addressOne = database.addressDAO().getAddress(1);

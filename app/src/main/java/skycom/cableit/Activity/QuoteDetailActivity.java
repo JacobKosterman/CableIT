@@ -1,18 +1,19 @@
 package skycom.cableit.Activity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import skycom.cableit.Classes.Adapters.ContactAdapter;
 import skycom.cableit.Classes.Adapters.QuoteLineAdapter;
@@ -25,15 +26,17 @@ import skycom.cableit.Database.AppDatabase;
 import skycom.cableit.R;
 
 public class QuoteDetailActivity extends AppCompatActivity {
+    Quote quote = null;
+    Context context = this;
+    AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quote_detail);
-        AppDatabase database = AppDatabase.getDatabase(getApplicationContext());
+        database = AppDatabase.getDatabase(getApplicationContext());
 
         //Objects
-        Quote quote = null;
         Address siteAddress;
         Address billingAddress;
         Company company;
@@ -56,6 +59,8 @@ public class QuoteDetailActivity extends AppCompatActivity {
         final Button btnBillingAddress = findViewById(R.id.btnBillingAddress);
         final Button btnContactList = findViewById(R.id.btnContactList);
         final Button btnQuoteLineList = findViewById(R.id.btnQuoteLineList);
+        final Button btnAddContact = findViewById(R.id.btnAddContact);
+        final Button btnAddLine = findViewById(R.id.btnAddLine);
 
         //Lists
         final ArrayList<QuoteLine> quoteLines;
@@ -130,6 +135,33 @@ public class QuoteDetailActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Click listener for contacts
+                final Contact a = (Contact) parent.getItemAtPosition(position);
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                builder1.setMessage("Would you like to remove " + a.contactName + "from this quote?");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //add quote contact
+                                database.quoteContactDAO().removeQuoteContact(quote.id,a.id);
+                                Intent intent = new Intent(getApplicationContext(), QuoteDetailActivity.class);
+                                intent.putExtra("QUOTE_ID", quote.id);
+                                startActivity(intent);
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
             }
         });
         //Prepare contact list button
@@ -168,6 +200,24 @@ public class QuoteDetailActivity extends AppCompatActivity {
                     lstQuoteLine.setVisibility(View.VISIBLE);
                     lstContact.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        btnAddContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QuoteContactNewActivity.class);
+                intent.putExtra("QUOTE_ID", quote.id);
+                startActivity(intent);
+            }
+        });
+
+        btnAddLine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QuoteLineNewActivity.class);
+                intent.putExtra("QUOTE_ID", quote.id);
+                startActivity(intent);
             }
         });
     }
