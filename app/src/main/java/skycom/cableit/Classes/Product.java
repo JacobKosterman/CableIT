@@ -30,5 +30,10 @@ public class Product {
             this.isActive = isActive;
         }
 
+    public String toString()
+    {
+        return(partNo + " " + productName);
+    }
+
 
 }

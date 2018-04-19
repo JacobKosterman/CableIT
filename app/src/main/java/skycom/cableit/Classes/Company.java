@@ -17,4 +17,9 @@ public class Company {
         this.description = description;
 
     }
+
+    public String toString()
+    {
+        return name;
+    }
 }

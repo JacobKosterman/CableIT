@@ -32,4 +32,9 @@ public class Address {
         this.isActive = isActive;
 
     }
+
+    public String toString()
+    {
+        return address1;
+    }
 }
