@@ -23,14 +23,28 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <EditText
+        <TextView
             android:id="@+id/txtProductID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:inputType="number"
-            android:hint="Product ID" />
+            android:text="Product" />
+
+        <Spinner
+            android:id="@+id/spnProductID"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip"
+            android:layout_marginTop="20dip" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Line Comment" />
 
         <EditText
             android:id="@+id/txtLineComment"
@@ -39,6 +53,13 @@
             android:gravity="top|left"
             android:ems="10"
             android:hint="Line Comment" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Quantity" />
 
         <EditText
             android:id="@+id/txtQuantity"
@@ -49,6 +70,13 @@
             android:inputType="number"
             android:hint="Quantity" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Cost" />
+
         <EditText
             android:id="@+id/txtProductCost"
             android:layout_width="match_parent"
@@ -57,6 +85,13 @@
             android:ems="10"
             android:inputType="number"
             android:hint="Product Cost" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Markup Rate" />
 
         <EditText
             android:id="@+id/txtMarkupRate"
@@ -67,6 +102,13 @@
             android:inputType="number"
             android:hint="Markup Rate" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Markup Amount" />
+
         <EditText
             android:id="@+id/txtMarkupAmount"
             android:layout_width="match_parent"
@@ -75,6 +117,38 @@
             android:ems="10"
             android:inputType="number"
             android:hint="Markup Amount" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Item Price" />
+
+        <EditText
+            android:id="@+id/txtItemPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Item Price" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Line Total" />
+
+        <EditText
+            android:id="@+id/txtLineTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Line Totoal" />
 
         <Button
             android:id="@+id/btnSaveLine"
