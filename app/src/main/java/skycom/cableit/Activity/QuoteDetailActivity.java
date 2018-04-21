@@ -61,6 +61,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
         final Button btnQuoteLineList = findViewById(R.id.btnQuoteLineList);
         final Button btnAddContact = findViewById(R.id.btnAddContact);
         final Button btnAddLine = findViewById(R.id.btnAddLine);
+        final Button btnEditHeader = findViewById(R.id.btnEditHeader);
 
         //Lists
         final ArrayList<QuoteLine> quoteLines;
@@ -76,7 +77,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
                 quote = database.quoteDAO().getQuote(extras.getInt("QUOTE_ID")).get(0);
             }
         } else {
-            quote = database.quoteDAO().getQuote((int)savedInstanceState.getSerializable("QUOTE_ID")).get(0);
+            quote = database.quoteDAO().getQuote((int) savedInstanceState.getSerializable("QUOTE_ID")).get(0);
         }
 
         if (quote != null) {
@@ -106,7 +107,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
         txtQuoteNumber.setText(quote.quoteNumber);
         txtSiteAddress1.setText(siteAddress.address1);
         txtSiteAddress2.setText(siteAddress.address2);
-        tempString = siteAddress.city + ", " + siteAddress.province + ", "+ siteAddress.postalCode;
+        tempString = siteAddress.city + ", " + siteAddress.province + ", " + siteAddress.postalCode;
         txtSiteCityProvPostal.setText(tempString);
         txtBillingAddress1.setText(billingAddress.address1);
         txtBillingAddress2.setText(billingAddress.address2);
@@ -145,7 +146,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 //add quote contact
-                                database.quoteContactDAO().removeQuoteContact(quote.id,a.id);
+                                database.quoteContactDAO().removeQuoteContact(quote.id, a.id);
                                 Intent intent = new Intent(getApplicationContext(), QuoteDetailActivity.class);
                                 intent.putExtra("QUOTE_ID", quote.id);
                                 startActivity(intent);
@@ -184,7 +185,10 @@ public class QuoteDetailActivity extends AppCompatActivity {
         lstQuoteLine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Click listener for contacts
+                QuoteLine a = (QuoteLine) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getApplicationContext(), QuoteDetailActivity.class);
+                intent.putExtra("QUOTE_LINE_ID", a.id);
+                startActivity(intent);
             }
         });
 
@@ -216,6 +220,15 @@ public class QuoteDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), QuoteLineNewActivity.class);
+                intent.putExtra("QUOTE_ID", quote.id);
+                startActivity(intent);
+            }
+        });
+
+        btnEditHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QuoteEditActivity.class);
                 intent.putExtra("QUOTE_ID", quote.id);
                 startActivity(intent);
             }

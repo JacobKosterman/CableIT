@@ -6,4 +6,158 @@
     android:layout_height="match_parent"
     tools:context=".Activity.QuoteLineEditActivity">
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center|top"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="1"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/txtProductID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Product" />
+
+        <Spinner
+            android:id="@+id/spnProductID"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip"
+            android:layout_marginTop="20dip" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Line Comment" />
+
+        <EditText
+            android:id="@+id/txtLineComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:hint="Line Comment" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Quantity" />
+
+        <EditText
+            android:id="@+id/txtQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Quantity" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Cost" />
+
+        <EditText
+            android:id="@+id/txtProductCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Product Cost" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Markup Rate" />
+
+        <EditText
+            android:id="@+id/txtMarkupRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Markup Rate" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Markup Amount" />
+
+        <EditText
+            android:id="@+id/txtMarkupAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Markup Amount" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Item Price" />
+
+        <EditText
+            android:id="@+id/txtItemPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Item Price" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Line Total" />
+
+        <EditText
+            android:id="@+id/txtLineTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Line Totoal" />
+
+        <Button
+            android:id="@+id/btnSaveLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Line"
+            android:gravity="bottom|center"/>
+
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

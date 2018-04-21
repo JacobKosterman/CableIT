@@ -99,75 +99,47 @@ public class QuoteLineNewActivity extends AppCompatActivity {
 
         });
 
-        txtMarkupRate.addTextChangedListener(new TextWatcher() {
+        txtMarkupRate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    //SAVE THE DATA
+                    updateCalulatedFields();
+                }
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                updateCalulatedFields();
             }
         });
 
-        txtProductCost.addTextChangedListener(new TextWatcher() {
+        txtProductCost.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    //SAVE THE DATA
+                    updateCalulatedFields();
+                }
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                updateCalulatedFields();
             }
         });
 
-        txtMarkupAmount.addTextChangedListener(new TextWatcher() {
+        txtMarkupAmount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    //SAVE THE DATA
+                    updateCalulatedFields();
+                }
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                updateCalulatedFields();
             }
         });
 
-        txtQuantity.addTextChangedListener(new TextWatcher() {
+        txtQuantity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    //SAVE THE DATA
+                    updateCalulatedFields();
+                }
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                updateCalulatedFields();
             }
         });
 
@@ -192,10 +164,29 @@ public class QuoteLineNewActivity extends AppCompatActivity {
     }
 
     public void updateCalulatedFields() {
-        Double mkAmt = Double.parseDouble(txtMarkupAmount.getText().toString());
-        Double mkRt = Double.parseDouble(txtMarkupRate.getText().toString());
-        Double cost = Double.parseDouble(txtProductCost.getText().toString());
+        Double mkAmt;
+        Double mkRt;
+        Double cost;
         Double qty;
+
+        try {
+            mkAmt = Double.parseDouble(txtMarkupAmount.getText().toString());
+        } catch (Exception e) {
+            mkAmt = 0.0;
+        }
+
+        try {
+            mkRt = Double.parseDouble(txtMarkupRate.getText().toString());
+        } catch (Exception e) {
+            mkRt = 0.0;
+        }
+
+        try {
+            cost = Double.parseDouble(txtProductCost.getText().toString());
+        } catch (Exception e) {
+            cost = 0.0;
+        }
+
         try {
             qty = Double.parseDouble(txtQuantity.getText().toString());
         } catch (Exception e) {

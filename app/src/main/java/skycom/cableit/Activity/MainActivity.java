@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
@@ -15,6 +16,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.List;
+
 import okhttp3.OkHttpClient;
 import skycom.cableit.Classes.Address;
 import skycom.cableit.Classes.Company;
@@ -86,8 +88,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
         //This removes the functionality of back button on main screen
     }
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     //Add Product Category is it does NOT exist
-                    if (tokens[1].length() > 0 ) {
+                    if (tokens[1].length() > 0) {
                         List<ProductCategory> listProductCategories = database.productCategoryDAO().checkIfExists(tokens[1].toString());
                         tempProCat = new ProductCategory(tokens[1], 0.67);
                         if (listProductCategories.isEmpty()) {
@@ -134,8 +137,7 @@ public class MainActivity extends AppCompatActivity {
                             //Getting from database gets the active ID number.
                             tempProCat = database.productCategoryDAO().getProductCategoryByName(tempProCat.categoryName);
                             tempCatId = tempProCat.id;
-                        }
-                        else{
+                        } else {
                             tempCatId = listProductCategories.get(0).id;
                         }
                     }
@@ -178,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 
 
-
                     database.productDAO().addProduct(new Product(tempCatId,
                             tempProNo,
                             tempProName,
@@ -194,11 +195,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void addDummyData(){
+    private void addDummyData() {
         List<Company> companies = database.companyDAO().getAllCompany();
         if (companies.isEmpty()) {
 
-            database.addressDAO().addAddress(new Address( 1,1,"Address 1", "Address 2", "Kitchener","N2N 2N2", "ON", "CA", Boolean.TRUE ));
+            database.addressDAO().addAddress(new Address(1, 1, "Address 1", "Address 2", "Kitchener", "N2N 2N2", "ON", "CA", Boolean.TRUE));
+            database.addressDAO().addAddress(new Address(1, 2, "Address 2 1", "Address 2 2", "Kitchener", "N2N 2N2", "ON", "CA", Boolean.TRUE));
             database.companyDAO().addCompany(new Company("Test Company 1", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 2", "This is a description"));
             database.companyDAO().addCompany(new Company("Test Company 3", "This is a description"));
@@ -207,13 +209,13 @@ public class MainActivity extends AppCompatActivity {
             database.companyDAO().addCompany(new Company("Test Company 6", "This is a description"));
             database.contactDAO().addContact(new Contact(1, 1, "Bob Suruncle", "bob@email.com", Boolean.TRUE));
             database.contactDAO().addContact(new Contact(1, 2, "Brian BlueBalls", "bballs@email.com", Boolean.TRUE));
-            database.phoneDAO().addPhone(new Phone(1, "888-888-8888","123", "Test Description"));
+            database.phoneDAO().addPhone(new Phone(1, "888-888-8888", "123", "Test Description"));
 
 
             database.quoteDAO().addQuote(new Quote("2018040401", 1, 1, 1, new Date(), new Date()));
 
 
-            database.quoteLineDAO().addQuoteLine(new QuoteLine(1, 1, "This is a comment", 2.0, 3.0, 4.0,4.0 ));
+            database.quoteLineDAO().addQuoteLine(new QuoteLine(1, 1, "This is a comment", 2.0, 3.0, 4.0, 4.0));
 
 
             List<Address> addressOne = database.addressDAO().getAddress(1);

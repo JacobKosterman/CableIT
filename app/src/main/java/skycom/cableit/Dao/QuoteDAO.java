@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -30,5 +31,9 @@ public interface QuoteDAO {
 
     @Query("select * from quote where quoteNumber like :prefix")
     public List<Quote> getQuotesFromNumber(String prefix);
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    void updateQuote(Quote quote);
+
 
 }
