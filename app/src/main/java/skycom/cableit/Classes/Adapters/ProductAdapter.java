@@ -52,7 +52,7 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
             holder = new ViewHolder();
             holder.productName = (TextView) view.findViewById(R.id.name);
             holder.partNumber = (TextView) view.findViewById(R.id.email);
-            holder.description = (TextView) view.findViewById(R.id.email);
+            //holder.description = (TextView) view.findViewById(R.id.email);
 
             view.setTag(holder);
         } else {
@@ -63,7 +63,7 @@ public class ProductAdapter extends BaseAdapter implements Filterable {
         // bind text with view holder content view for efficient use
         holder.productName.setText(product.productName);
         holder.partNumber.setText(product.partNo);
-        holder.description.setText(product.description);
+        //holder.description.setText(product.description);
 
         return view;
     }
