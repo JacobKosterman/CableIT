@@ -63,9 +63,7 @@ public class QuoteLineNewActivity extends AppCompatActivity {
         }
 
         if (quote != null) {
-            //Gather objects
         } else {
-            //make toast and return to quote list
             Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), QuoteListActivity.class);
             startActivity(intent);
@@ -73,7 +71,7 @@ public class QuoteLineNewActivity extends AppCompatActivity {
         }
 
         List<Product> products = database.productDAO().getAllProducts();
-
+        txtQuantity.setText("0");
 
         ArrayAdapter productAdapter = new ArrayAdapter(context,
                 android.R.layout.simple_spinner_item, products);
@@ -94,19 +92,15 @@ public class QuoteLineNewActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
-
         });
 
         txtMarkupRate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    //SAVE THE DATA
                     updateCalulatedFields();
                 }
-
             }
         });
 
@@ -114,10 +108,8 @@ public class QuoteLineNewActivity extends AppCompatActivity {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    //SAVE THE DATA
                     updateCalulatedFields();
                 }
-
             }
         });
 
@@ -125,10 +117,8 @@ public class QuoteLineNewActivity extends AppCompatActivity {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    //SAVE THE DATA
                     updateCalulatedFields();
                 }
-
             }
         });
 
@@ -136,10 +126,8 @@ public class QuoteLineNewActivity extends AppCompatActivity {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    //SAVE THE DATA
                     updateCalulatedFields();
                 }
-
             }
         });
 
@@ -147,18 +135,22 @@ public class QuoteLineNewActivity extends AppCompatActivity {
         btnSaveLine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String lineComment = txtLineComment.getText().toString();
-                Double qty = Double.parseDouble(txtQuantity.getText().toString());
-                Double productCost = Double.parseDouble(txtProductCost.getText().toString());
-                Double markupRate = Double.parseDouble(txtMarkupRate.getText().toString());
-                Double markupAmount = Double.parseDouble(txtMarkupAmount.getText().toString());
+                try {
+                    String lineComment = txtLineComment.getText().toString();
+                    Double qty = Double.parseDouble(txtQuantity.getText().toString());
+                    Double productCost = Double.parseDouble(txtProductCost.getText().toString());
+                    Double markupRate = Double.parseDouble(txtMarkupRate.getText().toString());
+                    Double markupAmount = Double.parseDouble(txtMarkupAmount.getText().toString());
 
-                database.quoteLineDAO().addQuoteLine(new QuoteLine(quote.id, product.id, lineComment,
-                        qty, productCost, markupRate, markupAmount));
+                    database.quoteLineDAO().addQuoteLine(new QuoteLine(quote.id, product.id, lineComment,
+                            qty, productCost, markupRate, markupAmount));
 
-                Intent intent = new Intent(getApplicationContext(), QuoteDetailActivity.class);
-                intent.putExtra("QUOTE_ID", quote.id);
-                startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(), QuoteDetailActivity.class);
+                    intent.putExtra("QUOTE_ID", quote.id);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Please ensure all fields have a value.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

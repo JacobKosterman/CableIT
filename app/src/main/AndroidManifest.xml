@@ -35,9 +35,9 @@
         <activity android:name=".Activity.QuoteLineNewActivity" />
         <activity android:name=".Activity.QuoteContactNewActivity" />
         <activity android:name=".Activity.QuoteLineEditActivity" />
-        <activity android:name=".Activity.QuoteEditActivity"></activity>
+        <activity android:name=".Activity.QuoteEditActivity"/>
         <activity android:name=".Activity.PhoneDetailActivity" />
-        <activity android:name=".Activity.PhoneNewActivity"></activity>
+        <activity android:name=".Activity.PhoneNewActivity"/>
     </application>
 
 </manifest>
