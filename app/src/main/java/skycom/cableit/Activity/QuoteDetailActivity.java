@@ -186,7 +186,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 QuoteLine a = (QuoteLine) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getApplicationContext(), QuoteDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), QuoteLineEditActivity.class);
                 intent.putExtra("QUOTE_LINE_ID", a.id);
                 startActivity(intent);
             }

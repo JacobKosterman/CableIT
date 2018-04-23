@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,12 +34,12 @@ public class QuoteLineEditActivity extends AppCompatActivity {
     TextView txtMarkupAmount;
     TextView txtLineTotal;
     TextView txtItemPrice;
-    Spinner spnProductID;
+    TextView txtProductID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quote_line_new);
+        setContentView(R.layout.activity_quote_line_edit);
         database = AppDatabase.getDatabase(getApplicationContext());
         txtLineComment = findViewById(R.id.txtLineComment);
         txtQuantity = findViewById(R.id.txtQuantity);
@@ -47,7 +48,7 @@ public class QuoteLineEditActivity extends AppCompatActivity {
         txtMarkupAmount = findViewById(R.id.txtMarkupAmount);
         txtItemPrice = findViewById(R.id.txtItemPrice);
         txtLineTotal = findViewById(R.id.txtLineTotal);
-        spnProductID = findViewById(R.id.spnProductID);
+        txtProductID = findViewById(R.id.txtProductID);
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -66,38 +67,23 @@ public class QuoteLineEditActivity extends AppCompatActivity {
             return;
         }
 
-        List<Product> products = database.productDAO().getAllProducts();
+        product = database.productDAO().getProduct(quoteLine.productID).get(0);
 
+        txtLineComment.setText(quoteLine.lineComment);
+        txtQuantity.setText(quoteLine.quantity.toString());
+        txtMarkupAmount.setText(quoteLine.markupAmount.toString());
+        txtMarkupRate.setText(quoteLine.markupRate.toString());
+        txtProductCost.setText(quoteLine.productCost.toString());
+        txtProductID.setText(product.productName);
 
-        ArrayAdapter productAdapter = new ArrayAdapter(context,
-                android.R.layout.simple_spinner_item, products);
+        txtProductID.setInputType(InputType.TYPE_NULL);
+        updateCalulatedFields();
 
-        spnProductID.setAdapter(productAdapter);
-
-        spnProductID.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                product = (Product) spnProductID.getItemAtPosition(position);
-
-                txtMarkupAmount.setText(String.valueOf(product.markupAmount));
-                txtMarkupRate.setText(String.valueOf(product.markupRate));
-                txtProductCost.setText(String.valueOf(product.productCost));
-
-                updateCalulatedFields();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
 
         txtMarkupRate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    //SAVE THE DATA
                     updateCalulatedFields();
                 }
             }
@@ -107,7 +93,6 @@ public class QuoteLineEditActivity extends AppCompatActivity {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    //SAVE THE DATA
                     updateCalulatedFields();
                 }
             }
@@ -117,7 +102,6 @@ public class QuoteLineEditActivity extends AppCompatActivity {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    //SAVE THE DATA
                     updateCalulatedFields();
                 }
             }
@@ -127,7 +111,6 @@ public class QuoteLineEditActivity extends AppCompatActivity {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    //SAVE THE DATA
                     updateCalulatedFields();
                 }
 
