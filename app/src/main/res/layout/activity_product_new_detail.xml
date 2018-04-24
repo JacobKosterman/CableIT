@@ -67,7 +67,7 @@
             android:layout_marginLeft="8dip"
             android:layout_marginRight="8dip"
             android:ems="10"
-            android:hint="Name"
+            android:hint="Cost"
             android:inputType="numberDecimal"/>
 
         <Button

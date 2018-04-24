@@ -29,7 +29,6 @@ public class ContactDetailActivity extends AppCompatActivity {
     int contactID;
     String addressType;
 
-
     ContactType contactType;
 
     ListView lvPhone;
