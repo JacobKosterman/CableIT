@@ -1,7 +1,9 @@
 package skycom.cableit.Activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -44,6 +46,7 @@ public class QuoteEditActivity extends AppCompatActivity {
     Spinner spnBillingAddressID;
     Spinner spnSiteAddressID;
     Button btnEditQuote;
+    Button btnDeleteQuote;
 
     ArrayAdapter companyAdapter;
     ArrayAdapter addressAdapter;
@@ -51,7 +54,7 @@ public class QuoteEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quote_new);
+        setContentView(R.layout.activity_quote_edit);
         database = AppDatabase.getDatabase(getApplicationContext());
         String quoteStart = new SimpleDateFormat("YYYYMMdd").format(new Date());
 
@@ -84,6 +87,7 @@ public class QuoteEditActivity extends AppCompatActivity {
         spnBillingAddressID = findViewById(R.id.spnBillingAddressID);
         spnSiteAddressID = findViewById(R.id.spnSiteAddressID);
         btnEditQuote = findViewById(R.id.btnEditQuote);
+//        btnDeleteQuote = findViewById(R.id.btnDeleteQuote);
         txtQuoteNumber.setText(quote.quoteNumber);
         txtQuoteNumber.setInputType(InputType.TYPE_NULL);
 
@@ -149,6 +153,37 @@ public class QuoteEditActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        btnDeleteQuote.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //logic
+//                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+//                builder1.setMessage("Would you like delete this quote?");
+//                builder1.setCancelable(true);
+//
+//                builder1.setPositiveButton(
+//                        "Yes",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                //delete quote
+//                                Intent intent = new Intent(getApplicationContext(), QuoteListActivity.class);
+//                                startActivity(intent);
+//                            }
+//                        });
+//
+//                builder1.setNegativeButton(
+//                        "No",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                dialog.cancel();
+//                            }
+//                        });
+//
+//                AlertDialog alert11 = builder1.create();
+//                alert11.show();
+//            }
+//        });
 
         assigning = true;
         spnCompanyID.setSelection(companyAdapter.getPosition(company));
