@@ -27,6 +27,14 @@
                 android:text="Edit Company" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:ems="10"
+                android:text="Company Name"
+                style="@style/Label"/>
+
+            <TextView
                 android:id="@+id/textName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,6 +50,14 @@
             >
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:ems="10"
+                android:text="Company Description"
+                style="@style/Label"/>
+
+            <TextView
                 android:id="@+id/textDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
@@ -54,7 +70,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".8"
+                android:layout_weight=".7"
 
                 >
             <LinearLayout
@@ -83,7 +99,7 @@
     <RelativeLayout
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:layout_weight=".5"
+             android:layout_weight=".65"
              android:paddingBottom="10dp"
              android:paddingLeft="10dp"
              android:paddingRight="10dp"

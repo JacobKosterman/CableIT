@@ -23,6 +23,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Address 1"
+            style="@style/Label"/>
+
         <EditText
             android:id="@+id/txtStreetAddress1"
             android:layout_width="match_parent"
@@ -32,6 +40,15 @@
             android:inputType="textPersonName"
             android:hint="Address 1" />
 
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Address 2"
+            style="@style/Label"/>
         <EditText
             android:id="@+id/txtStreetAddress2"
             android:layout_width="match_parent"
@@ -41,6 +58,15 @@
             android:inputType="textPersonName"
             android:hint="Address 2" />
 
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="City"
+            style="@style/Label"/>
         <EditText
             android:id="@+id/txtCity"
             android:layout_width="match_parent"
@@ -50,15 +76,16 @@
             android:inputType="textPersonName"
             android:hint="City" />
 
-        <EditText
-            android:id="@+id/txtPostalCode"
+
+
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Postal Code" />
-
+            android:text="Province"
+            style="@style/Label"/>
         <EditText
             android:id="@+id/txtProvince"
             android:layout_width="match_parent"
@@ -68,6 +95,33 @@
             android:inputType="textPersonName"
             android:hint="Province" />
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Postal Code"
+            style="@style/Label"/>
+        <EditText
+            android:id="@+id/txtPostalCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Postal Code" />
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Country"
+            style="@style/Label"/>
         <EditText
             android:id="@+id/txtCountry"
             android:layout_width="match_parent"
@@ -77,6 +131,15 @@
             android:inputType="textPersonName"
             android:hint="Country" />
 
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Address Type"
+            style="@style/Label"/>
         <Spinner
             android:id="@+id/spnAddressType"
             android:layout_width="fill_parent"

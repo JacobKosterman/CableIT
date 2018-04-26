@@ -25,6 +25,14 @@
 
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Product Name"
+            style="@style/Label"/>
+
 
         <EditText
             android:id="@+id/txtProName"
@@ -38,6 +46,16 @@
             android:inputType="textPersonName"
             />
 
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Product Number"
+            style="@style/Label"/>
+
         <EditText
             android:id="@+id/txtProNo"
             android:layout_width="fill_parent"
@@ -49,6 +67,15 @@
             android:inputType="textPersonName"
             android:hint="Product Number"/>
 
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Description"
+            style="@style/Label"/>
         <EditText
             android:id="@+id/txtProDescription"
             android:layout_width="fill_parent"
@@ -59,6 +86,14 @@
             android:ems="10"
             android:hint="Description" />
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Cost"
+            style="@style/Label"/>
         <EditText
             android:id="@+id/txtProCost"
             android:layout_width="fill_parent"

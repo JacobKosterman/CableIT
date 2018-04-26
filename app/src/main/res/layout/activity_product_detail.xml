@@ -5,9 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="skycom.cableit.Activity.ProductDetailActivity">
+    tools:context="skycom.cableit.Activity.ProductDetailActivity"
+    android:padding="10dp">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="top|left"
+        android:text="Product Name"
+        style="@style/Label"/>
     <TextView
         android:id="@+id/txtProName"
         android:layout_width="fill_parent"
@@ -15,11 +23,19 @@
         android:layout_marginTop="20dip"
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"
-        android:ems="10"
+        android:ems="15"
         android:hint="Product Name"
         android:inputType="textPersonName"
         />
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="top|left"
+        android:text="Product Number"
+        style="@style/Label"/>
     <TextView
         android:id="@+id/txtProNo"
         android:layout_width="fill_parent"
@@ -27,10 +43,18 @@
         android:layout_marginTop="20dip"
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"
-        android:ems="10"
+        android:ems="15"
         android:inputType="textPersonName"
         android:hint="Product Number"/>
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="top|left"
+        android:text="Product Description"
+        style="@style/Label"/>
     <TextView
         android:id="@+id/txtProDescription"
         android:layout_width="fill_parent"
@@ -41,6 +65,15 @@
         android:ems="10"
         android:hint="Description" />
 
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="top|left"
+        android:text="Cost"
+        style="@style/Label"/>
     <TextView
         android:id="@+id/txtProCost"
         android:layout_width="fill_parent"
@@ -49,7 +82,7 @@
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"
         android:ems="10"
-        android:hint="Name"
+        android:hint="Cost"
         android:inputType="numberDecimal"/>
 
 

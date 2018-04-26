@@ -8,6 +8,14 @@
     android:orientation="vertical">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:ems="10"
+        android:text="Phone Number"
+        style="@style/Label"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,12 +23,28 @@
         android:hint="Phone Number"/>
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:ems="10"
+        android:text="Extension"
+        style="@style/Label"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtExt"
         android:hint="Extension"/>
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:ems="10"
+        android:text="Description"
+        style="@style/Label"/>
 
     <EditText
         android:layout_width="match_parent"

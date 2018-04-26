@@ -42,18 +42,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Product List"
+
+
                 />
             <Button
                 android:id="@+id/btnCompanies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Company List"
+
                 />
             <Button
                 android:id="@+id/btnQuoteList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Quotes"
+
                 />
 
     </LinearLayout>

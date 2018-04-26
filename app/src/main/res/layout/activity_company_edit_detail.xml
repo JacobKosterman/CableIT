@@ -19,13 +19,27 @@
         android:weightSum="1"
         android:gravity="center|bottom">
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Company Name"
+            style="@style/Label"/>
         <EditText
             android:id="@+id/txtCompanyEditName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:ems="10"
+            android:text="Company Description"
+            style="@style/Label"/>
 
         <EditText
             android:id="@+id/txtCompanyEditDescription"

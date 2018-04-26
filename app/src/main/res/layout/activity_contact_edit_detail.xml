@@ -7,12 +7,28 @@
     tools:context="skycom.cableit.Activity.ContactEditDetailActivity"
     android:orientation="vertical">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:ems="10"
+        android:text="Contact Name"
+        style="@style/Label"/>
     <EditText
         android:id="@+id/textContactName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp" />
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:ems="10"
+        android:text="Contact Email"
+        style="@style/Label"/>
     <EditText
         android:id="@+id/textContactEmail"
         android:layout_width="match_parent"
@@ -20,6 +36,13 @@
         android:textSize="18sp" />
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:ems="10"
+        android:text="Contact Type"
+        style="@style/Label"/>
     <Spinner
         android:id="@+id/spnContactType"
         android:layout_width="fill_parent"

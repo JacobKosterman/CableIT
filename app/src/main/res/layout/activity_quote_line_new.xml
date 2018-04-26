@@ -36,7 +36,8 @@
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:text="Product" />
+            android:text="Product"
+            style="@style/Label"/>
 
         <Spinner
             android:id="@+id/spnProductID"
@@ -51,7 +52,8 @@
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:text="Line Comment" />
+            android:text="Line Comment"
+            style="@style/Label"/>
 
         <EditText
             android:id="@+id/txtLineComment"
@@ -66,7 +68,8 @@
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:text="Quantity" />
+            android:text="Quantity"
+            style="@style/Label"/>
 
         <EditText
             android:id="@+id/txtQuantity"
@@ -82,7 +85,8 @@
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:text="Cost" />
+            android:text="Cost"
+            style="@style/Label"/>
 
         <EditText
             android:id="@+id/txtProductCost"
@@ -98,7 +102,8 @@
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:text="Markup Rate" />
+            android:text="Markup Rate"
+            style="@style/Label"/>
 
         <EditText
             android:id="@+id/txtMarkupRate"
@@ -114,7 +119,8 @@
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:text="Markup Amount" />
+            android:text="Markup Amount"
+            style="@style/Label"/>
 
         <EditText
             android:id="@+id/txtMarkupAmount"
@@ -130,7 +136,8 @@
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:text="Item Price" />
+            android:text="Item Price"
+            style="@style/Label"/>
 
         <EditText
             android:id="@+id/txtItemPrice"
@@ -146,7 +153,8 @@
             android:layout_height="wrap_content"
             android:gravity="top|left"
             android:ems="10"
-            android:text="Line Total" />
+            android:text="Line Total"
+            style="@style/Label"/>
 
         <EditText
             android:id="@+id/txtLineTotal"

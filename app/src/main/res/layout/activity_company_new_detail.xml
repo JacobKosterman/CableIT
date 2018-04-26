@@ -7,6 +7,14 @@
     tools:context="skycom.cableit.Activity.CompanyNewDetailActivity"
     android:orientation="vertical">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:ems="10"
+        android:text="Company Name"
+        style="@style/Label"/>
         <EditText
             android:id="@+id/txtCompanyName"
             android:layout_width="match_parent"
@@ -19,6 +27,14 @@
             <requestFocus />
         </EditText>
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:ems="10"
+        android:text="Company Description"
+        style="@style/Label"/>
         <EditText
             android:id ="@+id/txtDescription"
             android:layout_width ="match_parent"

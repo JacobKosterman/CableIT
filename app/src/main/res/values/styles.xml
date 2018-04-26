@@ -1,14 +1,21 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here.
-          Keep this note here for now SYDNEY!
-        Theme.AppCompat.Light.DarkActionBar
-        Theme.AppCompat.Light.NoActionBar-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
+        <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button.Custom</item>
+
     </style>
 
+    <style name="TextAppearance.AppCompat.Button.Custom">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="Label" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#ff8000</item>
+    </style>
 </resources>
