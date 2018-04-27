@@ -201,23 +201,29 @@ public class MainActivity extends AppCompatActivity {
         List<Company> companies = database.companyDAO().getAllCompany();
         if (companies.isEmpty()) {
 
-            database.addressDAO().addAddress(new Address(1, 1, "Address 1", "Address 2", "Kitchener", "N2N 2N2", "ON", "CA", Boolean.TRUE));
-            database.addressDAO().addAddress(new Address(1, 2, "Address 2 1", "Address 2 2", "Kitchener", "N2N 2N2", "ON", "CA", Boolean.TRUE));
-            database.companyDAO().addCompany(new Company("Test Company 1", "This is a description"));
-            database.companyDAO().addCompany(new Company("Test Company 2", "This is a description"));
-            database.companyDAO().addCompany(new Company("Test Company 3", "This is a description"));
-            database.companyDAO().addCompany(new Company("Test Company 4", "This is a description"));
-            database.companyDAO().addCompany(new Company("Test Company 5", "This is a description"));
-            database.companyDAO().addCompany(new Company("Test Company 6", "This is a description"));
+            database.addressDAO().addAddress(new Address(1, 1, "99 Foxglove Cres", "Address 2", "Kitchener", "N2E 1H8", "ON", "CA", Boolean.TRUE));
+            database.addressDAO().addAddress(new Address(1, 2, "200 Doon Valley Drive", "", "Kitchener", "N2G 4M4", "ON", "CA", Boolean.TRUE));
+            database.addressDAO().addAddress(new Address(1, 2, "Pearson International Airport", "Terminal 1", "Mississauga", "MississaugaL5P 1B2", "ON", "CA", Boolean.TRUE));
+
+            database.companyDAO().addCompany(new Company("Company ABC", "Customer Service Company"));
+            database.companyDAO().addCompany(new Company("Company DEF", "Construction Consulting"));
+            database.companyDAO().addCompany(new Company("Company GHI", "Engineering Firm"));
+            database.companyDAO().addCompany(new Company("Company JKL", "Contracting Company"));
+            database.companyDAO().addCompany(new Company("Company MNO", "Tech Firm"));
+            database.companyDAO().addCompany(new Company("Company PQR", "Warehouse"));
+            database.companyDAO().addCompany(new Company("Company STU", "Supplier"));
+            database.companyDAO().addCompany(new Company("Company VWX", "Service Company"));
+            database.companyDAO().addCompany(new Company("Company YZ", "Accounting Firm"));
+            database.companyDAO().addCompany(new Company("Company 123", "Art Studio"));
             database.contactDAO().addContact(new Contact(1, 1, "Bob Suruncle", "bob@email.com", Boolean.TRUE));
-            database.contactDAO().addContact(new Contact(1, 2, "Brian BlueBalls", "bballs@email.com", Boolean.TRUE));
-            database.phoneDAO().addPhone(new Phone(1, "888-888-8888", "123", "Test Description"));
+            database.contactDAO().addContact(new Contact(1, 2, "Jake Jacobs", "jjacobs@email.com", Boolean.TRUE));
+            database.phoneDAO().addPhone(new Phone(1, "888-888-8888", "123", "Reception Desk"));
 
 
             database.quoteDAO().addQuote(new Quote("2018040401", 1, 1, 1, new Date(), new Date()));
 
 
-            database.quoteLineDAO().addQuoteLine(new QuoteLine(1, 1, "This is a comment", 2.0, 3.0, 4.0, 4.0));
+            database.quoteLineDAO().addQuoteLine(new QuoteLine(1, 1, "Initial Visit Quote", 2.0, 3.0, 4.0, 4.0));
 
 
             List<Address> addressOne = database.addressDAO().getAddress(1);
